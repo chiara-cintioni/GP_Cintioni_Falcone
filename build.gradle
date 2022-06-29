@@ -1,0 +1,25 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.1'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com.RIBO'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation group: 'org.mongodb', name: 'mongo-java-driver', version: '3.12.11'
+	//https://mvnrepository.com/artifact/org.json/json
+	implementation 'org.json:json:20210307'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
