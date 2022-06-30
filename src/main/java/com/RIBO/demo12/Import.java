@@ -1,35 +1,37 @@
 package com.RIBO.demo12;
 
-import org.json.CDL;
-import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Objects;
-import java.util.stream.Collectors;
+import java.util.List;
+import java.util.Map;
+
+import com.fasterxml.jackson.databind.MappingIterator;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.csv.CsvMapper;
+import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 
 
     public class Import{
-        public static void main(String[] args) {
-             // Read csv data file and store it in a string
-            InputStream is = Import.class.getResourceAsStream("C:\\Users\\Chiara\\OneDrive\\Desktop\\Archaea23S.csv");
-            String csv = new BufferedReader(
+        public static void main(String[] args) throws IOException {
+            File input = new File("C:\\Users\\Chiara\\OneDrive\\Desktop\\prova.csv");
+            File output = new File("C:\\Users\\Chiara\\OneDrive\\Desktop\\data.json");
 
-                    new InputStreamReader(Objects.requireNonNull(is), StandardCharsets.UTF_8))
-                    .lines()
-                    .collect(Collectors.joining("\n"));
+            List<Map<?, ?>> data = readObjectsFromCsv(input);
+            writeAsJson(data, output);
+        }
 
-                try {
-                    // Convert csv text to JSON string, and save it
-                // to a data.json file.
-                String json = CDL.toJSONArray(csv).toString(2);
-                Files.write(Path.of("data.json"), json.getBytes());
-            } catch (IOException e) {
-                e.printStackTrace();
+        public static List<Map<?, ?>> readObjectsFromCsv(File file) throws IOException {
+            CsvSchema bootstrap = CsvSchema.emptySchema().withHeader();
+            CsvMapper csvMapper = new CsvMapper();
+            try (MappingIterator<Map<?, ?>> mappingIterator = csvMapper.readerFor(Map.class).with(bootstrap).readValues(file)) {
+                return mappingIterator.readAll();
             }
         }
-    }
+
+        public static void writeAsJson(List<Map<?, ?>> data, File file) throws IOException {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.writeValue(file, data);
+        }
+        }
+
 

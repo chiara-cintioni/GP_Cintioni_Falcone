@@ -8,10 +8,7 @@ import org.bson.Document;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,7 +36,7 @@ public class DemoApplication {
 
 
 		Document provaDemo = new Document()
-				.append("Nome", "Secondo")
+				.append("Nome", "Primo")
 				.append ("Cognome", "Levi");
 		demoDB.insertOne(provaDemo);
 
