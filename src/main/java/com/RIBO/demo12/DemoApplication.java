@@ -12,6 +12,7 @@ import com.mongodb.DBObject;
 import com.mongodb.util.JSON;
 
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
@@ -37,16 +38,10 @@ public class DemoApplication {
 
 		MongoCollection<Document> demoDB = db.getCollection("DatiProfDaIntellij");
 
-		//db.createCollection("DemoDBDaIntellij");
-		//MongoCollection<Document> collectionProva = db.getCollection("DemoDBDaIntellij");
 
-
-
-
-		Document provaDemo = new Document()
-				.append("Nome", "Primo")
-				.append ("Cognome", "Levi");
-		demoDB.insertOne(provaDemo);
+		File input = new File("C:\\Users\\Chiara\\OneDrive\\Desktop\\benchmark-results\\Archaea\\23S-structures.csv");
+		File output = new File("C:\\Users\\Chiara\\OneDrive\\Desktop\\provaQuesto2.json");
+		ConverterCSVToJson converterCSVToJson = new ConverterCSVToJson(input,output);
 
 	}
 }
