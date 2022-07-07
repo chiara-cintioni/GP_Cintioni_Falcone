@@ -5,17 +5,25 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+import org.json.JSONObject;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.mongodb.DBObject;
+import com.mongodb.util.JSON;
+
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static org.springframework.util.SerializationUtils.serialize;
 
 @SpringBootApplication
 public class DemoApplication {
 
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws IOException {
 
 
 
@@ -27,7 +35,7 @@ public class DemoApplication {
 		MongoClient client = new MongoClient("localhost");
 		MongoDatabase db = client.getDatabase("databaseProvaDemo");
 
-		MongoCollection<Document> demoDB = db.getCollection("DemoDB");
+		MongoCollection<Document> demoDB = db.getCollection("DatiProfDaIntellij");
 
 		//db.createCollection("DemoDBDaIntellij");
 		//MongoCollection<Document> collectionProva = db.getCollection("DemoDBDaIntellij");

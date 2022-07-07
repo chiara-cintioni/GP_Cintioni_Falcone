@@ -1,0 +1,31 @@
+﻿Progressive Number;rRNA;Organisms;Benchmark ID;Filum;Filogenesi;Class;Class Labels;Order;Order Labels
+1 ;16S;Aeropyrum pernix ;CRW_16S_A_C_1;Crenarchaeota ;3;Thermoprotei;1;Desulfurococcales;1
+2 ;16S;Archaeoglobus fulgidus ;CRW_16S_A_E_2;Euryarchaeota ;1;Archaeoglobi;2;Archaeoglobales;2
+3 ;16S;Haloarcula marismortui rrnA ;CRW_16S_A_E_3;Euryarchaeota ;1;Stenosarchaea group;3;Halobacteria;3
+4 ;16S;Haloarcula marismortui rrnB ;CRW_16S_A_E_4;Euryarchaeota ;1;Stenosarchaea group;3;Halobacteria;3
+5 ;16S;Halobacterium sp. NRC-1 ;CRW_16S_A_E_5;Euryarchaeota ;1;Stenosarchaea group;3;Halobacteria;3
+6 ;16S;Haloferax volcanii ;CRW_16S_A_E_6;Euryarchaeota ;1;Stenosarchaea group;3;Halobacteria;3
+7 ;16S;Methanobacterium formicicum ;CRW_16S_A_E_7;Euryarchaeota ;1;Methanomada group;4;Methanobacteria;4
+8 ;16S;Methanococcus vannielii ;CRW_16S_A_E_8;Euryarchaeota ;1;Methanomada group;4;Methanococci;5
+9 ;16S;Methanospirillum hungatei ;CRW_16S_A_E_9;Euryarchaeota ;1;Methanomada group;4;Methanomicrobia;6
+11 ;16S;Methanothermobacter thermautotrophicus ;CRW_16S_A_E_11;Euryarchaeota ;1;Methanomada group;4;Methanomicrobia;6
+10 ;16S;Methanothermobacter thermautotrophicus ;CRW_16S_A_E_10;Euryarchaeota ;1;Methanomada group;4;Methanomicrobia;6
+12 ;16S;Nanoarchaeum equitans ;CRW_16S_A_N_12;Nanoarchaeota;2;Nanoarchaeales;5;Nanoarchaeaceae;7
+13 ;16S;Natronobacterium innermongoliae ;CRW_16S_A_E_13;Euryarchaeota ;1;Stenosarchaea group;3;Halobacteria;3
+14 ;16S;Natronorubrum bangense ;CRW_16S_A_E_14;Euryarchaeota ;1;Stenosarchaea group;3;Halobacteria;3
+15 ;16S;Picrophilus torridus DSM 9790 ;CRW_16S_A_E_15;Euryarchaeota ;1;Diaforarchaea group;6;Thermoplasmata;9
+16 ;16S;Pyrococcus abyssi ;CRW_16S_A_E_16;Euryarchaeota ;1;Thermococci;7;Thermococcales;8
+17 ;16S;Pyrococcus furiosus ;CRW_16S_A_E_17;Euryarchaeota ;1;Thermococci;7;Thermococcales;8
+18 ;16S;Pyrococcus horikoshii ;CRW_16S_A_E_18;Euryarchaeota ;1;Thermococci;7;Thermococcales;8
+19 ;16S;Pyrodictium occultum ;CRW_16S_A_C_19;Crenarchaeota ;3;Thermoprotei;1;Desulfurococcales;1
+20 ;16S;Sulfolobus acidocaldarius ;CRW_16S_A_C_20;Crenarchaeota ;3;Thermoprotei;1;Sulfolobales;10
+22 ;16S;Sulfolobus solfataricus ;CRW_16S_A_C_22;Crenarchaeota ;3;;;;
+21 ;16S;Sulfolobus solfataricus ;CRW_16S_A_C_21;Crenarchaeota ;3;Thermoprotei;1;Sulfolobales;10
+23 ;16S;Thermococcus celer ;CRW_16S_A_E_23;Euryarchaeota ;1;Thermococci;8;Thermococcales;8
+24 ;16S;Thermoplasma acidophilum ;CRW_16S_A_E_24;Euryarchaeota ;1;Diaforarchaea group;6;Thermoplasmata;9
+25 ;16S;Thermoproteus tenax ;CRW_16S_A_C_25;Crenarchaeota ;3;Thermoprotei;1;Thermoproteales;11
+;;;;;;;;;
+;;;;;;;;;
+;;;;;;;;;
+;;;;;;;;;
+;;;;;;;;;
