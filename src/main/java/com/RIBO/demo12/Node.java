@@ -10,13 +10,14 @@ import java.util.List;
  */
 public class Node<T> {
     private T data;
-    private int rank;
+    private int rank, lvlTree;
     private List<Node<T>> children;
     private Node<T> parent;
 
-    public Node(T data, int rank) {
+    public Node(T data, int rank, int lvlTree) {
         this.data = data;
         this.rank = rank;
+        this.lvlTree = lvlTree;
         this.children = new ArrayList<Node<T>>();
     }
 
@@ -126,6 +127,14 @@ public class Node<T> {
         }
 
         return false;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public int getLvlTree() {
+        return lvlTree;
     }
 
     @Override

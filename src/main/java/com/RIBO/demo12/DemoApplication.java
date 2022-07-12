@@ -15,6 +15,7 @@ import com.mongodb.util.JSON;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,10 +39,17 @@ public class DemoApplication {
 
 		MongoCollection<Document> demoDB = db.getCollection("DatiProfDaIntellij");
 		File file = new File("C:/Users/Denise/Desktop/GroupProject/Documents/EnaEukaryota.txt");
+
+		/*
 		ENATree.getInstance().insertMany(file);
-
-
-
+		ArrayList<ArrayList<Node<String>>> arrayList = ENATree.getInstance().getPathsFromRootToAnyLeaf();
+		for (ArrayList<Node<String>> An : arrayList) {
+			for (Node<String> n : An) {
+				System.out.println(n.getData());
+			}
+			System.out.println("\n");
+		}
+		 */
 
 
 
