@@ -7,7 +7,7 @@ import java.util.ArrayList;
  *
  * @param <T> Any class type
  */
-public class Tree<T> {
+public class Tree<T> implements TreeInterface<T> {
 
     private Node<T> root;
 
@@ -26,6 +26,7 @@ public class Tree<T> {
      * @return <code>true</code> if the tree is empty,
      * <code>false</code> otherwise.
      */
+    @Override
     public boolean isEmpty() {
         return root == null;
     }
@@ -35,6 +36,7 @@ public class Tree<T> {
      *
      * @return the root node.
      */
+    @Override
     public Node<T> getRoot() {
         return root;
     }
@@ -44,6 +46,7 @@ public class Tree<T> {
      *
      * @param root The root node to replace the existing root node with.
      */
+    @Override
     public void setRoot(Node<T> root) {
         this.root = root;
     }
@@ -56,6 +59,7 @@ public class Tree<T> {
      * @return <code>true</code> if the given key was found in the tree,
      * <code>false</code> otherwise.
      */
+    @Override
     public boolean exists(T key) {
         return find(root, key);
     }
@@ -65,6 +69,7 @@ public class Tree<T> {
      *
      * @return The number of nodes in the tree
      */
+    @Override
     public int size() {
         return getNumberOfDescendants(root) + 1;
     }
@@ -76,6 +81,7 @@ public class Tree<T> {
      * @param node The node whose number of descendants is needed.
      * @return the number of descendants
      */
+    @Override
     public int getNumberOfDescendants(Node<T> node) {
         int n = node.getChildren().size();
         for (Node<T> child : node.getChildren())
@@ -85,7 +91,8 @@ public class Tree<T> {
 
     }
 
-    private boolean find(Node<T> node, T keyNode) {
+    @Override
+    public boolean find(Node<T> node, T keyNode) {
         boolean res = false;
         if (node.getData().equals(keyNode))
             return true;
@@ -99,7 +106,8 @@ public class Tree<T> {
         return res;
     }
 
-    private Node<T> findNode(Node<T> node, T keyNode) {
+    @Override
+    public Node<T> findNode(Node<T> node, T keyNode) {
         if (node == null)
             return null;
         if (node.getData().equals(keyNode))
@@ -119,6 +127,7 @@ public class Tree<T> {
      *
      * @return The list of nodes in the tree, arranged in the pre-order
      */
+    @Override
     public ArrayList<Node<T>> getPreOrderTraversal() {
         ArrayList<Node<T>> preOrder = new ArrayList<Node<T>>();
         buildPreOrder(root, preOrder);
@@ -131,20 +140,23 @@ public class Tree<T> {
      *
      * @return The list of nodes in the tree, arranged in the post-order
      */
+    @Override
     public ArrayList<Node<T>> getPostOrderTraversal() {
         ArrayList<Node<T>> postOrder = new ArrayList<Node<T>>();
         buildPostOrder(root, postOrder);
         return postOrder;
     }
 
-    private void buildPreOrder(Node<T> node, ArrayList<Node<T>> preOrder) {
+    @Override
+    public void buildPreOrder(Node<T> node, ArrayList<Node<T>> preOrder) {
         preOrder.add(node);
         for (Node<T> child : node.getChildren()) {
             buildPreOrder(child, preOrder);
         }
     }
 
-    private void buildPostOrder(Node<T> node, ArrayList<Node<T>> postOrder) {
+    @Override
+    public void buildPostOrder(Node<T> node, ArrayList<Node<T>> postOrder) {
         for (Node<T> child : node.getChildren()) {
             buildPostOrder(child, postOrder);
         }
@@ -170,6 +182,7 @@ public class Tree<T> {
      *
      * @return The list of nodes in the longest path.
      */
+    @Override
     public ArrayList<Node<T>> getLongestPathFromRootToAnyLeaf() {
         ArrayList<Node<T>> longestPath = null;
         int max = 0;
@@ -189,6 +202,7 @@ public class Tree<T> {
      *
      * @return The height of the tree.
      */
+    @Override
     public int getHeight() {
         return getLongestPathFromRootToAnyLeaf().size();
     }
@@ -199,6 +213,7 @@ public class Tree<T> {
      *
      * @return List of paths.
      */
+    @Override
     public ArrayList<ArrayList<Node<T>>> getPathsFromRootToAnyLeaf() {
         ArrayList<ArrayList<Node<T>>> paths = new ArrayList<ArrayList<Node<T>>>();
         ArrayList<Node<T>> currentPath = new ArrayList<Node<T>>();
@@ -207,8 +222,9 @@ public class Tree<T> {
         return paths;
     }
 
-    private void getPath(Node<T> node, ArrayList<Node<T>> currentPath,
-                         ArrayList<ArrayList<Node<T>>> paths) {
+    @Override
+    public void getPath(Node<T> node, ArrayList<Node<T>> currentPath,
+                        ArrayList<ArrayList<Node<T>>> paths) {
         if (currentPath == null)
             return;
 
@@ -226,7 +242,8 @@ public class Tree<T> {
             currentPath.remove(index);
     }
 
-    private ArrayList<Node<T>> clone(ArrayList<Node<T>> list) {
+    @Override
+    public ArrayList<Node<T>> clone(ArrayList<Node<T>> list) {
         ArrayList<Node<T>> newList = new ArrayList<Node<T>>();
         for (Node<T> node : list)
             newList.add(new Node<T>(node));

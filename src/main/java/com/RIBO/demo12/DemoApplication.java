@@ -38,6 +38,19 @@ public class DemoApplication {
 
 		MongoCollection<Document> demoDB = db.getCollection("DatiProfDaIntellij");
 
+		Node<String> rootENA = new Node<>("ENA: ");
+		Tree<String> tree = new Tree<>(rootENA);
+
+
+
+
+
+
+
+
+
+
+
 		/**
 
 		File input = new File("C:\\Users\\Chiara\\OneDrive\\Desktop\\benchmark-results\\Archaea\\23S-structures.csv");
