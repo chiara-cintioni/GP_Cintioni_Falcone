@@ -38,9 +38,8 @@ public class DemoApplication {
 
 		MongoCollection<Document> demoDB = db.getCollection("DatiProfDaIntellij");
 
-		Node<String> rootENA = new Node<>("ENA: ");
-		Tree<String> tree = new Tree<>(rootENA);
-
+		File file = new File("C:-Users-Denise-Desktop-GroupProject-Documents-EnaEukaryota.txt");
+		ENATree.getInstance().insertMany(file);
 
 
 

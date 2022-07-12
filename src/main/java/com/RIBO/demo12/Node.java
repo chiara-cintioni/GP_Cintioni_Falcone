@@ -10,11 +10,13 @@ import java.util.List;
  */
 public class Node<T> {
     private T data;
+    private T rank;
     private List<Node<T>> children;
     private Node<T> parent;
 
-    public Node(T data) {
+    public Node(T data, T rank) {
         this.data = data;
+        this.rank = rank;
         this.children = new ArrayList<Node<T>>();
     }
 
