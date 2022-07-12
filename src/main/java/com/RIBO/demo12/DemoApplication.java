@@ -38,10 +38,12 @@ public class DemoApplication {
 
 		MongoCollection<Document> demoDB = db.getCollection("DatiProfDaIntellij");
 
+		/**
 
 		File input = new File("C:\\Users\\Chiara\\OneDrive\\Desktop\\benchmark-results\\Archaea\\23S-structures.csv");
 		File output = new File("C:\\Users\\Chiara\\OneDrive\\Desktop\\provaQuesto2.json");
 		ConverterCSVToJson converterCSVToJson = new ConverterCSVToJson(input,output);
-
+		 *
+		 */
 	}
 }

@@ -25,7 +25,7 @@ public class ConverterCSVtoDocument {
         while (!list.isEmpty()) {
             Map<?,?> map = list.get(cont);
 
-            documentBson.append("Organism Name", map.get());
+            documentBson.append("Organism Name", map.get(3));
             list.remove(cont);
             cont++;
         }
