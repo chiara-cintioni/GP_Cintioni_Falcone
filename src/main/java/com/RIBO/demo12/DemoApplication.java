@@ -40,7 +40,7 @@ public class DemoApplication {
 		MongoCollection<Document> demoDB = db.getCollection("DatiProfDaIntellij");
 		File file = new File("C:/Users/Denise/Desktop/GroupProject/Documents/EnaEukaryota.txt");
 
-		/*
+
 		ENATree.getInstance().insertMany(file);
 		ArrayList<ArrayList<Node<String>>> arrayList = ENATree.getInstance().getPathsFromRootToAnyLeaf();
 		for (ArrayList<Node<String>> An : arrayList) {
@@ -49,7 +49,7 @@ public class DemoApplication {
 			}
 			System.out.println("\n");
 		}
-		 */
+
 
 
 
