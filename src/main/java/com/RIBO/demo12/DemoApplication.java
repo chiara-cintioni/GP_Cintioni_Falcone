@@ -37,8 +37,7 @@ public class DemoApplication {
 		MongoDatabase db = client.getDatabase("databaseProvaDemo");
 
 		MongoCollection<Document> demoDB = db.getCollection("DatiProfDaIntellij");
-
-		File file = new File("C:-Users-Denise-Desktop-GroupProject-Documents-EnaEukaryota.txt");
+		File file = new File("C:/Users/Denise/Desktop/GroupProject/Documents/EnaEukaryota.txt");
 		ENATree.getInstance().insertMany(file);
 
 
