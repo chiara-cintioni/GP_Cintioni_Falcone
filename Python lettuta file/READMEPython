@@ -1,4 +1,0 @@
-Per ora legge un file (input) e scrive nel file output il testo del file input senza duplicati.
-(bisogna vedere come rimuovere i duplicati di due colonne e non i duplicati considerando tutte le colonne perchè nei nostri file delle tassonomie
-le righe non sono uguali in quanto cambiano dei valori numerici anche se il nome della sequenza genetica e la tassonomia sono le stess. Bisogna rimuovere
-le righe duplicate in base alle colonne submitted_path	submitted_name dove sono scritte tassonomia e nome)
