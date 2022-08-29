@@ -2,8 +2,6 @@ import hashlib
 
 from pickle import FALSE
 
-import pandas as pd
-
 #1
 output_file_path = "output.txt"
 input_file_path = "taxmap.txt"
