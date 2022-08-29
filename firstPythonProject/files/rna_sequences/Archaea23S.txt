@@ -1,0 +1,5 @@
+Organism Name	Benchmark ID	Length	NumberOfWeakBonds	NumNucleotidiDisaccoppiati	IsPseudoknotted	RNAType	Genus	Core	Coreplus	Shape
+Haloarcula marismortui	CRW-23S_A_E_1	2925	852	4146	Yes	23S
+Haloarcula marismortui rrnA	CRW-23S_A_E_2	2930	855	4150	Yes	23S				
+Haloarcula marismortui rrnB	CRW-23S_A_E_3	2930	855	4150	Yes	23S				
+Thermococcus celer	CRW-23S_A_E_6	3029	879	4300	Yes	23S				
