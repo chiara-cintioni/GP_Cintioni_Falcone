@@ -1,7 +1,26 @@
 import pandas as pd
 
 
-def search_rank_ncbi_ena(rank_to_search):
+def search_gtdb_rank(taxa):
+    rank_taxa = taxa.split(sep="__")
+    if rank_taxa[0] == 'd':
+        rank = "domain"
+    elif rank_taxa[0] == 'p':
+        rank = "phylum"
+    elif rank_taxa[0] == 'c':
+        rank = "class"
+    elif rank_taxa[0] == 'o':
+        rank = "order"
+    elif rank_taxa[0] == 'f':
+        rank = "family"
+    elif rank_taxa[0] == 'g':
+        rank = "genus"
+    elif rank_taxa[0] == 's':
+        rank = "species"
+    return [rank, rank_taxa[-1]]
+
+
+def search_rank(rank_to_search):
     rank_file = open("files/TaxaName_TaxaRank.txt", "r")
     rank_file_lines = rank_file.readlines()
     for line in rank_file_lines:
@@ -16,7 +35,7 @@ def search_rank_ncbi_ena(rank_to_search):
 
 def get_final_word(word):
     res = word.split(sep='	')
-    final_word = res[len(res)-1]
+    final_word = res[len(res) - 1]
     return final_word
 
 
@@ -51,7 +70,7 @@ class RnaObject:
                 self.benchmark_id = element
                 cont += 1
             elif cont == 2:
-                self.length = element
+                self.s_len = element
                 cont += 1
             elif cont == 3:
                 self.num_weak_bonds = element
@@ -168,6 +187,7 @@ class RnaObject:
         bacteria_gtdb_taxonomy = open('files/gtdb/gtdb_bacteria.txt', 'r')
         archaea_gtdb_taxonomy = open('files/gtdb/gtdb_archaea.txt', 'r')
         df = pd.read_table(bacteria_gtdb_taxonomy)
+        pd.set_option('display.max_colwidth', None)
         line = df.loc[df['ncbi_organism_name'] == self.organism_name, ['gtdb_taxonomy']]
         empty_df = pd.DataFrame(columns=['gtdb_taxonomy'])
         if empty_df.equals(line):
@@ -183,19 +203,19 @@ class RnaObject:
             self.gtdb_taxonomy = str(line)
 
 
-def get_first_silva_taxa(line):
+def get_first_taxa(line):
     word = line.split(sep=';')[0].strip()
     return word.split(sep=" ")[-1]
 
 
 def create_json():
-    file = open('files/rna_sequences/Archaea23S.txt', 'r')
+    file = open('files/rna_sequences/Bacteria23S.txt', 'r')
     output = open('files/result_json.json', 'w')
     output.write('[')
     lines = file.readlines()[1:]
     c = 0
     for line in lines:
-        if c==0:
+        if c == 0:
             output.write("{")
         else:
             output.write(',{')
@@ -205,25 +225,35 @@ def create_json():
         obj1.add_taxonomy_ltp()
         obj1.add_taxonomy_ncbi()
         obj1.add_taxonomy_silva()
-        output.write('\"Organism name\": \"' + obj1.organism_name + '\",')
-        output.write('\"Length\": ' + obj1.length + ',')
+        if obj1.organism_name != "":
+            output.write('\"Organism name\": \"' + obj1.organism_name + '\",')
+        else:
+            output.write('\"Organism name\": \"\",')
+        output.write('\"Length\": ' + obj1.s_len + ',')
         output.write('\"Number of decoupled nucleotides\": ' + obj1.num_decoupled + ',')
         output.write('\"Number of weak bonds\": ' + obj1.num_weak_bonds + ',')
-        output.write('\"Is Pseudoknotted\": \"' + obj1.pseudo_knotted + '\",')
-        output.write('\"Rna Type\": \"' + obj1.rna_type + '\",')
+        if obj1.pseudo_knotted != "":
+            output.write('\"Is Pseudoknotted\": \"' + obj1.pseudo_knotted + '\",')
+        else:
+            output.write('\"Is Pseudoknotted\": \"\",')
+        output.write("\n")
+        if obj1.rna_type != "":
+            output.write('\"Rna Type\": \"' + obj1.rna_type + '\",')
+        else:
+            output.write('\"Rna Type\": \"\",')
         output.write('\"Taxonomy\": [{')
         if obj1.silva:
             cont = 0
             output.write('\"SILVA\": {')
             output.write('\"Classified\": \"Yes\"')
-            taxa = get_first_silva_taxa(obj1.silva_taxonomy)
+            taxa = get_first_taxa(obj1.silva_taxonomy)
             cont += 1
             while taxa != "" and cont < len(obj1.silva_taxonomy.split(sep=';')):
                 output.write(',')
-                rank = search_rank_ncbi_ena(taxa)
+                rank = search_rank(taxa)
                 if rank == " ":
-                    rank = "no rank"
-                output.write('\"'+rank+'\": \"'+taxa+'\"')
+                    rank = "unknown"
+                output.write('\"' + rank + '\": \"' + taxa + '\"')
                 taxa = obj1.silva_taxonomy.split(sep=';')[cont]
                 cont += 1
             output.write("}},")
@@ -235,31 +265,96 @@ def create_json():
             cont = 0
             output.write('{\"ENA\": {')
             output.write('\"Classified\": \"Yes\"')
-            taxa = get_first_silva_taxa(obj1.silva_taxonomy)
+            taxa = get_first_taxa(obj1.ena_taxonomy)
             cont += 1
-            while taxa != "" and cont < len(obj1.silva_taxonomy.split(sep=';')):
+            while taxa != "" and cont < len(obj1.ena_taxonomy.split(sep=';')):
                 output.write(',')
-                rank = search_rank_ncbi_ena(taxa)
+                rank = search_rank(taxa)
                 if rank == " ":
-                    rank = "no rank"
+                    rank = "unknown"
                 output.write('\"' + rank + '\": \"' + taxa + '\"')
-                taxa = obj1.silva_taxonomy.split(sep=';')[cont]
+                taxa = obj1.ena_taxonomy.split(sep=';')[cont]
+                cont += 1
+            output.write("}},")
+        else:
+            output.write('{\"ENA\": {')
+            output.write('\"Classified\": \"No\"')
+            output.write("}},")
+        if obj1.ltp:
+            cont = 0
+            output.write('{\"LTP\": {')
+            output.write('\"Classified\": \"Yes\"')
+            taxa = get_first_taxa(obj1.ltp_taxonomy)
+            cont += 1
+            while taxa != "" and cont < len(obj1.ltp_taxonomy.split(sep=';')):
+                output.write(',')
+                rank = search_rank(taxa)
+                if rank == " ":
+                    rank = "unknown"
+                output.write('\"' + rank + '\": \"' + taxa + '\"')
+                taxa = obj1.ltp_taxonomy.split(sep=';')[cont]
+                cont += 1
+            output.write("}},")
+        else:
+            output.write('{\"LTP\": {')
+            output.write('\"Classified\": \"No\"')
+            output.write("}},")
+        if obj1.ncbi:
+            cont = 0
+            output.write('{\"NCBI\": {')
+            output.write('\"Classified\": \"Yes\"')
+            taxa = get_first_taxa(obj1.ncbi_taxonomy)
+            cont += 1
+            while taxa != "" and cont < len(obj1.ncbi_taxonomy.split(sep=';')):
+                output.write(',')
+                rank = search_rank(taxa)
+                if rank == " ":
+                    rank = "unknown"
+                output.write('\"' + rank + '\": \"' + taxa + '\"')
+                taxa = obj1.ncbi_taxonomy.split(sep=';')[cont]
+                cont += 1
+            output.write("}},")
+        else:
+            output.write('{\"NCBI\": {')
+            output.write('\"Classified\": \"No\"')
+            output.write("}},")
+        if obj1.gtdb:
+            cont = 0
+            output.write('{\"GTDB\": {')
+            output.write('\"Classified\": \"Yes\"')
+            taxa = get_first_taxa(obj1.gtdb_taxonomy)
+            cont += 1
+            while taxa != "" and cont < len(obj1.gtdb_taxonomy.split(sep=';')):
+                output.write(',')
+                result = search_gtdb_rank(taxa)
+                rank = result[0]
+                taxa = result[1]
+                if rank == "":
+                    rank = "unknown"
+                output.write('\"' + rank + '\": \"' + taxa + '\"')
+                taxa = obj1.gtdb_taxonomy.split(sep=';')[cont]
                 cont += 1
             output.write("}}")
         else:
-            output.write('{\"ENA\": {')
+            output.write('{\"GTDB\": {')
             output.write('\"Classified\": \"No\"')
             output.write("}}")
         output.write("]}")
         c += 1
     output.write("]")
 
+
 # pass lines from file
 # reduce_file2()
-# i = "Haloarcula marismortui	CRW-23S_A_E_1	2925	852	4146	Yes	23S"
+# i = "Halonotius roseus	CRW-23S_A_E_1	2925	852	4146	Yes	23S"
+# "d__Archaea;p__Halobacteriota;c__Halobacteria;o__Halobacteriales;f__Natrialbaceae;g__Natrinema;s__Natrinema pallidum"	Natrinema pallidum
+
 # obj1 = RnaObject(i)
-# obj1.add_taxonomy_ena()
-# print(obj1.organism_name)
+# obj1.add_taxonomy_gtdb()
+# print(obj1.organism_name+"\n")
+# print(obj1.gtdb_taxonomy)
+# taxa = obj1.gtdb_taxonomy.split(sep=';')[1]
+# print(search_gtdb_rank(taxa))
 create_json()
 # search_rank_NCBI_ENA("Peduovirus")
 # example1 = "Questa   frase   è   un  esempio per vedere  se  prende  la  prima   parola"

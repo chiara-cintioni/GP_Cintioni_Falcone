@@ -27,5 +27,5 @@ def remove_duplicates(file):
             k.append(i)
             output_dup.write(line)
 
-remove_duplicates(file)
+reduce_file2()
 
