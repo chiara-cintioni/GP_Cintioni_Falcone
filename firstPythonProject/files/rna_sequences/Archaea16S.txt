@@ -1,0 +1,25 @@
+Organism Name	Benchmark ID	Length	NumberOfWeakBonds	NumNucleotidiDisaccoppiati	IsPseudoknotted	RNAType	Genus	Core	Coreplus	Shape
+Pyrodictium occultum	CRW-16S_A_C_19	1498	469	2058	Yes	16S	--	--	--	--
+Aeropyrum pernix	CRW-16S_A_C_1	1504	471	2066	Yes	16S	--	--	--	--
+Archaeoglobus fulgidus	CRW-16S_A_E_2	1493	471	2044	Yes	16S	--	--	--	--
+Sulfolobus acidocaldarius	CRW-16S_A_C_20	1495	468	2054	Yes	16S	--	--	--	--
+Haloarcula marismortui rrnA	CRW-16S_A_E_3	1473	461	2024	Yes	16S	--	--	--	--
+Sulfolobus solfataricus	CRW-16S_A_C_21	1495	468	2054	Yes	16S	--	--	--	--
+Haloarcula marismortui rrnB	CRW-16S_A_E_4	1473	461	2024	Yes	16S	--	--	--	--
+Thermoproteus tenax	CRW-16S_A_C_25	1505	475	2060	Yes	16S	--	--	--	--
+Halobacterium sp. NRC-1	CRW-16S_A_E_5	1473	462	2022	Yes	16S	--	--	--	--
+Methanothermobacter thermautotrophicus	CRW-16S_A_E_10	1481	463	2036	Yes	16S	--	--	--	--
+Haloferax volcanii	CRW-16S_A_E_6	1474	458	2032	Yes	16S	--	--	--	--
+Methanothermobacter thermautotrophicus	CRW-16S_A_E_11	1481	463	2036	Yes	16S	--	--	--	--
+Methanobacterium formicicum	CRW-16S_A_E_7	1477	462	2030	Yes	16S	--	--	--	--
+Natronobacterium innermongoliae	CRW-16S_A_E_13	1473	460	2026	Yes	16S	--	--	--	--
+Methanococcus vannielii	CRW-16S_A_E_8	1468	460	2016	Yes	16S	--	--	--	--
+Natronorubrum bangense	CRW-16S_A_E_14	1476	461	2030	Yes	16S	--	--	--	--
+Methanospirillum hungatei	CRW-16S_A_E_9	1467	457	2020	Yes	16S	--	--	--	--
+Picrophilus torridus DSM 9790	CRW-16S_A_E_15	1472	462	2020	Yes	16S	--	--	--	--
+Pyrococcus abyssi	CRW-16S_A_E_16	1512	474	2076	Yes	16S	--	--	--	--
+Pyrococcus furiosus	CRW-16S_A_E_17	1496	469	2054	Yes	16S	--	--	--	--
+Nanoarchaeum equitans	CRW-16S_A_N_12	1501	474	2054	Yes	16S	--	--	--	--
+Pyrococcus horikoshii	CRW-16S_A_E_18	1500	473	2054	Yes	16S	--	--	--	--
+Thermococcus celer	CRW-16S_A_E_23	1487	468	2038	Yes	16S	--	--	--	--
+Thermoplasma acidophilum	CRW-16S_A_E_24	1473	462	2022	Yes	16S	--	--	--	--

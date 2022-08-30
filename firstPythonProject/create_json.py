@@ -64,10 +64,10 @@ class RnaObject:
         self.gtdb_taxonomy = ''
         for element in elements:
             if cont == 0:
-                self.organism_name = element
+                self.organism_name = str(element).strip()
                 cont += 1
             elif cont == 1:
-                self.benchmark_id = element
+                self.benchmark_id = str(element).strip()
                 cont += 1
             elif cont == 2:
                 self.s_len = element
@@ -79,19 +79,26 @@ class RnaObject:
                 self.num_decoupled = element
                 cont += 1
             elif cont == 5:
-                self.pseudo_knotted = element
+                self.pseudo_knotted = str(element).strip()
                 cont += 1
             elif cont == 6:
-                self.rna_type = element
+                self.rna_type = str(element).strip()
                 cont += 1
             elif cont == 7:
                 self.genus = element
+                cont += 1
             elif cont == 8:
-                self.core = element
+                self.core = str(element).strip()
+                cont += 1
             elif cont == 9:
-                self.core_plus = element
+                self.core_plus = str(element).strip()
+                cont += 1
             elif cont == 10:
-                self.shape = element
+                self.shape = str(element).strip()
+                cont += 1
+            elif cont == 11:
+                self.pseudo_order = element
+                cont += 1
 
     def add_taxonomy_silva(self):
         """
@@ -208,9 +215,7 @@ def get_first_taxa(line):
     return word.split(sep=" ")[-1]
 
 
-def create_json():
-    file = open('files/rna_sequences/Bacteria23S.txt', 'r')
-    output = open('files/result_json.json', 'w')
+def create_file_json(file, output):
     output.write('[')
     lines = file.readlines()[1:]
     c = 0
@@ -225,22 +230,27 @@ def create_json():
         obj1.add_taxonomy_ltp()
         obj1.add_taxonomy_ncbi()
         obj1.add_taxonomy_silva()
-        if obj1.organism_name != "":
-            output.write('\"Organism name\": \"' + obj1.organism_name + '\",')
+        output.write('\"Organism name\": \"' + obj1.organism_name + '\",')
+        if obj1.s_len == "--":
+            output.write('\"Length\": \"' + obj1.s_len + '\",')
         else:
-            output.write('\"Organism name\": \"\",')
-        output.write('\"Length\": ' + obj1.s_len + ',')
-        output.write('\"Number of decoupled nucleotides\": ' + obj1.num_decoupled + ',')
-        output.write('\"Number of weak bonds\": ' + obj1.num_weak_bonds + ',')
-        if obj1.pseudo_knotted != "":
-            output.write('\"Is Pseudoknotted\": \"' + obj1.pseudo_knotted + '\",')
+            output.write('\"Length\": ' + obj1.s_len + ',')
+        if obj1.num_decoupled == "--":
+            output.write('\"Number of decoupled nucleotides\": \"' + obj1.num_decoupled + '\",')
         else:
-            output.write('\"Is Pseudoknotted\": \"\",')
+            output.write('\"Number of decoupled nucleotides\": ' + obj1.num_decoupled + ',')
+        if obj1.num_weak_bonds == "--":
+            output.write('\"Number of weak bonds\": \"' + obj1.num_weak_bonds + '\",')
+        else:
+            output.write('\"Number of weak bonds\": ' + obj1.num_weak_bonds + ',')
+        output.write('\"Is Pseudoknotted\": \"' + obj1.pseudo_knotted + '\",')
+        output.write('\"Pseudoknot order\": \"' + "--" + '\",')
         output.write("\n")
-        if obj1.rna_type != "":
-            output.write('\"Rna Type\": \"' + obj1.rna_type + '\",')
-        else:
-            output.write('\"Rna Type\": \"\",')
+        output.write('\"Rna Type\": \"' + obj1.rna_type + '\",')
+        output.write('\"Genus\": \"' + obj1.genus + '\",')
+        output.write('\"Core\": \"' + obj1.core + '\",')
+        output.write('\"Core plus\": \"' + obj1.core_plus + '\",')
+        output.write('\"Shape\": \"' + obj1.shape + '\",')
         output.write('\"Taxonomy\": [{')
         if obj1.silva:
             cont = 0
@@ -340,6 +350,7 @@ def create_json():
             output.write('\"Classified\": \"No\"')
             output.write("}}")
         output.write("]}")
+        print(c)
         c += 1
     output.write("]")
 
@@ -355,7 +366,7 @@ def create_json():
 # print(obj1.gtdb_taxonomy)
 # taxa = obj1.gtdb_taxonomy.split(sep=';')[1]
 # print(search_gtdb_rank(taxa))
-create_json()
+#create_file_json()
 # search_rank_NCBI_ENA("Peduovirus")
 # example1 = "Questa   frase   è   un  esempio per vedere  se  prende  la  prima   parola"
 # print(get_final_word(example1))

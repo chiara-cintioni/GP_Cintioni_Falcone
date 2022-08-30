@@ -1,0 +1,43 @@
+Organism Name	Benchmark ID	Length	NumberOfWeakBonds	NumNucleotidiDisaccoppiati	IsPseudoknotted	RNAType	Genus	Core	Coreplus	Shape
+Micrococcus luteus	CRW-23S_B_Ac_34	3094	934	4320	Yes	23S	--	--	--	--
+Acinetobacter calcoaceticus	CRW-23S_B_P_1	2903	871	4064	Yes	23S	--	--	--	--
+Mycobacterium leprae	CRW-23S_B_Ac_35	3122	906	4432	Yes	23S	--	--	--	--
+Aeromonas hydrophila	CRW-23S_B_P_2	2895	868	4054	Yes	23S	--	--	--	--
+Chlamydia trachomatis 	CRW-23S_B_C_13	2941	867	4148	Yes	23S	--	--	--	--
+Bacillus anthracis	CRW-23S_B_F_3	2920	866	4108	Yes	23S	--	--	--	--
+Deinococcus radiodurans	CRW-23S_B_D_20	2880	862	4036	Yes	23S	--	--	--	--
+Bacillus subtilis	CRW-23S_B_F_4	2927	871	4112	Yes	23S	--	--	--	--
+Deinococcus radiodurans	CRW-23S_B_D_21	2880	862	4036	Yes	23S	--	--	--	--
+Bartonella bacilliformis	CRW-23S_B_P_5	2821	836	3970	Yes	23S	--	--	--	--
+Bordetella bronchiseptica	CRW-23S_B_P_6	2880	847	4066	Yes	23S	--	--	--	--
+Clostridium botulinum A	CRW-23S_B_F_16	2896	862	4068	Yes	23S	--	--	--	--
+Bordetella pertussis	CRW-23S_B_P_7	3009	843	4332	Yes	23S	--	--	--	--
+Clostridium botulinum B	CRW-23S_B_F_17	2910	866	4088	Yes	23S	--	--	--	--
+Borrelia burgdorferi	CRW-23S_B_S_8	2926	879	4094	Yes	23S	--	--	--	--
+Clostridium botulinum B	CRW-23S_B_F_18	2910	866	4088	Yes	23S	--	--	--	--
+Burkholderia cepacia	CRW-23S_B_P_9	2878	858	4040	Yes	23S	--	--	--	--
+Clostridium botulinum E	CRW-23S_B_F_19	2910	866	4088	Yes	23S	--	--	--	--
+Burkholderia mallei	CRW-23S_B_P_10	2882	863	4038	Yes	23S	--	--	--	--
+Enterococcus faecalis	CRW-23S_B_F_22	2913	871	4084	Yes	23S	--	--	--	--
+Burkholderia pseudomallei	CRW-23S_B_P_11	2882	862	4040	Yes	23S	--	--	--	--
+Erysipelothrix rhusiopathiae	CRW-23S_B_F_23	2901	858	4086	Yes	23S	--	--	--	--
+Campylobacter jejuni	CRW-23S_B_P_12	2907	872	4070	Yes	23S	--	--	--	--
+Lactococcus lactis	CRW-23S_B_F_30	2901	868	4066	Yes	23S	--	--	--	--
+Listeria monocytogenes	CRW-23S_B_F_32	2928	868	4120	Yes	23S	--	--	--	--
+Listeria monocytogenes	CRW-23S_B_F_33	2932	872	4120	Yes	23S	--	--	--	--
+Escherichia coli	CRW-23S_B_P_24	2904	869	4070	Yes	23S	--	--	--	--
+Haemophilus influenzae	CRW-23S_B_P_27	2897	866	4062	Yes	23S	--	--	--	--
+Helicobacter pylori	CRW-23S_B_P_28	2968	822	4292	Yes	23S	--	--	--	--
+Klebsiella pneumoniae	CRW-23S_B_P_29	2903	868	4070	Yes	23S	--	--	--	--
+Neisseria meningitidis	CRW-23S_B_P_39	2890	865	4050	Yes	23S	--	--	--	--
+Plesiomonas shigelloides	CRW-23S_B_P_40	2893	857	4072	Yes	23S	--	--	--	--
+Leptospira interrogans	CRW-23S_B_S_31	2958	883	4150	Yes	23S	--	--	--	--
+Pseudomonas aeruginosa	CRW-23S_B_P_41	2893	867	4052	Yes	23S	--	--	--	--
+Rickettsia rickettsii	CRW-23S_B_P_43	2759	815	3888	Yes	23S	--	--	--	--
+Ruminobacter amylophilus	CRW-23S_B_P_44	2867	856	4022	Yes	23S	--	--	--	--
+Mycoplasma genitalium	CRW-23S_B_T_36	2917	867	4100	Yes	23S	--	--	--	--
+Mycoplasma pneumoniae	CRW-23S_B_T_37	2905	866	4078	Yes	23S	--	--	--	--
+Staphylococcus aureus	CRW-23S_B_F_45	2923	874	4098	Yes	23S	--	--	--	--
+Staphylococcus carnosus	CRW-23S_B_F_46	2924	876	4096	Yes	23S	--	--	--	--
+Thermus thermophilus	CRW-23S_B_D_49	2915	832	4166	Yes	23S	--	--	--	--
+Treponema pallidum	CRW-23S_B_S_50	2953	884	4138	Yes	23S	--	--	--	--
