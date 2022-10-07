@@ -1,0 +1,58 @@
+<head>
+        <meta charset="utf-8">
+</head>
+
+
+<nav class="navbar navbar-expand-lg" style="background-color: #FFB042;">
+    <div class="container-fluid">
+      <img src="static\images\ribo_logo.png" alt="RIBO" width="60" height = "60">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul class="navbar-nav navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+          <li class="nav-item">
+            {% url 'home' as home_url %}
+            <a class="nav-link active" style = "color: black; font-size: 20px" aria-current="page" href="{{ home_url }}">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" style = "color: black; font-size: 20px" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Search
+            </a>
+            <ul class="dropdown-menu">
+                {% url 'search' as search_url %}
+                <li><a class="dropdown-item" style = "color: black; font-size: 20px" href="{{ search_url }}">Search rna sequences</a></li>
+                {% url 'download' as download_url %}
+                <li><a class="dropdown-item" style = "color: black; font-size: 20px" href="{{ download_url }}">Download</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            {% url 'contact' as contact_url %}
+            <a class="nav-link" style = "color: black; font-size: 20px" href="{{ contact_url }}">Contact us</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" style = "color: black; font-size: 20px" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Documentation
+            </a>
+            <ul class="dropdown-menu">
+                {% url 'help' as help_url %}
+                <li><a class="dropdown-item" style = "color: black; font-size: 20px" href="{{ help_url }}">Help</a></li>
+                {% url 'info' as info_url %}
+                <li><a class="dropdown-item" style = "color: black; font-size: 20px" href="{{ info_url }}">Info</a></li>
+                {% url 'sources' as sources_url %}
+                <li><a class="dropdown-item" style = "color: black; font-size: 20px" href="{{ sources_url }}">Sources</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="align-content-lg-center">
+          {% url 'admin:index' as admin_url %}
+          {% if user.is_authenticated %}
+              <a class="nav-link" style = "color: black; font-size: 20px" aria-current="page" href="{{ admin_url }}">Back to admin page</a>
+          {% else %}
+              <a class="nav-link" style = "color: black; font-size: 20px" aria-current="page" href="{{ admin_url }}">Login</a>
+          {% endif %}
+
+      </div>
+    </div>
+</nav>
