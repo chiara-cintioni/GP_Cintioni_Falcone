@@ -1,27 +1,44 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-      <meta charset="utf-8">
-      <title>nav_bar</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-      <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-  </head>
- <body>
-    <nav>
-        <input type="checkbox" id="check">
-        <label for="check" class="checkbtn">
-            <i class="fas fa-bars"></i>
-        </label>
-        <label class="logo">RIBO</label>
-        <ul>
-            <li><a class="active" href="{{ url_for('home') }}">Home</a></li>
-            <li><a href="{{ url_for('search') }}">Search</a></li>
-            <li><a href="{{ url_for('contact') }}">Contact us</a></li>
-            <li><a href="{{ url_for('documentation') }}">Documentation</a></li>
-        </ul>
-    </nav>
- <section></section>
- </body>
+<head>
+    <meta charset="utf-8">
+    <title> RIBO </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!--<script src="https://kit.fontawesome.com/817de29756.js" ></script>-->
+</head>
+<body>
+   <div class="dropdown">
+        <nav>
+             <input type="checkbox" id="check">
+                <label for="check" class="checkbtn">
+                    <i class="fa-sharp fa-solid fa-bars"></i>
+                </label>
+            <label class="logo">RIBO</label>
+            <ul>
+                <li><a class="active" href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="#">Search<i class="fas fa-caret-down"></i></a>
+                    <ul>
+                        <li><a href="{{ url_for('search') }}">Search</a></li>
+                        <li><a href="{{ url_for('download') }}">Download</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Documentation<i class="fas fa-caret-down"></i></a>
+                    <ul>
+                        <li><a href="<#>">Tutorial<i style="transform: rotate(-90deg);" class="fas fa-caret-down"></i></a>
+                            <ul>
+                                <li><a href="{{ url_for('s_tutorial') }}">Search</a></li>
+                                <li><a href="{{ url_for('d_tutorial') }}">Download</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="{{ url_for('info') }}">Info</a></li>
+                        <li><a href="{{ url_for('sources') }}">Sources</a></li>
+                    </ul>
+                </li>
+                <li><a href="{{ url_for('contact') }}">Contact us</a></li>
+            </ul>
+        </nav>
+   </div>
+</body>
 </html>

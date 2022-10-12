@@ -1,120 +1,152 @@
-h1{
-    border: 2px #eee solid;
-    color: black;
-    text-align: center;
-    padding: 10px;
-}
-
-*{
-    padding: 0;
-    margin: 0;
-    text-decoration: none;
-    list-style: none;
-    box-sizing: border-box;
-}
-
 body{
-    font-family: Arial;
-    background-color: #ffe9d6;
+    background: azure;
+    font-family: montserrat;
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown{
+    margin: 0 auto;
 }
 
 nav{
-    background: #FFA62B;
-    height: 80px;
-    width: 100%;
+    height: 60px;
+    background: #489fb5;
 }
-
 label.logo{
-    color: black;
-    font-family: Batang;
+    color: white;
     font-size: 35px;
-    line-height: 80px;
+    line-height: 60px;
     padding: 0 100px;
     font-weight: bold;
 }
 
 nav ul{
+    padding: 0;
     float: right;
-    margin-right: 20px;
+    margin: 0 30px 0 0;
 }
 
 nav ul li{
+    background: #489fb5;
+    position: relative;
+    list-style: none;
     display: inline-block;
-    line-height: 80px;
-    margin: 0 5px;
 }
 
 nav ul li a{
-    color: black;
-    font-size: 17px;
-    padding: 5px 11px;
+    display: block;
+    padding: 0 15px;
+    color: white;
     border-radius: 3px;
     text-transform: uppercase;
-}
-
-/*cancellare se non vogliamo il quadrato su home*/
-a.active,a:hover{
-    background: #FFBE63;
-    transition: .5s;
+    text-decoration: none;
+    line-height: 60px;
+    font-size: 16px;
 }
 
 .checkbtn{
     font-size: 30px;
-    color: black;
+    color: white;
     float: right;
-    line-height: 80px;
+    line-height: 60px;
     margin-right: 40px;
     cursor: pointer;
     display: none;
 }
-
 #check{
     display: none;
 }
 
-@media (max-width: 952px) {
+@media (max-width: 958px){
     label.logo{
         font-size: 30px;
         padding-left: 50px;
     }
-    nav ul li a{
+    nav ul li a {
         font-size: 16px;
     }
 }
 
-@media (max-width: 858px) {
+@media (max-width: 858px){
     .checkbtn{
-        display: block;
+        display:block;
     }
     ul{
         position: fixed;
         width: 100%;
         height: 100vh;
-        background: #c84201;
-        top: 80px;
+        background: #16697a;
+        top: 60px;
         left: -100%;
         text-align: center;
         transition: all .5s;
     }
     nav ul li{
         display: block;
+        background: #16697a;
         margin: 50px 0;
         line-height: 30px;
     }
     nav ul li a{
         font-size: 20px;
     }
-    a:hover,a.active{
+    nav ul ul li a{
+        display: block;
+        background: #16697a;
+        margin: 50px 0;
+        line-height: 30px;
+    }
+    nav ul ul ul li a{
+        display: block;
+        background: #16697a;
+        margin: 50px 0;
+        line-height: 30px;
+    }
+    a.active{
         background: none;
-        color: #fb8832;
+        color: #489fb5;
+    }
+    a:hover{
+        background: none;
+        color: black;
     }
     #check:checked ~ ul{
         left: 0;
     }
 }
-/*
-section{
-    background: url;
+
+nav ul li a:hover{
+    background: #82c0cc;
+    text-decoration: none;
+    color: black;
 }
-per mettere un'img
- */
+
+nav ul ul{
+    position: absolute;
+    top: 60px;
+    display: none;
+}
+
+nav ul li:hover>ul{
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+
+nav ul ul li{
+    width: 150px;
+    float: none;
+    display: list-item;
+    position: relative;
+}
+
+nav ul ul ul li{
+    position: relative;
+    top: -60px;
+    left: 150px;
+}
+
+nav ul li a i{
+    margin: 5px;
+}
