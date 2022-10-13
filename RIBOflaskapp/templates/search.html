@@ -3,47 +3,27 @@
 {% block title %}Search{% endblock %}
 
 {% block content %}
-<h1>Search</h1>
-<hr>
-<div class="content">
-<form method="post">
-    <p>
-        <b><label for="content">Todo content</label></b>
-    </p>
-    <p>
-        <input type="text" name="content"
-            placeholder="Todo Content"></input>
-    </p>
-    <p>
-        <b><label for="degree">Degree</label></b>
-    </p>
-    <p>
-        <input id="degree-0" name="degree" required type="radio" value="Important">
-        <label for="degree-0">Important</label>
-    </p>
-    <p>
-        <input id="degree-1" name="degree" required type="radio" value="Unimportant">
-        <label for="degree-1">Unimportant</label>
-    </p>
-    <button type="submit">Submit</button>
-</form>
-    <hr>
-    {% for c in collection %}
-        <div class="collection">
-            <p>{{ c['content'] }} <i>({{ c['degree']}})</i></p>
-            <form method="POST" action="{{ url_for('delete', id=c['_id']) }}" >
-                <input type="submit" value="Delete Todo"
-                       onclick="return confirm('Are you sure you want to delete this entry?')">
-            </form>
-        </div>
-    {% endfor %}
-</div>
-<div>
-<h1>Search rna sequence:</h1>
-    <form action="/list" method="POST" autocomplete="on">
-        <td><input type="text" name="mypos" placeholder="organism name" size="20" /></td>
-        <td><button type="submit">Search</button></td>
-        <button type="Reset" value="Reset">Reset</button>
-    </form>
+<div id="search_container">
+    <h1>Search:</h1>
+    <div id="search_box">
+        <form action="/search/result" method="POST"  autocomplete="on">
+            <td><input type="text" name="Organism name" placeholder="Organism name" size="20"></td>
+            <td><input type="text" name="Accession number" placeholder="Accession number" size="20"></td>
+            <td><input type="text" name="Benchmark ID" placeholder="Reference ID" size="20"></td>
+            <td><input type="number" name="Length" placeholder="Length"></td>
+            <td><input type="number" name="Number of decoupled nucleotides" placeholder="Decoupled nucleotides"></td>
+            <td><input type="number" name="Number of weak bonds" placeholder="Weak bonds"></td>
+            <td><input type="text" name="Is Pseudoknotted" placeholder="Is Pseudoknotted"></td>
+            <td><input type="number" name="Pseudoknot order" placeholder="Pseudoknot order"></td>
+            <td><input type="text" name="Rna Type" placeholder="RNA type"></td>
+            <td><input type="number" name="Genus" placeholder="Genus"></td>
+            <td><input type="text" name="Core" placeholder="Core"></td>
+            <td><input type="text" name="Core plus" placeholder="Core plus"></td>
+            <td><input type="text" name="Shape" placeholder="Shape"></td>
+
+            <td><button type="submit">Search</button></td>
+            <button type="Reset" value="Reset">Reset</button>
+        </form>
+    </div>
 </div>
 {% endblock %}
