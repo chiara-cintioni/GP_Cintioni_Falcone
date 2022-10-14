@@ -1,29 +1,63 @@
 {% extends 'base.html' %}
 
-{% block title %}Search{% endblock %}
+    {% block title %}
+        Search
+    {% endblock %}
+
+
+
 
 {% block content %}
-<div id="search_container">
     <h1>Search:</h1>
     <div id="search_box">
-        <form action="/search/result" method="POST"  autocomplete="on">
-            <td><input type="text" name="Organism name" placeholder="Organism name" size="20"></td>
+        <form name="RegForm" action="/search/result" method="POST"  autocomplete="on" onsubmit="return check_input_length()">
+            <td><a>Organism name:</a></td>
+            <td><input type="text" name="Organism name" placeholder="Organism name" size="20" oninput=""></td>
+            <td><a>Accession number:</a></td>
             <td><input type="text" name="Accession number" placeholder="Accession number" size="20"></td>
+            <td><a>Reference ID:</a></td>
             <td><input type="text" name="Benchmark ID" placeholder="Reference ID" size="20"></td>
-            <td><input type="number" name="Length" placeholder="Length"></td>
+            <td><a>Length:</a></td>
+            <td><input type="number" name="Length" placeholder="Any length"></td>
+            <td><input type="number" name="Length_from" placeholder="From"></td>
+            <td><input type="number" name="Length_to" placeholder="To"></td>
+                <script>
+                    function check_input_length(){
+                         var any = document.forms.RegForm.Length.value;
+                         var from = document.forms.RegForm.Length_from.value;
+                         var to = document.forms.RegForm.Length_to.value;
+                         if (any !== '' && from !== '' || to !== ''){
+                            window.alert("You can only enter a specific length or a range.");
+                            any.focus();
+                            return "No";
+                         }
+                         return "Ok"
+                    }
+                </script>
+            <td><a>Number of decoupled nucleotides:</a></td>
             <td><input type="number" name="Number of decoupled nucleotides" placeholder="Decoupled nucleotides"></td>
-            <td><input type="number" name="Number of weak bonds" placeholder="Weak bonds"></td>
+            <td><a>Number of weak bonds:</a></td>
+            <td><input type="number" name="Number_of_weak_bonds" placeholder="Any weak bonds"></td>
+            <td><input type="number" name="Number_of_weak_bonds_from" placeholder="From"></td>
+            <td><input type="number" name="Number_of_weak_bonds_to" placeholder="To"></td>
+
+            <td><a>Is Pseudoknotted:</a></td>
             <td><input type="text" name="Is Pseudoknotted" placeholder="Is Pseudoknotted"></td>
+            <td><a>Pseudoknot order:</a></td>
             <td><input type="number" name="Pseudoknot order" placeholder="Pseudoknot order"></td>
             <td><input type="text" name="Rna Type" placeholder="RNA type"></td>
+            <td><a>Genus:</a></td>
             <td><input type="number" name="Genus" placeholder="Genus"></td>
+            <td><a>Core:</a></td>
             <td><input type="text" name="Core" placeholder="Core"></td>
+            <td><a>Core plus:</a></td>
             <td><input type="text" name="Core plus" placeholder="Core plus"></td>
+            <td><a>Shape:</a></td>
             <td><input type="text" name="Shape" placeholder="Shape"></td>
 
             <td><button type="submit">Search</button></td>
             <button type="Reset" value="Reset">Reset</button>
         </form>
     </div>
-</div>
+
 {% endblock %}

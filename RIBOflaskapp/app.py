@@ -24,6 +24,8 @@ def search():
 @app.route('/search/result', methods=['GET', 'POST'])
 def search_db():
     if request.method == 'POST':
+        if request.form.get()
+            redirect("/search/", code=302)
         org_name = request.form['Organism name']
         length = request.form['Length']
         if length == '':
@@ -66,14 +68,9 @@ def search_db():
     return render_template('form.html')
 
 
-@app.route('/home/')
+@app.route('/')
 def home():
     return render_template('home.html')
-
-
-@app.route('/')
-def index():
-    return render_template('index.html')
 
 
 @app.route('/contact/')

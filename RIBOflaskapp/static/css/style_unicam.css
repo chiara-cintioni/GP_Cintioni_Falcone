@@ -136,6 +136,10 @@ nav ul li a:hover{
     color: black;
 }
 
+nav ul li .dropdown-menu{
+    display: block;
+}
+
 nav ul ul{
     position: absolute;
     top: 80px;
