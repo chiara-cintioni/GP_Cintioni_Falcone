@@ -7,7 +7,7 @@ h1{
 }
 
 body{
-    background: azure;
+    background: #eff5fb;
     margin: 0;
     padding: 0;
 }
@@ -90,7 +90,7 @@ nav ul li a{
         position: fixed;
         width: 100%;
         height: 100vh;
-        background: #2774A3;
+        background: #295a8e;
         top: 80px;
         left: -100%;
         text-align: center;
@@ -98,7 +98,7 @@ nav ul li a{
     }
     nav ul li{
         display: block;
-        background: #2774A3;
+        background: #295a8e;
         margin: 50px 0;
         line-height: 30px;
     }
@@ -107,19 +107,19 @@ nav ul li a{
     }
     nav ul ul li a{
         display: block;
-        background: #2691C7;
+        background: #3778be;
         margin: 50px 0;
         line-height: 30px;
     }
     nav ul ul ul li a{
         display: block;
-        background: #2691C7;
+        background: #3778be;
         margin: 50px 0;
         line-height: 30px;
     }
     a.active{
         background: none;
-        color: #1b3b5d;
+        color: #12283f;
     }
     a:hover{
         background: none;
@@ -131,9 +131,9 @@ nav ul li a{
 }
 
 nav ul li a:hover{
-    background: #2691C7;
+    background: #295a8e;
     text-decoration: none;
-    color: black;
+    color:#b0cbe8;
 }
 
 nav ul ul{
@@ -168,3 +168,33 @@ nav ul li a i{
 .container {
     margin-top: 100px;
 }
+
+.result_table {
+  border: 1px solid black;
+  white-space: nowrap;
+}
+
+.result_table th {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid black;
+}
+
+.result_table tr {
+  border: 1px solid black;
+}
+
+.result_table tr td{
+  border: 1px solid black;
+  white-space: nowrap;
+}
+
+button{
+    background: #eff5fb;
+}
+
+button:hover{
+    background-color: #b0cbe8;
+    transition: .5s;
+}
+

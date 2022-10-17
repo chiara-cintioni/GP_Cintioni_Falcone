@@ -4,16 +4,79 @@
 
 {% block content %}
 <form action="/search/">
-    <input type="submit" value="Previous page">
+    <button type="submit"> Previous page </button>
 </form>
-{% for element in result_list %}
-<div class="element">
-    <p>
-        {{ element['Organism name'] }}
-    </p>
-    <p>
-        {{ element['Accession number'] }}
-    </p>
+<h1>Result</h1>
+<div style="overflow-x:auto;">
+    <table class="result_table" id="result_table">
+    <thead>
+         <tr>
+             <th><input id="check_all" type="checkbox"></th>
+             <th>Organism name</th>
+             <th>Accession number</th>
+             <th>Reference ID</th>
+             <th>Length</th>
+             <th>Number of decoupled nucleotides</th>
+             <th>Number of weak bonds</th>
+             <th>Is Pseudoknotted</th>
+             <th>Pseudoknot order</th>
+             <th>RNA Type</th>
+             <th>Genus</th>
+             <th>Domain</th>
+             <th>Core</th>
+             <th>Core plus</th>
+             <th>Shape</th>
+         </tr>
+    </thead>
+    <tbody>
+        {% for element in result_list %}
+        <tr class="element">
+            <td><input type="checkbox" name="row-check"></td>
+            <td>
+                {{ element['Organism name'] }}
+            </td>
+            <td>
+                {{ element['Accession number'] }}
+            </td>
+            <td>
+                {{ element['Benchmark ID'] }}
+            </td>
+            <td>
+                {{ element['Length'] }}
+            </td>
+            <td>
+                {{ element['Number of decoupled nucleotides'] }}
+            </td>
+            <td>
+                {{ element['Number of weak bonds'] }}
+            </td>
+            <td>
+                {{ element['Is Pseudoknotted'] }}
+            </td>
+            <td>
+                {{ element['Pseudoknot order'] }}
+            </td>
+            <td>
+                {{ element['Rna Type'] }}
+            </td>
+            <td>
+                {{ element['Genus'] }}
+            </td>
+            <td>
+                {{ element['Domain'] }}
+            </td>
+            <td>
+                {{ element['Core'] }}
+            </td>
+            <td>
+                {{ element['Core plus'] }}
+            </td>
+            <td>
+                {{ element['Shape'] }}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
-{% endfor %}
 {% endblock %}

@@ -1,18 +1,15 @@
 {% extends 'base.html' %}
-
     {% block title %}
         Search
     {% endblock %}
 
 
-
-
 {% block content %}
     <h1>Search:</h1>
     <div id="search_box">
-        <form name="RegForm" action="/search/result" method="POST"  autocomplete="on" onsubmit="return check_input_length()">
+        <form name="RegForm" action="/download/" method="POST" autocomplete="on">
             <td><a>Organism name:</a></td>
-            <td><input type="text" name="Organism name" placeholder="Organism name" size="20" oninput=""></td>
+            <td><input type="text" name="Organism name" placeholder="Organism name" size="20"></td>
             <td><a>Accession number:</a></td>
             <td><input type="text" name="Accession number" placeholder="Accession number" size="20"></td>
             <td><a>Reference ID:</a></td>
@@ -21,31 +18,28 @@
             <td><input type="number" name="Length" placeholder="Any length"></td>
             <td><input type="number" name="Length_from" placeholder="From"></td>
             <td><input type="number" name="Length_to" placeholder="To"></td>
-                <script>
-                    function check_input_length(){
-                         var any = document.forms.RegForm.Length.value;
-                         var from = document.forms.RegForm.Length_from.value;
-                         var to = document.forms.RegForm.Length_to.value;
-                         if (any !== '' && from !== '' || to !== ''){
-                            window.alert("You can only enter a specific length or a range.");
-                            any.focus();
-                            return "No";
-                         }
-                         return "Ok"
-                    }
-                </script>
             <td><a>Number of decoupled nucleotides:</a></td>
             <td><input type="number" name="Number of decoupled nucleotides" placeholder="Decoupled nucleotides"></td>
             <td><a>Number of weak bonds:</a></td>
             <td><input type="number" name="Number_of_weak_bonds" placeholder="Any weak bonds"></td>
             <td><input type="number" name="Number_of_weak_bonds_from" placeholder="From"></td>
             <td><input type="number" name="Number_of_weak_bonds_to" placeholder="To"></td>
-
             <td><a>Is Pseudoknotted:</a></td>
-            <td><input type="text" name="Is Pseudoknotted" placeholder="Is Pseudoknotted"></td>
+            <td><select  name="Is Pseudoknotted" >
+                <option value=''>---</option>
+                <option value="Kind">Kind</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select></td>
             <td><a>Pseudoknot order:</a></td>
             <td><input type="number" name="Pseudoknot order" placeholder="Pseudoknot order"></td>
-            <td><input type="text" name="Rna Type" placeholder="RNA type"></td>
+            <td><a>RNA Type:</a></td>
+            <td><select  name="Rna Type">
+                <option value=''>Any</option>
+                <option value="5S">5S</option>
+                <option value="16S">16S</option>
+                <option value="23S">23S</option>
+            </select></td>
             <td><a>Genus:</a></td>
             <td><input type="number" name="Genus" placeholder="Genus"></td>
             <td><a>Core:</a></td>
@@ -54,8 +48,23 @@
             <td><input type="text" name="Core plus" placeholder="Core plus"></td>
             <td><a>Shape:</a></td>
             <td><input type="text" name="Shape" placeholder="Shape"></td>
-
-            <td><button type="submit">Search</button></td>
+            <td><a>Taxonomy:</a></td>
+            <td><select  name="Taxonomy" >
+                <option value=''>---</option>
+                <option value="ENA">ENA</option>
+                <option value="SILVA">SILVA</option>
+                <option value="GTDB">GTDB</option>
+                <option value="LTP">LTP</option>
+                <option value="NCBI">NCBI</option>
+            </select></td>
+            <td><a>Domain:</a></td>
+            <td><select  name="Domain">
+                <option value=''>---</option>
+                <option value="Eukaryota">Eukaryota</option>
+                <option value="Bacteria">Bacteria</option>
+                <option value="Archaea">Archaea</option>
+            </select></td>
+            <button type="submit"  onclick="check_input_length(), check_input_weak_bonds()">Search</button>
             <button type="Reset" value="Reset">Reset</button>
         </form>
     </div>
