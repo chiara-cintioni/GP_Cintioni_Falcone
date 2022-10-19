@@ -16,10 +16,10 @@
                     <i class="fas fa-bars"></i>
                 </label>
             <label class="logo">
-                <img src="https://www.unicam.it/themes/custom/italiagov/unicam/img/logo_.png" width="80" height="95">
+                <img src="{{ url_for('static', filename='img/UNICAM_logo.png') }}" width="80" height="95">
             </label>
             <label class="text-logo">
-                <img src="https://www.unicam.it/themes/custom/italiagov/unicam/webp/logo-mobile.webp" width="126" height="40">
+                <img src="{{ url_for('static', filename='img/UNICAM_scritta.webp') }}" width="126" height="40">
             </label>
             <ul>
                 <li><a class="active" href="{{ url_for('home') }}">Home</a></li>
