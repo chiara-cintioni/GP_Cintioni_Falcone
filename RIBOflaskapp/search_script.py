@@ -1,10 +1,10 @@
 from flask import Flask, render_template, request, url_for, redirect
 from pymongo import MongoClient
 
-client = MongoClient('mongodb+srv://DeniseFalcone:Giappone4ever@cluster0.yelotpf.mongodb.net/test', 27017)
-db = client.RIBOdb
-# client = MongoClient('localhost')
-# db = client.databaseRIBO
+#client = MongoClient('mongodb+srv://DeniseFalcone:Giappone4ever@cluster0.yelotpf.mongodb.net/test', 27017)
+#db = client.RIBOdb
+client = MongoClient('localhost')
+db = client.RIBO_flask_db
 
 
 def search_org_name(org_name, collection):
@@ -41,21 +41,7 @@ def search_acc_num(acc_num, collection):
     return res_col
 
 
-def search_any_length(length, collection):
-    if length == -1:
-        return collection
-    result = collection.aggregate([
-        {
-            '$match': {
-                'Length': length
-            }
-        },
-        {
-            '$out': 'temp'
-        }
-    ])
-    res_col = db.temp
-    return res_col
+
 
 
 def search_length_from (length_from, collection):
@@ -139,15 +125,13 @@ def search_length_from_to(length_from, length_to, collection):
     return res_col
 
 
-def search_length(length_from, length_to, any_length, collection):
-    if length_from == -1 and length_to == -1 and any_length == -1:
+def search_length(length_from, length_to, collection):
+    if length_from == -1 and length_to == -1:
         return collection
-    elif length_from == -1 and length_to == -1 and any_length != -1:
-        return search_any_length(any_length, collection)
     elif length_from != -1 and length_to == -1:
         return search_length_from(length_from,collection)
     elif length_from == -1 and length_to != -1:
-        return search_length_to(length_to,collection)
+        return search_length_to(length_to, collection)
     else:
         return search_length_from_to(length_from, length_to, collection)
 
@@ -186,21 +170,6 @@ def search_num_decoup(num_decoup, collection):
     return res_col
 
 
-def search_any_weak(weak, collection):
-    if weak == -1:
-        return collection
-    result = collection.aggregate([
-        {
-            '$match': {
-                'Number of weak bonds': weak
-            }
-        },
-        {
-            '$out': 'temp'
-        }
-    ])
-    res_col = db.temp
-    return res_col
 
 
 def search_weak_from(weak_from, collection):
@@ -284,11 +253,9 @@ def search_weak_from_to(weak_from, weak_to, collection):
     return res_col
 
 
-def search_weak_bonds(weak_from, weak_to, any_weak, collection):
-    if weak_from == -1 and weak_to == -1 and any_weak == -1:
+def search_weak_bonds(weak_from, weak_to, collection):
+    if weak_from == -1 and weak_to == -1:
         return collection
-    elif weak_from == -1 and weak_to == -1 and any_weak != -1:
-        return search_any_weak(any_weak, collection)
     elif weak_from != -1 and weak_to == -1:
         return search_weak_from(weak_from, collection)
     elif weak_from == -1 and weak_to != -1:
@@ -417,95 +384,10 @@ def search_shape(shape, collection):
     return res_col
 
 
-def search_taxonomy_ENA(collection):
-    result = collection.aggregate([
-        {
-            '$match': {
-                'Taxonomy.ENA.Classified': 'Yes'
-            }
-        },
-        {
-            '$out': 'temp'
-        }
-    ])
-    res_col = db.temp
-    return res_col
 
+"""
 
-def search_taxonomy_SILVA( collection):
-    result = collection.aggregate([
-        {
-            '$match': {
-                'Taxonomy.SILVA.Classified': 'Yes'
-            }
-        },
-        {
-            '$out': 'temp'
-        }
-    ])
-    res_col = db.temp
-    return res_col
-
-
-def search_taxonomy_LTP(collection):
-    result = collection.aggregate([
-        {
-            '$match': {
-                'Taxonomy.LTP.Classified': 'Yes'
-            }
-        },
-        {
-            '$out': 'temp'
-        }
-    ])
-    res_col = db.temp
-    return res_col
-
-
-def search_taxonomy_GTDB(collection):
-    result = collection.aggregate([
-        {
-            '$match': {
-                'Taxonomy.GTDB.Classified': 'Yes'
-            }
-        },
-        {
-            '$out': 'temp'
-        }
-    ])
-    res_col = db.temp
-    return res_col
-
-
-def search_taxonomy_NCBI(collection):
-    result = collection.aggregate([
-        {
-            '$match': {
-                'Taxonomy.NCBI.Classified': 'Yes'
-            }
-        },
-        {
-            '$out': 'temp'
-        }
-    ])
-    res_col = db.temp
-    return res_col
-
-
-def search_taxonomy(taxonomy, collection):
-    if taxonomy == '':
-        return collection
-    elif taxonomy == "SILVA":
-        return search_taxonomy_SILVA(collection)
-    elif taxonomy == "ENA":
-        return search_taxonomy_ENA(collection)
-    elif taxonomy == "GTDB":
-        return search_taxonomy_GTDB(collection)
-    elif taxonomy == "LTP":
-        return search_taxonomy_LTP(collection)
-    else:
-        return search_taxonomy_NCBI(collection)
-
+NON SERVE PIU' PERCHE' NON ABBIAMO PIU' IL CAMPO DOMAIN DA SOLO
 
 def search_domain(domain, collection):
     if domain == '':
@@ -522,3 +404,91 @@ def search_domain(domain, collection):
     ])
     res_col = db.temp
     return res_col
+"""
+
+def search_ENA(collection):
+    result = collection.aggregate([
+        {
+            '$match': {
+                'Taxonomy.ENA.Classified': 'Yes'
+            }
+        },
+        {
+            '$out': 'temp'
+        }
+    ])
+    res_col = db.temp
+    return res_col
+
+def search_SILVA(collection):
+    result = collection.aggregate([
+        {
+            '$match': {
+                'Taxonomy.SILVA.Classified': 'Yes'
+            }
+        },
+        {
+            '$out': 'temp'
+        }
+    ])
+    res_col = db.temp
+    return res_col
+
+
+def search_LTP(collection):
+    result = collection.aggregate([
+        {
+            '$match': {
+                'Taxonomy.LTP.Classified': 'Yes'
+            }
+        },
+        {
+            '$out': 'temp'
+        }
+    ])
+    res_col = db.temp
+    return res_col
+
+def search_GTDB(collection):
+    result = collection.aggregate([
+        {
+            '$match': {
+                'Taxonomy.GTDB.Classified': 'Yes'
+            }
+        },
+        {
+            '$out': 'temp'
+        }
+    ])
+    res_col = db.temp
+    return res_col
+
+def search_NCBI(collection):
+    result = collection.aggregate([
+        {
+            '$match': {
+                'Taxonomy.NCBI.Classified': 'Yes'
+            }
+        },
+        {
+            '$out': 'temp'
+        }
+    ])
+    res_col = db.temp
+    return res_col
+
+
+
+def search_taxonomy(taxonomy, collection):
+    if taxonomy == '':
+        return collection
+    elif taxonomy == "SILVA":
+        return search_SILVA(collection)
+    elif taxonomy == "ENA":
+        return search_ENA(collection)
+    elif taxonomy == "GTDB":
+        return search_GTDB(collection)
+    elif taxonomy == "LTP":
+        return search_LTP(collection)
+    else:
+        return search_NCBI(collection)

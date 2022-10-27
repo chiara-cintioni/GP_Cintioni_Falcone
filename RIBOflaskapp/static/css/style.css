@@ -198,3 +198,43 @@ button:hover{
     transition: .5s;
 }
 
+/* Tabella che si espande*/
+
+
+        .container_table {
+            margin: 0 auto;
+            padding: 0px;
+            text-align: center;
+            width: 995px;
+        }
+
+
+
+        #result_table {
+            width: 500px;
+            text-align: left;
+            border-collapse: collapse;
+            color: #2E2E2E;
+            border: #A4A4A4;
+        }
+
+        #result_table tr:hover {
+            background-color: #b0cbe8;
+            cursor: pointer;
+
+        }
+
+        #result_table .hidden_row {
+            display: none;
+        }
+
+/* Pagina download */
+
+#download_div {
+    text-align: right;
+}
+
+#output {
+    text-align: left;
+
+}

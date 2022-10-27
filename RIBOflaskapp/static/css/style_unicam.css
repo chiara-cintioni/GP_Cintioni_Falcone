@@ -1,174 +1,34 @@
-*{
-    font-family: montserrat;
-}
+ body {
+            margin: 0 auto;
+            padding: 0px;
+            text-align: center;
+            width: 100%;
+            font-family: "Myriad Pro",
+                "Helvetica Neue", Helvetica,
+                Arial, Sans-Serif;
+        }
 
-h1{
-    text-transform: uppercase;
-}
-
-body{
-    background: azure;
-    margin: 0;
-    padding: 0;
-}
-
-.dropdown{
-    margin: 0 auto;
-}
-
-nav{
-    height: 80px;
-    background: #1b3b5d;
-}
-
-label.logo{
-    line-height: 80px;
-    padding: 10px 30px;
-    position: absolute;
-    z-index: 1;
-}
-
-label.text-logo{
-    line-height: 80px;
-    margin-left: 130px;
-    position: absolute;
-    z-index: 1;
-}
-
-nav ul{
-    padding: 0;
-    float: right;
-    margin: 0 30px 0 0;
-}
-
-nav ul li{
-    background: #1b3b5d;
-    position: relative;
-    list-style: none;
-    display: inline-block;
-}
-
-nav ul li a{
-    display: block;
-    padding: 0 15px;
-    color: white;
-    border-radius: 3px;
-    text-transform: uppercase;
-    text-decoration: none;
-    line-height: 80px;
-    font-size: 16px;
-}
-
-.checkbtn{
-    font-size: 30px;
-    color: white;
-    float: right;
-    line-height: 80px;
-    margin-right: 40px;
-    cursor: pointer;
-    display: none;
-}
-#check{
-    display: none;
-}
+        .container {
+            margin: 0 auto;
+            padding: 0px;
+            text-align: center;
+            width: 995px;
+        }
 
 
-@media (max-width: 958px){
-    label.logo{
-        padding: 0 30px;
-    }
-    nav ul li a {
-        font-size: 16px;
-    }
-}
 
-@media (max-width: 858px){
-    .checkbtn{
-        display:block;
-    }
-    ul{
-        position: fixed;
-        width: 100%;
-        height: 100vh;
-        background: #2774A3;
-        top: 80px;
-        left: -100%;
-        text-align: center;
-        transition: all .5s;
-    }
-    nav ul li{
-        display: block;
-        background: #2774A3;
-        margin: 50px 0;
-        line-height: 30px;
-    }
-    nav ul li a{
-        font-size: 20px;
-    }
-    nav ul ul li a{
-        display: block;
-        background: #2691C7;
-        margin: 50px 0;
-        line-height: 30px;
-    }
-    nav ul ul ul li a{
-        display: block;
-        background: #2691C7;
-        margin: 50px 0;
-        line-height: 30px;
-    }
-    a.active{
-        background: none;
-        color: #1b3b5d;
-    }
-    a:hover{
-        background: none;
-        color: black;
-    }
-    #check:checked ~ ul{
-        left: 0;
-    }
-}
+        #result_table {
+            width: 500px;
+            text-align: left;
+            border-collapse: collapse;
+            color: #2E2E2E;
+            border: #A4A4A4;
+        }
 
-nav ul li a:hover{
-    background: #2691C7;
-    text-decoration: none;
-    color: black;
-}
+        #result_table tr:hover {
+            background-color: #F2F2F2;
+        }
 
-nav ul li .dropdown-menu{
-    display: block;
-}
-
-nav ul ul{
-    position: absolute;
-    top: 80px;
-    display: none;
-}
-
-nav ul li:hover>ul{
-    display: block;
-    text-decoration: none;
-    color: black;
-}
-
-nav ul ul li{
-    width: 150px;
-    float: none;
-    display: list-item;
-    position: relative;
-}
-
-nav ul ul ul li{
-    position: relative;
-    top: -80px;
-    left: 150px;
-}
-
-nav ul li a i{
-    margin: 5px;
-}
-
-.container {
-    margin-top: 100px;
-}
+        #result_table .hidden_row {
+            display: none;
+        }

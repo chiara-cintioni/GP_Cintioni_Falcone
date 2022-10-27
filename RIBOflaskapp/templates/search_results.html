@@ -7,76 +7,53 @@
     <button type="submit"> Previous page </button>
 </form>
 <h1>Result</h1>
-<div class="container">
-    <button type="button" id="dl_id" onclick="download()">Download</button>
+<div class="container_table">
+    <div id="download_div">
+        <input class="check_button_format" type="checkbox" id="bpseq" value="bpseq">
+        <label for="bpseq"> bpseq format</label><br>
+        <input class="check_button_format" type="checkbox" id="bpseq_nh" value="bpseq_nh">
+        <label for="bpseq_nh"> bpseq-nH format</label><br>
+        <input class="check_button_format" type="checkbox" id="ct" value="ct">
+        <label for="ct"> ct format</label><br>
+        <input class="check_button_format" type="checkbox" id="ct_nh" value="ct_nh">
+        <label for="ct_nh"> ct-nH format</label><br>
+        <input class="check_button_format" type="checkbox" id="db" value="db">
+        <label for="db"> db format</label><br>
+        <input class="check_button_format" type="checkbox" id="db_nh" value="db_nh">
+        <label for="db_nh"> db-nH format</label><br>
+        <button type="button" id="dl_button" onclick="download_file_from_db()">Download</button>
+    </div>
     <table class="result_table" id="result_table">
     <thead>
          <tr>
              <th><input id="check_all" type="checkbox"></th>
              <th>Organism name</th>
-             <th>Accession number</th>
              <th>Reference ID</th>
              <th>Length</th>
-             <th>Number of decoupled nucleotides</th>
-             <th>Number of weak bonds</th>
-             <th>Is Pseudoknotted</th>
-             <th>Pseudoknot order</th>
              <th>RNA Type</th>
-             <th>Genus</th>
-             <th>Domain</th>
-             <th>Core</th>
-             <th>Core plus</th>
-             <th>Shape</th>
          </tr>
     </thead>
     <tbody class="result_tbody">
         {% for element in result_list %}
-        <tr>
+        <tr id="table_row" onclick="showHideRow('hidden_row{{ element['Benchmark ID'] }}')">
             <td>
-                <input class="check_button" type="checkbox" name="id_checkbox" id="{{ element['Accession number'] }}" >
+                <input class="check_button" type="checkbox" name="id_checkbox" id="{{ element['Benchmark ID'] }}">
             </td>
             <td >
                 {{ element['Organism name'] }}
             </td>
-            <td >
-                {{ element['Accession number'] }}
-            </td>
-            <td>
+            <td id="ref_id">
                 {{ element['Benchmark ID'] }}
             </td>
             <td>
                 {{ element['Length'] }}
             </td>
             <td>
-                {{ element['Number of decoupled nucleotides'] }}
-            </td>
-            <td>
-                {{ element['Number of weak bonds'] }}
-            </td>
-            <td>
-                {{ element['Is Pseudoknotted'] }}
-            </td>
-            <td>
-                {{ element['Pseudoknot order'] }}
-            </td>
-            <td>
                 {{ element['Rna Type'] }}
             </td>
-            <td>
-                {{ element['Genus'] }}
-            </td>
-            <td>
-                {{ element['Domain'] }}
-            </td>
-            <td>
-                {{ element['Core'] }}
-            </td>
-            <td>
-                {{ element['Core plus'] }}
-            </td>
-            <td>
-                {{ element['Shape'] }}
-            </td>
+        </tr>
+        <tr id="hidden_row{{ element['Benchmark ID'] }}" class="hidden_row">
+            <td colspan="14">Organism name: {{ element['Organism name'] }},</td>
         </tr>
         {% endfor %}
         </tbody>

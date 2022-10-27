@@ -15,19 +15,16 @@
             <td><a>Reference ID:</a></td>
             <td><input type="text" name="Benchmark ID" placeholder="Reference ID" size="20"></td>
             <td><a>Length:</a></td>
-            <td><input type="number" name="Length" placeholder="Any length"></td>
             <td><input type="number" name="Length_from" placeholder="From"></td>
             <td><input type="number" name="Length_to" placeholder="To"></td>
             <td><a>Number of decoupled nucleotides:</a></td>
             <td><input type="number" name="Number of decoupled nucleotides" placeholder="Decoupled nucleotides"></td>
             <td><a>Number of weak bonds:</a></td>
-            <td><input type="number" name="Number_of_weak_bonds" placeholder="Any weak bonds"></td>
             <td><input type="number" name="Number_of_weak_bonds_from" placeholder="From"></td>
             <td><input type="number" name="Number_of_weak_bonds_to" placeholder="To"></td>
             <td><a>Is Pseudoknotted:</a></td>
             <td><select  name="Is Pseudoknotted" >
                 <option value=''>---</option>
-                <option value="Kind">Kind</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
             </select></td>
@@ -39,6 +36,7 @@
                 <option value="5S">5S</option>
                 <option value="16S">16S</option>
                 <option value="23S">23S</option>
+                <option value="Other">Others</option>
             </select></td>
             <td><a>Genus:</a></td>
             <td><input type="number" name="Genus" placeholder="Genus"></td>
@@ -57,14 +55,7 @@
                 <option value="LTP">LTP</option>
                 <option value="NCBI">NCBI</option>
             </select></td>
-            <td><a>Domain:</a></td>
-            <td><select  name="Domain">
-                <option value=''>---</option>
-                <option value="Eukaryota">Eukaryota</option>
-                <option value="Bacteria">Bacteria</option>
-                <option value="Archaea">Archaea</option>
-            </select></td>
-            <button type="submit" onclick="check_input_length(), check_input_weak_bonds()">Search</button>
+            <button type="submit">Search</button>
             <button type="Reset" value="Reset">Reset</button>
         </form>
     </div>
