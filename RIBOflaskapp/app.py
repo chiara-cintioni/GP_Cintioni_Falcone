@@ -1,8 +1,9 @@
 # importiamo l'oggetto flask dal flask package.
-from flask import Flask, render_template, request, url_for, redirect, send_file
-from pymongo import MongoClient
-import win32api
+import os
 
+from flask import Flask, render_template, request, url_for, redirect, send_file, send_from_directory, current_app, \
+    make_response
+from pymongo import MongoClient
 import download_from_db
 import search_script
 
@@ -13,11 +14,13 @@ app = Flask(__name__)
 
 # ora che abbiamo creato l'app, la useremo per gestire le richieste HTTP che riceviamo.
 
-#client = MongoClient('mongodb+srv://DeniseFalcone:Giappone4ever@cluster0.yelotpf.mongodb.net/test', 27017)
-#db = client.RIBOdb
-client = MongoClient('localhost')
-db = client.RIBO_flask_db
-collection = db.rna
+client = MongoClient('mongodb+srv://DeniseFalcone:Giappone4ever@cluster0.yelotpf.mongodb.net/test', 27017)
+db = client.RIBOdb
+#client = MongoClient('localhost')
+#db = client.RIBO_flask_db
+collection = db.rna_sequences
+
+
 
 
 @app.route('/search/', methods=('GET', 'POST'))
@@ -58,7 +61,11 @@ def search_result():
         core = request.form['Core']
         core_plus = request.form['Core plus']
         shape = request.form['Shape']
-        result_org_name = search_script.search_org_name(org_name, collection)
+        rank = request.form['Taxonomy_rank']
+        taxon = request.form['rank_value']
+        #taxonomy rank deve essere fatto come primo controllo di campo ricerca: il problema sta nella collection temp che potrebbe essere cancellata ce semo capiti
+        result_taxonomy_rank = search_script.search_rank(taxonomy, rank, taxon, collection)
+        result_org_name = search_script.search_org_name(org_name, result_taxonomy_rank)
         result_acc_num = search_script.search_acc_num(acc_num, result_org_name)
         result_length = search_script.search_length(int(from_length), int(to_length), result_acc_num)
         result_decoupled = search_script.search_num_decoup(int(num_dec), result_length)
@@ -73,23 +80,43 @@ def search_result():
         result_benchmark = search_script.search_benchmark(benchmark, result_shape)
         result_taxonomy = search_script.search_taxonomy(taxonomy, result_benchmark)
         result = result_taxonomy.find()
+
         return render_template("search_results.html", result_list=result)
 
     return render_template('search_results.html')
 
+
 @app.route('/download/')
 def download():
-    return render_template('download.html');
+    return render_template('download.html')
+
+
+'''
+@app.route('/download/', methods = ['GET', 'POST'])
+def download():
+    file_name = request.args.get('variable', 'default') + ".ct"
+    print(file_name)
+    grid_fs_file = fs.find_one({'filename': file_name})
+    response = make_response(grid_fs_file.read())
+    response.headers['Content-Type'] = 'text/ct'
+    response.headers["Content-Disposition"] = "attachment; filename={}".format(file_name)
+    return response
+'''
+
+
+
 
 
 @app.route('/download_files/')
 def test():
     ref_ids = request.args.get('variable', 'default').split(sep=",")
     format_string = request.args.get('format', 'default').split(sep=",")
-    print(format_string)
     for i in format_string:
         print(i)
     for format_value in format_string:
+        if format_value == "zip":
+            download_from_db.create_zip_file(ref_ids, format_string)
+            return render_template('search_results.html')
         if format_value == "db":
             download_from_db.download_db_files(ref_ids)
         elif format_value == "ct":
@@ -102,7 +129,8 @@ def test():
             download_from_db.download_ct_nh_files(ref_ids)
         elif format_value == "bpseq_nh":
             download_from_db.download_bpseq_nh_files(ref_ids)
-    return render_template('search_results.html');
+    return render_template('search_results.html')
+
 
 @app.route('/')
 def home():

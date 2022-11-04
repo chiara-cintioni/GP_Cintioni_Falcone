@@ -9,6 +9,8 @@
 <h1>Result</h1>
 <div class="container_table">
     <div id="download_div">
+        <input class="check_button_format" type="checkbox" id="zip" value="zip">
+        <label for="zip">.zip</label><br>
         <input class="check_button_format" type="checkbox" id="bpseq" value="bpseq">
         <label for="bpseq"> bpseq format</label><br>
         <input class="check_button_format" type="checkbox" id="bpseq_nh" value="bpseq_nh">
@@ -21,7 +23,7 @@
         <label for="db"> db format</label><br>
         <input class="check_button_format" type="checkbox" id="db_nh" value="db_nh">
         <label for="db_nh"> db-nH format</label><br>
-        <button type="button" id="dl_button" onclick="download_file_from_db()">Download</button>
+        <button type="button"  id="dl_button" onclick="download_file_from_db()">Download</button>
     </div>
     <table class="result_table" id="result_table">
     <thead>
@@ -46,14 +48,33 @@
                 {{ element['Benchmark ID'] }}
             </td>
             <td>
-                {{ element['Length'] }}
+                {{ element['Accession number'] }}
             </td>
             <td>
                 {{ element['Rna Type'] }}
             </td>
         </tr>
         <tr id="hidden_row{{ element['Benchmark ID'] }}" class="hidden_row">
-            <td colspan="14">Organism name: {{ element['Organism name'] }},</td>
+            <td colspan="14">
+                <p>Organism name: {{ element['Organism name'] }},</p>
+                <p>Accession number: {{ element['Accession number'] }},</p>
+                <p>Length: {{ element['Length'] }},</p>
+                <p>Number of decoupled nucleotides: {{ element['Number of decoupled nucleotides'] }},</p>
+                <p>Number of weak bonds: {{ element['Number of weak bonds'] }},</p>
+                <p>Is pseudoknotted: {{ element['Is Pseudoknotted'] }},</p>
+                <p>Pseudoknot order: {{ element['Pseudoknot order'] }},</p>
+                <p>Rna type: {{ element['Rna Type'] }},</p>
+                <p>Genus: {{ element['Genus'] }},</p>
+                <p>Core: {{ element['Core'] }},</p>
+                <p>Core plus: {{ element['Core plus'] }},</p>
+                <p>Shape: {{ element['Shape'] }},</p>
+                <p>Reference ID: {{ element['Benchmark ID'] }},</p>
+                <p>Database name: inserire campo db,</p>
+                <p>Database link: inserire campo db link,</p>
+                <hr>
+                <p>Taxonomy:</p>
+                <p>SILVA:</p>
+            </td>
         </tr>
         {% endfor %}
         </tbody>

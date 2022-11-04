@@ -47,7 +47,7 @@
             <td><a>Shape:</a></td>
             <td><input type="text" name="Shape" placeholder="Shape"></td>
             <td><a>Taxonomy:</a></td>
-            <td><select  name="Taxonomy" >
+            <td><select  name="Taxonomy">
                 <option value=''>---</option>
                 <option value="ENA">ENA</option>
                 <option value="SILVA">SILVA</option>
@@ -55,6 +55,19 @@
                 <option value="LTP">LTP</option>
                 <option value="NCBI">NCBI</option>
             </select></td>
+            <td><a>Taxonomy rank:</a></td>
+            <td><select  name="Taxonomy_rank" onchange="check_taxon_rank(this)">
+                <option value=''>---</option>
+                <option value="superkingdom">Superkingdom</option>
+                <option value="phylum">Phylum</option>
+                <option value="class">Class</option>
+                <option value="order">Order</option>
+                <option value="family">Family</option>
+                <option value="genus">Genus</option>
+            </select></td>
+            <td><a>Taxon:</a></td>
+            <td><input id="Taxon_id" type="text" name="rank_value" placeholder="Taxon" disabled></td>
+
             <button type="submit">Search</button>
             <button type="Reset" value="Reset">Reset</button>
         </form>

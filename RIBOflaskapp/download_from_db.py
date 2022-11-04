@@ -3,14 +3,14 @@ import pymongo
 import gridfs
 from tkinter import *
 from tkinter import filedialog
+from zipfile import ZipFile
 
 
-
-
-myclient=pymongo.MongoClient('mongodb+srv://DeniseFalcone:Giappone4ever@cluster0.yelotpf.mongodb.net/test',27017)
+myclient = pymongo.MongoClient('mongodb+srv://DeniseFalcone:Giappone4ever@cluster0.yelotpf.mongodb.net/test', 27017)
 db = myclient['RIBOdb']
 collection = db['rna_sequences']
 fs = gridfs.GridFS(db)
+
 
 def choose_path(format):
     win = Tk()
@@ -111,3 +111,30 @@ def download_ct_files(ref_ids):
             print("Download completed")
 
 
+def create_zip_file(ref_ids, format_string):
+    dir_path = choose_path('selected')
+    zip_obj = ZipFile(dir_path + '/rna_files.zip', 'w')
+    for single_id in ref_ids:
+        if single_id != '':
+            for f in format_string:
+                if f != '' and f != 'zip':
+                    if f == 'bpseq_nh':
+                        f = "_nH.bpseq"
+                    elif f == 'ct_nh':
+                        f = "_nH.ct"
+                    elif f == 'db_nh':
+                        f = "_nH.db"
+                    else:
+                        f = "." + f
+                    name = single_id + f
+                    print(name)
+                    data = db.fs.files.find_one({'filename': name})
+                    my_id = data['_id']
+                    output_data = fs.get(my_id).read()
+                    download_loc = dir_path + "/" + name
+                    output = open(download_loc, "wb")
+                    output.write(output_data)
+                    output.close()
+                    zip_obj.write(download_loc, name)
+                    os.remove(download_loc)
+    zip_obj.close()

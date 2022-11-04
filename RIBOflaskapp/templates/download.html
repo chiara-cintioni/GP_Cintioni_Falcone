@@ -1,7 +1,26 @@
 {% extends 'base.html' %}
 
-{% block title %}Help{% endblock %}
+{% block title %}Download{% endblock %}
 
 {% block content %}
-<h1>DOWNLOAD</h1>
+    <form action="/search/">
+        <button type="submit">Go back to search</button>
+    </form>
+    <button type="button" id="dl_button" onclick="download_file_from_db()">Download</button>
+    <h1 id="file_to_download">File to download:</h1>
+    <div id="output">
+    <p>Organism name, Reference ID, Length, Rna type</p>
+    </div>
+    <script>
+        var output = document.getElementById("output");
+        for (var i = 0; i < localStorage.length;i++) {
+            var element = document.createElement("p");
+            element.textContent = localStorage.getItem(i.toString());
+            output.appendChild(element);
+        }
+        localStorage.clear();
+        /*console.log(localStorage.getObj("content"))
+        for (var i = 0; i < localStorage.length; i++)
+            document.write( localStorage.key(i) +" has value " + localStorage[localStorage.key(i)] )*/
+    </script>
 {% endblock %}

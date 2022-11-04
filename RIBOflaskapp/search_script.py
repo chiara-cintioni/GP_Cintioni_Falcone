@@ -1,10 +1,11 @@
+import pymongo
 from flask import Flask, render_template, request, url_for, redirect
 from pymongo import MongoClient
 
-#client = MongoClient('mongodb+srv://DeniseFalcone:Giappone4ever@cluster0.yelotpf.mongodb.net/test', 27017)
-#db = client.RIBOdb
-client = MongoClient('localhost')
-db = client.RIBO_flask_db
+client = MongoClient('mongodb+srv://DeniseFalcone:Giappone4ever@cluster0.yelotpf.mongodb.net/test', 27017)
+db = client.RIBOdb
+#client = MongoClient('localhost')
+#db = client.RIBO_flask_db
 
 
 def search_org_name(org_name, collection):
@@ -129,7 +130,7 @@ def search_length(length_from, length_to, collection):
     if length_from == -1 and length_to == -1:
         return collection
     elif length_from != -1 and length_to == -1:
-        return search_length_from(length_from,collection)
+        return search_length_from(length_from, collection)
     elif length_from == -1 and length_to != -1:
         return search_length_to(length_to, collection)
     else:
@@ -312,7 +313,6 @@ def search_rna_type(rna_type, collection):
         }
     ])
     res_col = db.temp
-    res_c = res_col.find()
     return res_col
 
 
@@ -384,28 +384,6 @@ def search_shape(shape, collection):
     return res_col
 
 
-
-"""
-
-NON SERVE PIU' PERCHE' NON ABBIAMO PIU' IL CAMPO DOMAIN DA SOLO
-
-def search_domain(domain, collection):
-    if domain == '':
-        return collection
-    result = collection.aggregate([
-        {
-            '$match': {
-                'Domain': domain
-            }
-        },
-        {
-            '$out': 'temp'
-        }
-    ])
-    res_col = db.temp
-    return res_col
-"""
-
 def search_ENA(collection):
     result = collection.aggregate([
         {
@@ -419,6 +397,7 @@ def search_ENA(collection):
     ])
     res_col = db.temp
     return res_col
+
 
 def search_SILVA(collection):
     result = collection.aggregate([
@@ -449,6 +428,7 @@ def search_LTP(collection):
     res_col = db.temp
     return res_col
 
+
 def search_GTDB(collection):
     result = collection.aggregate([
         {
@@ -462,6 +442,7 @@ def search_GTDB(collection):
     ])
     res_col = db.temp
     return res_col
+
 
 def search_NCBI(collection):
     result = collection.aggregate([
@@ -492,3 +473,159 @@ def search_taxonomy(taxonomy, collection):
         return search_LTP(collection)
     else:
         return search_NCBI(collection)
+
+
+def get_string_ENA(rank):
+    string = "Taxonomy.ENA."+rank
+    return string
+
+
+def get_string_SILVA(rank):
+    string = "Taxonomy.SILVA."+rank
+    return string
+
+
+def get_string_LTP(rank):
+    string = "Taxonomy.LTP."+rank
+    return string
+
+
+def get_string_GTDB(rank):
+    string = "Taxonomy.GTDB."+rank
+    return string
+
+
+def get_string_NCBI(rank):
+    string = "Taxonomy.NCBI."+rank
+    return string
+
+
+def create_string_taxonomy(taxonomy, rank, value):
+    print("Sono in create string taxonomy iniziale")
+    string_array = []
+    if taxonomy == '' and rank == '' and value == '':
+        return ''
+    if taxonomy == "GTDB":
+        if rank == 'superkingdom':
+            rank = 'domain'
+    if taxonomy == '' and rank != '':
+        string_array.append(get_string_SILVA(rank))
+        string_array.append(get_string_ENA(rank))
+        string_array.append(get_string_LTP(rank))
+        string_array.append(get_string_NCBI(rank))
+        if rank == 'superkingdom':
+            string_array.append(get_string_GTDB('domain'))
+        else:
+            string_array.append(get_string_GTDB(rank))
+        print("Sto nel caso senza tassonomia. L'array è:")
+        for i in string_array:
+            print(i)
+        return string_array
+    else:
+        string = "Taxonomy."+taxonomy+"."+rank
+        return string
+
+
+def search_rank_all(string_array, value, collection):
+    print(string_array, value)
+    db.get_collection("temp").delete_many({})
+    result = collection.aggregate([
+        {
+            '$match': {
+                string_array[0]: value
+            }
+        }, {
+            '$merge': {
+                'into': 'temp',
+                'on': '_id',
+                'whenMatched': 'replace',
+                'whenNotMatched': 'insert'
+            }
+        }
+    ])
+    result = collection.aggregate([
+        {
+            '$match': {
+                string_array[1]: value
+            }
+        },
+        {
+            '$merge': {
+                'into': 'temp',
+                'on': '_id',
+                'whenMatched': 'replace',
+                'whenNotMatched': 'insert'
+            }
+        }
+    ])
+    print("ci stava qualcosa")
+    result = collection.aggregate([
+        {
+            '$match': {
+                string_array[2]: value
+            }
+        }, {
+            '$merge': {
+                'into': 'temp',
+                'on': '_id',
+                'whenMatched': 'replace',
+                'whenNotMatched': 'insert'
+            }
+        }
+    ])
+    result = collection.aggregate([
+        {
+            '$match': {
+                string_array[3]: value
+            }
+        }, {
+            '$merge': {
+                'into': 'temp',
+                'on': '_id',
+                'whenMatched': 'replace',
+                'whenNotMatched': 'insert'
+            }
+        }
+    ])
+    result = collection.aggregate([
+        {
+            '$match': {
+                string_array[4]: value
+            }
+        }, {
+            '$merge': {
+                'into': 'temp',
+                'on': '_id',
+                'whenMatched': 'replace',
+                'whenNotMatched': 'insert'
+            }
+        }
+    ])
+    res_col = db.temp
+
+    return res_col
+
+def search_rank(taxonomy, rank, value, collection):
+    print("Sono in search rank iniziale")
+    string = create_string_taxonomy(taxonomy, rank, value)
+    if string == '':
+        return collection
+    if type(string) == list:
+        return search_rank_all(string, value, collection)
+    else:
+        result = collection.aggregate([
+            {
+                '$match': {
+                    string: value
+                }
+            },
+            {
+                '$out': 'temp'
+            }
+        ])
+        res_col = db.temp
+        return res_col
+
+
+
+
