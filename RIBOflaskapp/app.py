@@ -1,10 +1,7 @@
 # importiamo l'oggetto flask dal flask package.
-import os
 
-from flask import Flask, render_template, request, url_for, redirect, send_file, send_from_directory, current_app, \
-    make_response
+from flask import Flask, render_template, request
 from pymongo import MongoClient
-import download_from_db
 import search_script
 
 
@@ -106,6 +103,8 @@ def download():
 
 
 
+'''
+VECCHIO DOWNLOAD
 
 @app.route('/download_files/')
 def test():
@@ -130,6 +129,7 @@ def test():
         elif format_value == "bpseq_nh":
             download_from_db.download_bpseq_nh_files(ref_ids)
     return render_template('search_results.html')
+ '''
 
 
 @app.route('/')
@@ -160,7 +160,6 @@ def d_tutorial():
 @app.route('/info/')
 def info():
     return render_template('info.html')
-
 
 
 if __name__ == '__main__':

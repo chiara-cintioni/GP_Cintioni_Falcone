@@ -503,12 +503,14 @@ def get_string_NCBI(rank):
 def create_string_taxonomy(taxonomy, rank, value):
     print("Sono in create string taxonomy iniziale")
     string_array = []
+    if taxonomy != '' and rank == '' and value == '':
+        return ''
     if taxonomy == '' and rank == '' and value == '':
         return ''
     if taxonomy == "GTDB":
         if rank == 'superkingdom':
             rank = 'domain'
-    if taxonomy == '' and rank != '':
+    if taxonomy == '' and rank != '' and value != '':
         string_array.append(get_string_SILVA(rank))
         string_array.append(get_string_ENA(rank))
         string_array.append(get_string_LTP(rank))
@@ -521,6 +523,8 @@ def create_string_taxonomy(taxonomy, rank, value):
         for i in string_array:
             print(i)
         return string_array
+    elif rank != '' and value == '':
+        return ''
     else:
         string = "Taxonomy."+taxonomy+"."+rank
         return string

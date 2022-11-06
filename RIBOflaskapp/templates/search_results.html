@@ -33,11 +33,12 @@
              <th>Reference ID</th>
              <th>Length</th>
              <th>RNA Type</th>
+             <th>More Information</th>
          </tr>
     </thead>
     <tbody class="result_tbody">
         {% for element in result_list %}
-        <tr id="table_row" onclick="showHideRow('hidden_row{{ element['Benchmark ID'] }}')">
+        <tr id="table_row" >
             <td>
                 <input class="check_button" type="checkbox" name="id_checkbox" id="{{ element['Benchmark ID'] }}">
             </td>
@@ -53,24 +54,27 @@
             <td>
                 {{ element['Rna Type'] }}
             </td>
+            <td onclick="showHideRow('hidden_row{{ element['Benchmark ID'] }}')">
+                +
+            </td>
         </tr>
         <tr id="hidden_row{{ element['Benchmark ID'] }}" class="hidden_row">
             <td colspan="14">
-                <p>Organism name: {{ element['Organism name'] }},</p>
-                <p>Accession number: {{ element['Accession number'] }},</p>
-                <p>Length: {{ element['Length'] }},</p>
-                <p>Number of decoupled nucleotides: {{ element['Number of decoupled nucleotides'] }},</p>
-                <p>Number of weak bonds: {{ element['Number of weak bonds'] }},</p>
-                <p>Is pseudoknotted: {{ element['Is Pseudoknotted'] }},</p>
-                <p>Pseudoknot order: {{ element['Pseudoknot order'] }},</p>
-                <p>Rna type: {{ element['Rna Type'] }},</p>
-                <p>Genus: {{ element['Genus'] }},</p>
-                <p>Core: {{ element['Core'] }},</p>
-                <p>Core plus: {{ element['Core plus'] }},</p>
-                <p>Shape: {{ element['Shape'] }},</p>
-                <p>Reference ID: {{ element['Benchmark ID'] }},</p>
-                <p>Database name: inserire campo db,</p>
-                <p>Database link: inserire campo db link,</p>
+                <p>Organism name: {{ element['Organism name'] }}</p>
+                <p>Accession number: {{ element['Accession number'] }}</p>
+                <p>Length: {{ element['Length'] }}</p>
+                <p>Number of decoupled nucleotides: {{ element['Number of decoupled nucleotides'] }}</p>
+                <p>Number of weak bonds: {{ element['Number of weak bonds'] }}</p>
+                <p>Is pseudoknotted: {{ element['Is Pseudoknotted'] }}</p>
+                <p>Pseudoknot order: {{ element['Pseudoknot order'] }}</p>
+                <p>Rna type: {{ element['Rna Type'] }}</p>
+                <p>Genus: {{ element['Genus'] }}</p>
+                <p>Core: {{ element['Core'] }}</p>
+                <p>Core plus: {{ element['Core plus'] }}</p>
+                <p>Shape: {{ element['Shape'] }}</p>
+                <p>Reference ID: {{ element['Benchmark ID'] }}</p>
+                <p>Database name: inserire campo db</p>
+                <p>Database link: inserire campo db link</p>
                 <hr>
                 <p>Taxonomy:</p>
                 <p>SILVA:</p>
