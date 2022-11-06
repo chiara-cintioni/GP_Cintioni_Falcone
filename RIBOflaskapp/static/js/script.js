@@ -1,3 +1,12 @@
+function check_taxon_rank(rank){
+    var value = rank.value;
+    if (value !== '' ) {
+        document.getElementById("Taxon_id").disabled = false;
+    } else {
+        document.getElementById("Taxon_id").disabled = true;
+    }
+}
+
 function get_row_data(button) {
     var boolean_button = button.firstElementChild.checked;
     if (boolean_button === true) {
@@ -104,6 +113,20 @@ function download_file_from_db() {
 
 }
 
+/*
+function final_download() {
+    var row = document.getElementById('table_row');
+    var ref_id = get_reference_id(row);
+     $.ajax({
+        url:'/download/?variable='+ref_id,
+        type: 'GET',
+        context: document.body,
+        success: function(response){
+                alert("Download completed");
+            },
+    });
+}
+*/
 
 function redirect_to_download() {
     var content = get_data_rows();
