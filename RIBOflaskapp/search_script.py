@@ -2,7 +2,7 @@ import pymongo
 from flask import Flask, render_template, request, url_for, redirect
 from pymongo import MongoClient
 
-client = MongoClient('mongodb+srv://DeniseFalcone:Giappone4ever@cluster0.yelotpf.mongodb.net/test', 27017)
+client = MongoClient('mongodb://localhost:27017', 27017)
 db = client.RIBOdb
 #client = MongoClient('localhost')
 #db = client.RIBO_flask_db

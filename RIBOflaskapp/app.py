@@ -1,23 +1,35 @@
 # importiamo l'oggetto flask dal flask package.
+import io
+import os
+import pathlib
+import shutil
+import time
+import zipfile
+from zipfile import ZipFile
 
-from flask import Flask, render_template, request
+
+from flask import Flask, render_template, request, abort, send_file, send_from_directory, make_response
 from pymongo import MongoClient
-import search_script
+from flask_pymongo import PyMongo
 
+import search_script
 
 # usiamo l'oggetto Flask per creare l'istanza della nostra app Flask con il nome app.
 # __name__ è il nome del modulo python corrente. Usato per dire all'app dove si trova. Serve perché Flask definisce dei path dietro le quinte.
 app = Flask(__name__)
 
+app.config["DB_FILES"] = "C:\\Users\\Chiara\\OneDrive\\Desktop\\GP-Master\\GP_DA_GIT\\GroupProject-master\\RIBOflaskapp\\static\\client\\db_file"
+app.config["CT_FILES"] = "C:\\Users\\Chiara\\OneDrive\\Desktop\\GP-Master\\GP_DA_GIT\\GroupProject-master\\RIBOflaskapp\\static\\client\\ct_file"
+
+
+
 # ora che abbiamo creato l'app, la useremo per gestire le richieste HTTP che riceviamo.
 
-client = MongoClient('mongodb+srv://DeniseFalcone:Giappone4ever@cluster0.yelotpf.mongodb.net/test', 27017)
+# client = MongoClient('mongodb+srv://DeniseFalcone:Giappone4ever@cluster0.yelotpf.mongodb.net/test', 27017)
+# db = client.RIBOdb
+client = MongoClient('localhost')
 db = client.RIBOdb
-#client = MongoClient('localhost')
-#db = client.RIBO_flask_db
 collection = db.rna_sequences
-
-
 
 
 @app.route('/search/', methods=('GET', 'POST'))
@@ -27,6 +39,7 @@ def search():
 
 @app.route('/search/res/', methods=['GET', 'POST'])
 def search_result():
+    # This is a conditional statement. It checks if the request method is POST.
     if request.method == 'POST':
         org_name = request.form['Organism name']
         from_length = request.form['Length_from']
@@ -60,7 +73,7 @@ def search_result():
         shape = request.form['Shape']
         rank = request.form['Taxonomy_rank']
         taxon = request.form['rank_value']
-        #taxonomy rank deve essere fatto come primo controllo di campo ricerca: il problema sta nella collection temp che potrebbe essere cancellata ce semo capiti
+        # taxonomy rank deve essere fatto come primo controllo di campo ricerca: il problema sta nella collection temp che potrebbe essere cancellata ce semo capiti
         result_taxonomy_rank = search_script.search_rank(taxonomy, rank, taxon, collection)
         result_org_name = search_script.search_org_name(org_name, result_taxonomy_rank)
         result_acc_num = search_script.search_acc_num(acc_num, result_org_name)
@@ -77,9 +90,7 @@ def search_result():
         result_benchmark = search_script.search_benchmark(benchmark, result_shape)
         result_taxonomy = search_script.search_taxonomy(taxonomy, result_benchmark)
         result = result_taxonomy.find()
-
         return render_template("search_results.html", result_list=result)
-
     return render_template('search_results.html')
 
 
@@ -100,8 +111,146 @@ def download():
     return response
 '''
 
+''''
+@app.route('/download_files/<filenames>')
+def test(filenames):
+    print(filenames)
+    filename_array = filenames.split(sep=",")
+    for filename in filename_array:
+        dir2 = 'test'
+        par_dir = 'C:\\Users\\Chiara\\OneDrive\\Desktop'
+        path = os.path.join(par_dir, dir2)
+        try:
+            os.mkdir(path)
+        except FileExistsError:
+            os.rmdir(path)
+            os.mkdir(path)
+        for file in os.listdir(app.config['DB_FILES']):
+            print(file)
+            old_file_path = os.path.join(app.config['DB_FILES'], file)
+            if os.path.isfile(old_file_path):
+                if filename == file:
+                    new_file_path = os.path.join(path, file)
+                    with open(old_file_path, 'r') as old:
+                        with open(new_file_path, 'w') as new:
+                            old_file = old.readlines()
+                            new.writelines(old_file)
+                        new.close()
+                    old.close()
+    base_path = path
+    data = io.BytesIO()
+    with zipfile.ZipFile(data, mode='w') as z:
+        for f_name in os.listdir(base_path):
+            z.write(f_name)
+    data.seek(0)
+    return send_file(
+        data,
+        mimetype='application/zip',
+        as_attachment=True,
+        download_name='gino.zip'
+
+    )
+    return render_template('search_results.html')
+'''
 
 
+'''
+
+
+@app.route('/download_files/<filenames>')
+def test(filenames):
+    print(filenames)
+    filename_array = filenames.split(sep=",")
+    for filename in filename_array:
+        dir2 = 'test'
+        par_dir = 'C:\\Users\\Chiara\\OneDrive\\Desktop'
+        path = os.path.join(par_dir, dir2)
+        try:
+            os.mkdir(path)
+        except FileExistsError:
+            os.rmdir(path)
+            os.mkdir(path)
+        for file in os.listdir(app.config['DB_FILES']):
+            print(file)
+            old_file_path = os.path.join(app.config['DB_FILES'], file)
+            if os.path.isfile(old_file_path):
+                if filename == file:
+                    new_file_path = os.path.join(path, file)
+                    with open(old_file_path, 'r') as old:
+                        with open(new_file_path, 'w') as new:
+                            old_file = old.readlines()
+                            new.writelines(old_file)
+                        new.close()
+                    old.close()
+    base_path = path
+    buffer = io.BytesIO()
+    with open(filename, 'wb') as f:
+        f.write(buffer.getvalue())
+        with ZipFile('gino.zip', mode='a') as archive:
+            for f_name in os.listdir(base_path):
+                with archive.open(f_name, 'w') as arc_open:
+                    with open(f_name, mode='rb') as f_open:
+                        while bytes := f_open.read(1):
+                            arc_open.write(bytes)
+        return send_file(
+            "gino.zip",
+            as_attachment=True,
+            download_name='gino.zip'
+        )
+    return render_template('search_results.html')
+
+'''
+
+#FUNZIONA +-
+@app.route('/download_files/<filenames>', methods=['GET', 'POST'])
+def test(filenames):
+    if request.method == 'GET':
+        print("url: "+request.url)
+        memory_file = io.BytesIO()
+        with zipfile.ZipFile(memory_file, 'w') as zf:
+            filenames = filenames.split(sep=',')
+            for file in filenames:
+                if file != '':
+                    file = file + '.db'
+                    for db_file in os.listdir(app.config['DB_FILES']):
+                        if file == db_file:
+                            print("file: "+file)
+                            db_file_path = os.path.join(app.config['DB_FILES'], db_file)
+                            op_file = open(db_file_path, 'r')
+                            long_line = ''
+                            for line in op_file:
+                                long_line = long_line + line
+                            data = zipfile.ZipInfo(db_file)
+                            data.date_time = time.localtime(time.time())[:6]
+                            data.compress_type = zipfile.ZIP_DEFLATED
+                            zf.writestr(data, long_line)
+        memory_file.seek(0)
+        return send_file(memory_file, as_attachment=True, download_name='files.zip')
+    return render_template('search_results.html')
+
+
+
+'''
+@app.route('/download_files/', methods=['GET', 'POST'])
+def test():
+       print(request.method)
+       if request.method == 'POST':
+           ref_ids = request.args.get('variable', 'default').split(sep=",")
+           format_string = request.args.get('format', 'default').split(sep=",")
+           for id in ref_ids:
+               print("i: " + id)
+               for format_value in format_string:
+                   print("format:" + format_value)
+                   if format_value == "db":
+                       path = "db_file/" + id + ".db"
+                       filename = id + ".db"
+                       print("path: " + path)
+                   try:
+                       return send_file(path, as_attachment=True)
+                   except FileNotFoundError:
+                       abort(404)
+        return render_template('search_results.html')
+'''
 
 '''
 VECCHIO DOWNLOAD

@@ -91,19 +91,18 @@ function check_format_dl(){
     var result = '';
     for(var i = 0; i < check_buttons.length; i++) {
         if(check_buttons[i].checked === true){
-            result = result + "," + check_buttons[i].value;
-
+            result = result + check_buttons[i].value + ",";
         }
     }
     return  result;
 }
 
-
+/*
 function download_file_from_db() {
     var all_ref_id = get_all_ref_ids();
     var format = check_format_dl();
     $.ajax({
-        url:'/download_files/?variable='+all_ref_id+"&format="+format,
+        url:'/download_files/'+all_ref_id,
         type: 'GET',
         context: document.body,
         success: function(response){
@@ -111,7 +110,25 @@ function download_file_from_db() {
             },
     });
 
+}*/
+function download_file_from_db() {
+    var all_ref_id = get_all_ref_ids();
+    var format = check_format_dl();
+    $.ajax({
+        url: '/download_files/' + all_ref_id,
+        type: 'GET',
+        context: document.body,
+        xhrFields:{
+            responseType: 'blob'
+        },
+        success: function(data) {
+            saveAs(data, "test.zip");
+
+        }
+    });
 }
+
+
 
 /*
 function final_download() {
