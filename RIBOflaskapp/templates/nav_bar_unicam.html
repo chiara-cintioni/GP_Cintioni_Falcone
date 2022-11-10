@@ -4,54 +4,30 @@
     <meta charset="utf-8">
     <title> RIBO </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style_unicam.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!--<script src="https://kit.fontawesome.com/817de29756.js" ></script>-->
 </head>
 <body>
-   <div class="dropdown">
-        <nav>
-             <input type="checkbox" id="check">
-                <label for="check" class="checkbtn">
-                    <i class="fas fa-bars"></i>
-                </label>
-            <label class="logo">
-                <img src="https://www.unicam.it/themes/custom/italiagov/unicam/img/logo_.png" width="80" height="95">
-            </label>
-            <label class="text-logo">
-                <img src="https://www.unicam.it/themes/custom/italiagov/unicam/webp/logo-mobile.webp" width="126" height="40">
-            </label>
-            <ul>
-                <li><a class="active" href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="#">Search<i class="fas fa-caret-down"></i></a>
-                    <div class="dropdown-menu">
-                        <div class="row">
-                            <div class="col">
-                                <div class="list wrapper">
-                                    <ul class="list">
-                                        <li><a href="{{ url_for('search') }}">Search</a></li>
-                                        <li><a href="{{ url_for('download') }}">Download</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li><a href="#">Documentation<i class="fas fa-caret-down"></i></a>
-                    <ul>
-                        <li><a href="#">Tutorial<i style="transform: rotate(-90deg);" class="fas fa-caret-down"></i></a>
-                            <ul>
-                                <li><a href="{{ url_for('s_tutorial') }}">Search</a></li>
-                                <li><a href="{{ url_for('d_tutorial') }}">Download</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="{{ url_for('info') }}">Info</a></li>
-                        <li><a href="{{ url_for('sources') }}">Sources</a></li>
-                    </ul>
-                </li>
-                <li><a href="{{ url_for('contact') }}">Contact us</a></li>
-            </ul>
-        </nav>
-   </div>
+   <nav>
+       <div class="navbar">
+           <div class="logo"><a href="#">RIBO 2.0</a></div>
+           <div class="nav-links">
+               <ul class="links">
+                   <li><a href="#">HOME</a></li>
+                   <li>
+                       <a href="#">HTML & CSS</a>
+                       <i class="fas fa-caret-down"></i>
+                   </li>
+                   <li>
+                       <a href="#">JAVASCRIPT</a>
+                       <i class="fas fa-caret-down"></i>
+                   </li>
+                   <li><a href="#">ABOUT US</a></li>
+                   <li><a href="#">CONTACT US</a></li>
+               </ul>
+           </div>
+       </div>
+   </nav>
 </body>
 </html>

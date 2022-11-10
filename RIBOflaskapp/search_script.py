@@ -1,5 +1,3 @@
-import pymongo
-from flask import Flask, render_template, request, url_for, redirect
 from pymongo import MongoClient
 
 client = MongoClient('mongodb://localhost:27017', 27017)

@@ -7,7 +7,6 @@ import time
 import zipfile
 from zipfile import ZipFile
 
-
 from flask import Flask, render_template, request, abort, send_file, send_from_directory, make_response
 from pymongo import MongoClient
 from flask_pymongo import PyMongo
@@ -18,10 +17,18 @@ import search_script
 # __name__ è il nome del modulo python corrente. Usato per dire all'app dove si trova. Serve perché Flask definisce dei path dietro le quinte.
 app = Flask(__name__)
 
-app.config["DB_FILES"] = "C:\\Users\\Chiara\\OneDrive\\Desktop\\GP-Master\\GP_DA_GIT\\GroupProject-master\\RIBOflaskapp\\static\\client\\db_file"
-app.config["CT_FILES"] = "C:\\Users\\Chiara\\OneDrive\\Desktop\\GP-Master\\GP_DA_GIT\\GroupProject-master\\RIBOflaskapp\\static\\client\\ct_file"
-
-
+app.config[
+    "DB_FILES"] = "C:\\Users\\Chiara\\OneDrive\\Desktop\\GP-Master\\GP_DA_GIT\\GroupProject-master\\RIBOflaskapp\\static\\client\\db_file"
+app.config[
+    "CT_FILES"] = "C:\\Users\\Chiara\\OneDrive\\Desktop\\GP-Master\\GP_DA_GIT\\GroupProject-master\\RIBOflaskapp\\static\\client\\ct_file"
+app.config[
+    "BPSEQ_FILES"] = "C:\\Users\\Chiara\\OneDrive\\Desktop\\GP-Master\\GP_DA_GIT\\GroupProject-master\\RIBOflaskapp\\static\\client\\bpseq_file"
+app.config[
+    "BPSEQ_FILES_NH"] = "C:\\Users\\Chiara\\OneDrive\\Desktop\\GP-Master\\GP_DA_GIT\\GroupProject-master\\RIBOflaskapp\\static\\client\\bpseq_nH_file"
+app.config[
+    "CT_FILES_NH"] = "C:\\Users\\Chiara\\OneDrive\\Desktop\\GP-Master\\GP_DA_GIT\\GroupProject-master\\RIBOflaskapp\\static\\client\\ct_nH_file"
+app.config[
+    "DB_FILES_NH"] = "C:\\Users\\Chiara\\OneDrive\\Desktop\\GP-Master\\GP_DA_GIT\\GroupProject-master\\RIBOflaskapp\\static\\client\\db_nH_file"
 
 # ora che abbiamo creato l'app, la useremo per gestire le richieste HTTP che riceviamo.
 
@@ -153,7 +160,6 @@ def test(filenames):
     return render_template('search_results.html')
 '''
 
-
 '''
 
 
@@ -201,33 +207,65 @@ def test(filenames):
 
 '''
 
-#FUNZIONA +-
-@app.route('/download_files/<filenames>', methods=['GET', 'POST'])
-def test(filenames):
+
+# FUNZIONA +-
+@app.route('/download_files/<filenames>/<formats>', methods=['GET', 'POST'])
+def test(filenames, formats):
     if request.method == 'GET':
-        print("url: "+request.url)
+        print("url: " + request.url)
         memory_file = io.BytesIO()
         with zipfile.ZipFile(memory_file, 'w') as zf:
             filenames = filenames.split(sep=',')
-            for file in filenames:
-                if file != '':
-                    file = file + '.db'
-                    for db_file in os.listdir(app.config['DB_FILES']):
-                        if file == db_file:
-                            print("file: "+file)
-                            db_file_path = os.path.join(app.config['DB_FILES'], db_file)
-                            op_file = open(db_file_path, 'r')
-                            long_line = ''
-                            for line in op_file:
-                                long_line = long_line + line
-                            data = zipfile.ZipInfo(db_file)
-                            data.date_time = time.localtime(time.time())[:6]
-                            data.compress_type = zipfile.ZIP_DEFLATED
-                            zf.writestr(data, long_line)
+            formats = formats.split(sep=',')
+            for f in formats:
+                print("f: " + f)
+                path = return_format(f)
+                print("path: " + path)
+                if path != '':
+                    for file in filenames:
+                        if file != '':
+                            file = file + f
+                            for file_selected in os.listdir(path):
+                                if file == file_selected:
+                                    print("file: " + file)
+                                    file_path = os.path.join(path, file_selected)
+                                    op_file = open(file_path, 'r')
+                                    long_line = ''
+                                    for line in op_file:
+                                        long_line = long_line + line
+                                    data = zipfile.ZipInfo(file_selected)
+                                    data.date_time = time.localtime(time.time())[:6]
+                                    data.compress_type = zipfile.ZIP_DEFLATED
+                                    zf.writestr(data, long_line)
+                                    break
         memory_file.seek(0)
         return send_file(memory_file, as_attachment=True, download_name='files.zip')
     return render_template('search_results.html')
 
+
+def return_format(f):
+    match f:
+        case '.db':
+            path = app.config['DB_FILES']
+            return path
+        case '.ct':
+            path = app.config['CT_FILES']
+            return path
+        case '.bpseq':
+            path = app.config['BPSEQ_FILES']
+            return path
+        case 'nH.db':
+            path = app.config['DB_FILES_NH']
+            return path
+        case 'nH.ct':
+            path = app.config['CT_FILES_MH']
+            return path
+        case 'nH.bpseq':
+            path = app.config['BPSEQ_FILES_NH']
+            return path
+        case '':
+            path = ''
+    return path
 
 
 '''

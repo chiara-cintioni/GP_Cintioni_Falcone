@@ -9,21 +9,19 @@
 <h1>Result</h1>
 <div class="container_table">
     <div id="download_div">
-        <input class="check_button_format" type="checkbox" id="zip" value="zip">
-        <label for="zip">.zip</label><br>
-        <input class="check_button_format" type="checkbox" id="bpseq" value="bpseq">
+        <input class="check_button_format" type="checkbox" id="bpseq" value=".bpseq">
         <label for="bpseq"> bpseq format</label><br>
-        <input class="check_button_format" type="checkbox" id="bpseq_nh" value="bpseq_nh">
+        <input class="check_button_format" type="checkbox" id="bpseq_nH" value="nH.bpseq">
         <label for="bpseq_nh"> bpseq-nH format</label><br>
-        <input class="check_button_format" type="checkbox" id="ct" value="ct">
+        <input class="check_button_format" type="checkbox" id="ct" value=".ct">
         <label for="ct"> ct format</label><br>
-        <input class="check_button_format" type="checkbox" id="ct_nh" value="ct_nh">
+        <input class="check_button_format" type="checkbox" id="ct_nH" value="nH.ct">
         <label for="ct_nh"> ct-nH format</label><br>
-        <input class="check_button_format" type="checkbox" id="db" value="db">
+        <input class="check_button_format" type="checkbox" id="db" value=".db">
         <label for="db"> db format</label><br>
-        <input class="check_button_format" type="checkbox" id="db_nh" value="db_nh">
+        <input class="check_button_format" type="checkbox" id="db_nh" value="nH.db">
         <label for="db_nh"> db-nH format</label><br>
-        <button type="button"  id="dl_button" onclick="download_file_from_db()">Download</button>
+        <button type="button"  id="dl_button" onclick="download_file_from_db(),download() ">Download</button>
     </div>
     <table class="result_table" id="result_table">
     <thead>
@@ -31,7 +29,7 @@
              <th><input id="check_all" type="checkbox"></th>
              <th>Organism name</th>
              <th>Reference ID</th>
-             <th>Length</th>
+             <th>Accession Number</th>
              <th>RNA Type</th>
              <th>More Information</th>
          </tr>
@@ -54,7 +52,7 @@
             <td>
                 {{ element['Rna Type'] }}
             </td>
-            <td onclick="showHideRow('hidden_row{{ element['Benchmark ID'] }}')">
+            <td onclick="showHideRow('hidden_row{{ element['Benchmark ID'] }}'), show_taxonomy()">
                 +
             </td>
         </tr>
@@ -77,7 +75,26 @@
                 <p>Database link: inserire campo db link</p>
                 <hr>
                 <p>Taxonomy:</p>
-                <p>SILVA:</p>
+                <div id="silva_div">
+                    <p>SILVA:</p>
+                    <p  style="display: none;" id="silva_taxonomy" >{{ element['Taxonomy'][0]['SILVA']}}</p>
+                </div>
+                <div id="ena_div">
+                    <p>ENA:</p>
+                    <p  style="display: none;" id="ena_taxonomy" >{{ element['Taxonomy'][1]['ENA']}}</p>
+                </div>
+                <div id="ltp_div">
+                    <p>LTP:</p>
+                    <p  style="display: none;" id="ltp_taxonomy" >{{ element['Taxonomy'][2]['LTP']}}</p>
+                </div>
+                <div id="ncbi_div">
+                    <p>NCBI:</p>
+                    <p  style="display: none;" id="ncbi_taxonomy" >{{ element['Taxonomy'][3]['NCBI']}}</p>
+                </div>
+                <div id="gtdb_div">
+                    <p>GTDB:</p>
+                    <p  style="display: none;" id="gtdb_taxonomy" >{{ element['Taxonomy'][4]['GTDB']}}</p>
+                </div>
             </td>
         </tr>
         {% endfor %}
