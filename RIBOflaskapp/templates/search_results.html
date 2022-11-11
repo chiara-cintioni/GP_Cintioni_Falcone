@@ -38,7 +38,7 @@
         {% for element in result_list %}
         <tr id="table_row" >
             <td>
-                <input class="check_button" type="checkbox" name="id_checkbox" id="{{ element['Benchmark ID'] }}">
+                <input onclick="show_taxonomy('{{ element['Benchmark ID'] }}')" class="check_button" type="checkbox" name="id_checkbox" id="{{ element['Benchmark ID'] }}">
             </td>
             <td >
                 {{ element['Organism name'] }}
@@ -52,48 +52,48 @@
             <td>
                 {{ element['Rna Type'] }}
             </td>
-            <td onclick="showHideRow('hidden_row{{ element['Benchmark ID'] }}'), show_taxonomy()">
+            <td onclick="showHideRow('hidden_row{{ element['Benchmark ID'] }}'), show_taxonomy('{{ element['Benchmark ID'] }}')">
                 +
             </td>
         </tr>
         <tr id="hidden_row{{ element['Benchmark ID'] }}" class="hidden_row">
             <td colspan="14">
-                <p>Organism name: {{ element['Organism name'] }}</p>
-                <p>Accession number: {{ element['Accession number'] }}</p>
-                <p>Length: {{ element['Length'] }}</p>
-                <p>Number of decoupled nucleotides: {{ element['Number of decoupled nucleotides'] }}</p>
-                <p>Number of weak bonds: {{ element['Number of weak bonds'] }}</p>
-                <p>Is pseudoknotted: {{ element['Is Pseudoknotted'] }}</p>
-                <p>Pseudoknot order: {{ element['Pseudoknot order'] }}</p>
-                <p>Rna type: {{ element['Rna Type'] }}</p>
-                <p>Genus: {{ element['Genus'] }}</p>
-                <p>Core: {{ element['Core'] }}</p>
-                <p>Core plus: {{ element['Core plus'] }}</p>
-                <p>Shape: {{ element['Shape'] }}</p>
-                <p>Reference ID: {{ element['Benchmark ID'] }}</p>
-                <p>Database name: inserire campo db</p>
-                <p>Database link: inserire campo db link</p>
+                <p name="hidden_element">Organism name: {{ element['Organism name'] }}</p>
+                <p name="hidden_element">Accession number: {{ element['Accession number'] }}</p>
+                <p name="hidden_element">Length: {{ element['Length'] }}</p>
+                <p name="hidden_element">Number of decoupled nucleotides: {{ element['Number of decoupled nucleotides'] }}</p>
+                <p name="hidden_element">Number of weak bonds: {{ element['Number of weak bonds'] }}</p>
+                <p name="hidden_element">Is pseudoknotted: {{ element['Is Pseudoknotted'] }}</p>
+                <p name="hidden_element">Pseudoknot order: {{ element['Pseudoknot order'] }}</p>
+                <p name="hidden_element">Rna type: {{ element['Rna Type'] }}</p>
+                <p name="hidden_element">Genus: {{ element['Genus'] }}</p>
+                <p name="hidden_element">Core: {{ element['Core'] }}</p>
+                <p name="hidden_element">Core plus: {{ element['Core plus'] }}</p>
+                <p name="hidden_element">Shape: {{ element['Shape'] }}</p>
+                <p name="hidden_element">Reference ID: {{ element['Benchmark ID'] }}</p>
+                <p name="hidden_element">Database name: inserire campo db</p>
+                <p name="hidden_element">Database link: inserire campo db link</p>
                 <hr>
                 <p>Taxonomy:</p>
-                <div id="silva_div">
+                <div id="silva_div{{ element['Benchmark ID'] }}">
                     <p>SILVA:</p>
-                    <p  style="display: none;" id="silva_taxonomy" >{{ element['Taxonomy'][0]['SILVA']}}</p>
+                    <p  style="display: none;" id="silva_taxonomy{{ element['Benchmark ID'] }}" >{{ element['Taxonomy'][0]['SILVA']}}</p>
                 </div>
-                <div id="ena_div">
+                <div id="ena_div{{ element['Benchmark ID'] }}">
                     <p>ENA:</p>
-                    <p  style="display: none;" id="ena_taxonomy" >{{ element['Taxonomy'][1]['ENA']}}</p>
+                    <p  style="display: none;" id="ena_taxonomy{{ element['Benchmark ID'] }}" >{{ element['Taxonomy'][1]['ENA']}}</p>
                 </div>
-                <div id="ltp_div">
+                <div id="ltp_div{{ element['Benchmark ID'] }}">
                     <p>LTP:</p>
-                    <p  style="display: none;" id="ltp_taxonomy" >{{ element['Taxonomy'][2]['LTP']}}</p>
+                    <p  style="display: none;" id="ltp_taxonomy{{ element['Benchmark ID'] }}" >{{ element['Taxonomy'][2]['LTP']}}</p>
                 </div>
-                <div id="ncbi_div">
+                <div id="ncbi_div{{ element['Benchmark ID'] }}">
                     <p>NCBI:</p>
-                    <p  style="display: none;" id="ncbi_taxonomy" >{{ element['Taxonomy'][3]['NCBI']}}</p>
+                    <p  style="display: none;" id="ncbi_taxonomy{{ element['Benchmark ID'] }}" >{{ element['Taxonomy'][3]['NCBI']}}</p>
                 </div>
-                <div id="gtdb_div">
+                <div id="gtdb_div{{ element['Benchmark ID'] }}">
                     <p>GTDB:</p>
-                    <p  style="display: none;" id="gtdb_taxonomy" >{{ element['Taxonomy'][4]['GTDB']}}</p>
+                    <p  style="display: none;" id="gtdb_taxonomy{{ element['Benchmark ID'] }}" >{{ element['Taxonomy'][4]['GTDB']}}</p>
                 </div>
             </td>
         </tr>

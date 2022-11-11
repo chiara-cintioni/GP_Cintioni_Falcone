@@ -10,13 +10,19 @@ function check_taxon_rank(rank){
 function get_row_data(button) {
     var boolean_button = button.firstElementChild.checked;
     if (boolean_button === true) {
-        var row = button.parentElement;
-        var tds = row.getElementsByTagName('td');
-        var tds_array = [];
-        for (var i = 1; i < tds.length; i++) {
-            tds_array[i - 1] = tds.item(i).innerText;
+        var bench_id = button.nextElementSibling.nextElementSibling.innerText;
+        var hidden_row = document.getElementById("hidden_row"+bench_id);
+        //fino a qua, ok
+        var hidden_row_children = hidden_row.getElementsByTagName("p");
+        console.log("hidden row child: "+hidden_row_children);
+        var hrc_array = [];
+        for (var i = 0; i < hidden_row_children.length; i++) {
+            if(hidden_row_children[i].hasAttribute("name")){
+                hrc_array[i] = hidden_row_children.item(i).innerText;
+            }
         }
-        return tds_array;
+        console.log(hrc_array.length);
+        return hrc_array;
     } else {
         return [];
     }
@@ -36,6 +42,7 @@ function get_data_rows() {
     }
     return array;
 }
+
 
 function get_table_header() {
     var rows = document.getElementsByTagName('tr');
@@ -79,7 +86,6 @@ function get_all_ref_ids() {
 
 function download() {
     var content = get_table_header().concat("\n", get_data_rows())
-
     var blob = new Blob(content, {
         type: "text/plain;charset=utf-8"
     });
@@ -97,20 +103,6 @@ function check_format_dl(){
     return  result;
 }
 
-/*
-function download_file_from_db() {
-    var all_ref_id = get_all_ref_ids();
-    var format = check_format_dl();
-    $.ajax({
-        url:'/download_files/'+all_ref_id,
-        type: 'GET',
-        context: document.body,
-        success: function(response){
-                alert("Download completed");
-            },
-    });
-
-}*/
 function download_file_from_db() {
     var all_ref_id = get_all_ref_ids();
     var formats = check_format_dl();
@@ -129,22 +121,6 @@ function download_file_from_db() {
 }
 
 
-
-/*
-function final_download() {
-    var row = document.getElementById('table_row');
-    var ref_id = get_reference_id(row);
-     $.ajax({
-        url:'/download/?variable='+ref_id,
-        type: 'GET',
-        context: document.body,
-        success: function(response){
-                alert("Download completed");
-            },
-    });
-}
-*/
-
 function redirect_to_download() {
     var content = get_data_rows();
     for (var i = 0; i < content.length; i++) {
@@ -156,35 +132,73 @@ function showHideRow(row) {
     $("#" + row).toggle();
 }
 
-function show_taxonomy(){
-    if (document.getElementById('silva_taxonomy').innerHTML.toString().split("'")[3] === 'Yes'){
-        show_taxonomy_silva();
+function show_taxonomy(bench_id){
+    if(document.getElementById("silva_taxon"+bench_id)){
+        return;
+    }
+    if (document.getElementById("silva_taxonomy" + bench_id))
+    if (document.getElementById("silva_taxonomy" + bench_id).innerHTML.toString().split("'")[3] === 'Yes'){
+        show_taxonomy_silva(bench_id);
     }else{
-        var el = document.createElement("p");
-        var nd = document.createTextNode("Not Classified");
-        el.appendChild(nd);
-        document.getElementById("silva_div").appendChild(el);
+        var el_s = document.createElement("p");
+        var nd_s = document.createTextNode("Not Classified");
+        el_s.appendChild(nd_s);
+        el_s.setAttribute("id", "silva_taxon"+bench_id)
+        document.getElementById("silva_div"+bench_id).appendChild(el_s);
     }
-    show_taxonomy_ena();
-    show_taxonomy_ltp();
-    show_taxonomy_ncbi();
-    show_taxonomy_gtdb();
+     if (document.getElementById("ena_taxonomy" + bench_id).innerHTML.toString().split("'")[3] === 'Yes'){
+        show_taxonomy_ena(bench_id);
+    }else{
+        var el_e = document.createElement("p");
+        var nd_e = document.createTextNode("Not Classified");
+        el_e.appendChild(nd_e);
+        document.getElementById("ena_div"+bench_id).appendChild(el_e);
+    }
+     if (document.getElementById("ltp_taxonomy" + bench_id).innerHTML.toString().split("'")[3] === 'Yes'){
+        show_taxonomy_ltp(bench_id);
+    }else{
+        var el_l = document.createElement("p");
+        var nd_l = document.createTextNode("Not Classified");
+        el_l.appendChild(nd_l);
+        document.getElementById("ltp_div"+bench_id).appendChild(el_l);
+    }
+     if (document.getElementById("ncbi_taxonomy" + bench_id).innerHTML.toString().split("'")[3] === 'Yes'){
+        show_taxonomy_ncbi(bench_id);
+    }else{
+        var el_n = document.createElement("p");
+        var nd_n = document.createTextNode("Not Classified");
+        el_n.appendChild(nd_n);
+        document.getElementById("ncbi_div"+bench_id).appendChild(el_n);
+    }
+     if (document.getElementById("gtdb_taxonomy" + bench_id).innerHTML.toString().split("'")[3] === 'Yes'){
+        show_taxonomy_gtdb(bench_id);
+    }else{
+        var el_g = document.createElement("p");
+        var nd_g = document.createTextNode("Not Classified");
+        el_g.appendChild(nd_g);
+        document.getElementById("gtdb_div"+bench_id).appendChild(el_g);
+    }
 }
 
-function show_taxonomy_silva() {
-    var silva = document.getElementById('silva_taxonomy').innerHTML.toString();
+function show_taxonomy_silva(bench_id) {
+    console.log(bench_id)
+    var silva = document.getElementById('silva_taxonomy'+bench_id).innerHTML.toString();
+    console.log(silva)
     var temp = silva.split("'");
-    var position = document.getElementById("silva_div");
+    var position = document.getElementById("silva_div"+bench_id);
     var rank_cont = 0
     for (var i = 5; i< temp.length;i++){
         for(var j=0; j<temp.length; j++){
+            temp[i].replace("<",'&lt');
             if(i%2 !== 0){
                 if(rank_cont%2 === 0){
                     var element = document.createElement("p");
-                    element.setAttribute("id","silva_rank")
+                    element.setAttribute("id","silva_rank"+bench_id)
+                    element.setAttribute("name", "hidden_element")
                 }else{
                     var element = document.createElement("p");
-                    element.setAttribute("id","silva_taxon");
+                    element.setAttribute("id","silva_taxon"+bench_id);
+                    element.setAttribute("name", "hidden_element")
                 }
                 rank_cont++;
                 var node = document.createTextNode(temp[i]);
@@ -196,20 +210,22 @@ function show_taxonomy_silva() {
     }
 }
 
-function show_taxonomy_ena() {
-    var ena = document.getElementById('ena_taxonomy').innerHTML.toString();
+function show_taxonomy_ena(bench_id) {
+    var ena = document.getElementById('ena_taxonomy'+bench_id).innerHTML.toString();
     var temp = ena.split("'");
-    var position = document.getElementById("ena_div");
+    var position = document.getElementById("ena_div"+bench_id);
     var rank_cont = 0
     for (var i = 5; i< temp.length;i++){
         for(var j=0; j<temp.length; j++){
             if(i%2 !== 0){
                 if(rank_cont%2 === 0){
                     var element = document.createElement("p");
-                    element.setAttribute("id","ena_rank")
+                    element.setAttribute("id","ena_rank"+bench_id)
+                    element.setAttribute("name", "hidden_element")
                 }else{
                     var element = document.createElement("p");
-                    element.setAttribute("id","ena_taxon");
+                    element.setAttribute("id","ena_taxon"+bench_id);
+                    element.setAttribute("name", "hidden_element")
                 }
                 rank_cont++;
                 var node = document.createTextNode(temp[i]);
@@ -221,20 +237,22 @@ function show_taxonomy_ena() {
     }
 }
 
-function show_taxonomy_gtdb() {
-    var gtdb = document.getElementById('gtdb_taxonomy').innerHTML.toString();
+function show_taxonomy_gtdb(bench_id) {
+    var gtdb = document.getElementById('gtdb_taxonomy'+bench_id).innerHTML.toString();
     var temp = gtdb.split("'");
-    var position = document.getElementById("gtdb_div");
+    var position = document.getElementById("gtdb_div"+bench_id);
     var rank_cont = 0
     for (var i = 5; i< temp.length;i++){
         for(var j=0; j<temp.length; j++){
             if(i%2 !== 0){
                 if(rank_cont%2 === 0){
                     var element = document.createElement("p");
-                    element.setAttribute("id","gtdb_rank")
+                    element.setAttribute("id","gtdb_rank"+bench_id)
+                    element.setAttribute("name", "hidden_element")
                 }else{
                     var element = document.createElement("p");
-                    element.setAttribute("id","gtdb_taxon");
+                    element.setAttribute("id","gtdb_taxon"+bench_id);
+                    element.setAttribute("name", "hidden_element")
                 }
                 rank_cont++;
                 var node = document.createTextNode(temp[i]);
@@ -246,20 +264,22 @@ function show_taxonomy_gtdb() {
     }
 }
 
-function show_taxonomy_ltp() {
-    var ena = document.getElementById('ltp_taxonomy').innerHTML.toString();
+function show_taxonomy_ltp(bench_id) {
+    var ena = document.getElementById('ltp_taxonomy'+bench_id).innerHTML.toString();
     var temp = ena.split("'");
-    var position = document.getElementById("ltp_div");
+    var position = document.getElementById("ltp_div"+bench_id);
     var rank_cont = 0
     for (var i = 5; i< temp.length;i++){
         for(var j=0; j<temp.length; j++){
             if(i%2 !== 0){
                 if(rank_cont%2 === 0){
                     var element = document.createElement("p");
-                    element.setAttribute("id","ltp_rank")
+                    element.setAttribute("id","ltp_rank"+bench_id)
+                    element.setAttribute("name", "hidden_element")
                 }else{
                     var element = document.createElement("p");
-                    element.setAttribute("id","ltp_taxon");
+                    element.setAttribute("id","ltp_taxon"+bench_id);
+                    element.setAttribute("name", "hidden_element")
                 }
                 rank_cont++;
                 var node = document.createTextNode(temp[i]);
@@ -271,20 +291,24 @@ function show_taxonomy_ltp() {
     }
 }
 
-function show_taxonomy_ncbi() {
-    var ena = document.getElementById('ncbi_taxonomy').innerHTML.toString();
+function show_taxonomy_ncbi(bench_id) {
+    var ena = document.getElementById('ncbi_taxonomy'+bench_id).innerHTML.toString();
     var temp = ena.split("'");
-    var position = document.getElementById("ncbi_div");
+    var position = document.getElementById("ncbi_div"+bench_id);
     var rank_cont = 0
     for (var i = 5; i< temp.length;i++){
+        temp[i].replace("&lt", "&lt;");
+         console.log(temp[i]);
         for(var j=0; j<temp.length; j++){
             if(i%2 !== 0){
                 if(rank_cont%2 === 0){
                     var element = document.createElement("p");
-                    element.setAttribute("id","ncbi_rank")
+                    element.setAttribute("id","ncbi_rank"+bench_id)
+                    element.setAttribute("name", "hidden_element")
                 }else{
                     var element = document.createElement("p");
-                    element.setAttribute("id","ncbi_taxon");
+                    element.setAttribute("id","ncbi_taxon"+bench_id);
+                    element.setAttribute("name", "hidden_element")
                 }
                 rank_cont++;
                 var node = document.createTextNode(temp[i]);
