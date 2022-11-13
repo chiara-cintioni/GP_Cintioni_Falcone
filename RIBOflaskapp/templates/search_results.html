@@ -21,7 +21,19 @@
         <label for="db"> db format</label><br>
         <input class="check_button_format" type="checkbox" id="db_nh" value="nH.db">
         <label for="db_nh"> db-nH format</label><br>
-        <button type="button"  id="dl_button" onclick="download_file_from_db(),download() ">Download</button>
+        <button type="button"  id="dl_button" onclick="download_file_from_db(),download_csv_from_db()">Download</button>
+    </div>
+    <div id="choose_taxonomy_div">
+        <input type="radio" class="check_button_taxonomy" name="taxonomy_button" id="SILVA" value="SILVA">
+        <label for="SILVA"> SILVA taxonomy</label><br>
+        <input type="radio" class="check_button_taxonomy" name="taxonomy_button" id="ENA" value="ENA">
+        <label for="ENA"> ENA taxonomy</label><br>
+        <input type="radio" class="check_button_taxonomy" name="taxonomy_button" id="LTP" value="LTP">
+        <label for="LTP"> LTP taxonomy</label><br>
+        <input type="radio" class="check_button_taxonomy" name="taxonomy_button" id="NCBI" value="NCBI">
+        <label for="NCBI"> NCBI Taxonomy</label><br>
+        <input type="radio" class="check_button_taxonomy" name ="taxonomy_button" id="GTDB" value="GTDB">
+        <label for="GTDB"> GTDB Taxonomy</label><br>
     </div>
     <table class="result_table" id="result_table">
     <thead>

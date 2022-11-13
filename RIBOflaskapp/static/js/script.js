@@ -84,6 +84,7 @@ function get_all_ref_ids() {
     return ref_id_string;
 }
 
+/*
 function download() {
     var content = get_table_header().concat("\n", get_data_rows())
     var blob = new Blob(content, {
@@ -91,6 +92,7 @@ function download() {
     });
     saveAs(blob, "search-result.csv");
 }
+*/
 
 function check_format_dl(){
     var check_buttons = document.getElementsByClassName("check_button_format")
@@ -101,6 +103,34 @@ function check_format_dl(){
         }
     }
     return  result;
+}
+
+function check_taxonomy_dl(){
+    var check_buttons = document.getElementsByClassName("check_button_taxonomy")
+    var result = '';
+    for(var i = 0; i < check_buttons.length; i++) {
+        if(check_buttons[i].checked === true){
+            result = check_buttons[i].value + "," + result;
+        }
+    }
+    return  result;
+}
+
+function download_csv_from_db() {
+    var all_ref_id = get_all_ref_ids();
+    var taxonomy = check_taxonomy_dl();
+    $.ajax({
+        url: '/download_files_csv/' + all_ref_id +'/'+ taxonomy,
+        type: 'GET',
+        context: document.body,
+        xhrFields:{
+            responseType: 'blob'
+        },
+        success: function(data) {
+            saveAs(data, "rna_sequences.csv");
+
+        }
+    });
 }
 
 function download_file_from_db() {
@@ -131,6 +161,7 @@ function redirect_to_download() {
 function showHideRow(row) {
     $("#" + row).toggle();
 }
+
 
 function show_taxonomy(bench_id){
     if(document.getElementById("silva_taxon"+bench_id)){
@@ -181,9 +212,7 @@ function show_taxonomy(bench_id){
 }
 
 function show_taxonomy_silva(bench_id) {
-    console.log(bench_id)
     var silva = document.getElementById('silva_taxonomy'+bench_id).innerHTML.toString();
-    console.log(silva)
     var temp = silva.split("'");
     var position = document.getElementById("silva_div"+bench_id);
     var rank_cont = 0
@@ -298,7 +327,6 @@ function show_taxonomy_ncbi(bench_id) {
     var rank_cont = 0
     for (var i = 5; i< temp.length;i++){
         temp[i].replace("&lt", "&lt;");
-         console.log(temp[i]);
         for(var j=0; j<temp.length; j++){
             if(i%2 !== 0){
                 if(rank_cont%2 === 0){
