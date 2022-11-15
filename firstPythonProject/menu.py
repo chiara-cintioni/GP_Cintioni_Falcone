@@ -4,7 +4,7 @@ import mongo_services
 
 def menu():
     print("Welcome, what would you like to do?"),
-    print("1. Insert a csv file (with one or more rna sequences) into mongodb."),
+    print("1. Insert a txt file (with one or more rna sequences) into mongodb."),
     print("2. Modify a single rna sequence."),
     print("3. Delete a single rna sequence."),
     print("4. Delete all."),
@@ -18,7 +18,7 @@ def menu():
     if result == 0:
         return
     elif result == 1:
-        print("You chose to insert one or more csv files into mongo db.")
+        print("You chose to insert one or more txt files into mongo db.")
         output_path = main_create_json.read_files()
         mongo_services.insert_many_to_mongo(output_path)
         menu()

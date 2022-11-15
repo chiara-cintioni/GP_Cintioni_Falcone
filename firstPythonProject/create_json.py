@@ -137,7 +137,9 @@ def create_file_json(file, output, file_path):
         output.write('\"Core\": \"' + obj1.core + '\",')
         output.write('\"Core plus\": \"' + obj1.core_plus + '\",')
         output.write('\"Shape\": \"' + obj1.shape + '\",')
+        # obj1.db_name da inserire al posto di CRW
         output.write('\"Reference database\": \"' + obj1.db_name + '\",')
+        # obj1.link_db da inserire al posto del link diretto
         output.write('\"Reference database link\": \"' + obj1.link_db + '\",')
         output.write('\"Benchmark ID\": \"' + obj1.benchmark_id + '\",')
         output.write('\"Taxonomy\": [{')
