@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 
-client = MongoClient('mongodb://localhost:27017', 27017)
+#client = MongoClient('mongodb://localhost:27017', 27017)
+client = MongoClient('mongodb+srv://DeniseFalcone:Giappone4ever@cluster0.yelotpf.mongodb.net/test', 27017)
 db = client.RIBOdb
 #client = MongoClient('localhost')
 #db = client.RIBO_flask_db
@@ -608,7 +609,6 @@ def search_rank_all(string_array, value, collection):
     return res_col
 
 def search_rank(taxonomy, rank, value, collection):
-    print("Sono in search rank iniziale")
     string = create_string_taxonomy(taxonomy, rank, value)
     if string == '':
         return collection
@@ -629,5 +629,34 @@ def search_rank(taxonomy, rank, value, collection):
         return res_col
 
 
+def get_file_with_one_taxonomy(filename, taxonomy):
+    collection = db.get_collection("rna_sequences")
+    string_taxonomy = 'Taxonomy.'+taxonomy+'.Classified'
+    result = collection.aggregate([
+        {
+            '$match': {
+                'Benchmark ID': filename
+            }
+        }, {
+            '$unwind': {
+                'path': '$Taxonomy',
+                'preserveNullAndEmptyArrays': True
+            }
+        }, {
+            '$match': {
+                string_taxonomy: 'Yes'
+            }
+        },
+        {
+            '$merge': {
+                'into': 'temp',
+                'on': '_id',
+                'whenMatched': 'replace',
+                'whenNotMatched': 'insert'
+            }
+        }
+    ])
+    res_col = db.temp
+    return res_col
 
 

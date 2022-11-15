@@ -1,15 +1,16 @@
 # importiamo l'oggetto flask dal flask package.
 import io
+import json
 import os
-import pathlib
-import shutil
 import time
 import zipfile
-from zipfile import ZipFile
 
-from flask import Flask, render_template, request, abort, send_file, send_from_directory, make_response
+import pandas
+from bson import json_util
+from flask import Flask, render_template, request, send_file
+from pandas.io.json import json_normalize
+from pip._internal.utils import datetime
 from pymongo import MongoClient
-from flask_pymongo import PyMongo
 
 import search_script
 
@@ -32,9 +33,9 @@ app.config[
 
 # ora che abbiamo creato l'app, la useremo per gestire le richieste HTTP che riceviamo.
 
-# client = MongoClient('mongodb+srv://DeniseFalcone:Giappone4ever@cluster0.yelotpf.mongodb.net/test', 27017)
+client = MongoClient('mongodb+srv://DeniseFalcone:Giappone4ever@cluster0.yelotpf.mongodb.net/test', 27017)
 # db = client.RIBOdb
-client = MongoClient('localhost')
+# client = MongoClient('localhost')
 db = client.RIBOdb
 collection = db.rna_sequences
 
@@ -101,114 +102,34 @@ def search_result():
     return render_template('search_results.html')
 
 
-@app.route('/download/')
-def download():
-    return render_template('download.html')
-
-
-'''
-@app.route('/download/', methods = ['GET', 'POST'])
-def download():
-    file_name = request.args.get('variable', 'default') + ".ct"
-    print(file_name)
-    grid_fs_file = fs.find_one({'filename': file_name})
-    response = make_response(grid_fs_file.read())
-    response.headers['Content-Type'] = 'text/ct'
-    response.headers["Content-Disposition"] = "attachment; filename={}".format(file_name)
-    return response
-'''
-
-''''
-@app.route('/download_files/<filenames>')
-def test(filenames):
-    print(filenames)
-    filename_array = filenames.split(sep=",")
-    for filename in filename_array:
-        dir2 = 'test'
-        par_dir = 'C:\\Users\\Chiara\\OneDrive\\Desktop'
-        path = os.path.join(par_dir, dir2)
-        try:
-            os.mkdir(path)
-        except FileExistsError:
-            os.rmdir(path)
-            os.mkdir(path)
-        for file in os.listdir(app.config['DB_FILES']):
-            print(file)
-            old_file_path = os.path.join(app.config['DB_FILES'], file)
-            if os.path.isfile(old_file_path):
-                if filename == file:
-                    new_file_path = os.path.join(path, file)
-                    with open(old_file_path, 'r') as old:
-                        with open(new_file_path, 'w') as new:
-                            old_file = old.readlines()
-                            new.writelines(old_file)
-                        new.close()
-                    old.close()
-    base_path = path
-    data = io.BytesIO()
-    with zipfile.ZipFile(data, mode='w') as z:
-        for f_name in os.listdir(base_path):
-            z.write(f_name)
-    data.seek(0)
-    return send_file(
-        data,
-        mimetype='application/zip',
-        as_attachment=True,
-        download_name='gino.zip'
-
-    )
-    return render_template('search_results.html')
-'''
-
-'''
-
-
-@app.route('/download_files/<filenames>')
-def test(filenames):
-    print(filenames)
-    filename_array = filenames.split(sep=",")
-    for filename in filename_array:
-        dir2 = 'test'
-        par_dir = 'C:\\Users\\Chiara\\OneDrive\\Desktop'
-        path = os.path.join(par_dir, dir2)
-        try:
-            os.mkdir(path)
-        except FileExistsError:
-            os.rmdir(path)
-            os.mkdir(path)
-        for file in os.listdir(app.config['DB_FILES']):
-            print(file)
-            old_file_path = os.path.join(app.config['DB_FILES'], file)
-            if os.path.isfile(old_file_path):
-                if filename == file:
-                    new_file_path = os.path.join(path, file)
-                    with open(old_file_path, 'r') as old:
-                        with open(new_file_path, 'w') as new:
-                            old_file = old.readlines()
-                            new.writelines(old_file)
-                        new.close()
-                    old.close()
-    base_path = path
-    buffer = io.BytesIO()
-    with open(filename, 'wb') as f:
-        f.write(buffer.getvalue())
-        with ZipFile('gino.zip', mode='a') as archive:
-            for f_name in os.listdir(base_path):
-                with archive.open(f_name, 'w') as arc_open:
-                    with open(f_name, mode='rb') as f_open:
-                        while bytes := f_open.read(1):
-                            arc_open.write(bytes)
-        return send_file(
-            "gino.zip",
-            as_attachment=True,
-            download_name='gino.zip'
-        )
+@app.route('/download_files_csv/<filenames>/<taxonomy>', methods=['GET', 'POST'])
+def download(filenames, taxonomy):
+    if request.method == 'GET':
+        filenames = filenames.split(sep=',')
+        taxonomy = taxonomy.split(sep=',')
+        db.get_collection("temp").delete_many({})
+        for filename in filenames:
+            if filename != '' and taxonomy[0] != '':
+                search_script.get_file_with_one_taxonomy(filename, taxonomy[0])
+        # make an API call to the MongoDB server
+        mongo_docs = db.get_collection("temp").find()
+        # Convert the mongo docs to a DataFrame
+    #OPZIONE 1: TAXON SEPARATI MA SALTA L'ORDINE CORRETTE DELLE COLONNE
+        #sanitized = json.loads(json_util.dumps(mongo_docs))
+        #normalized = json_normalize(sanitized)
+        #docs = pandas.DataFrame(normalized)
+    #OPZIONE 2: STRINGA TAXONOMY TUTTA INSIEME
+        docs = pandas.DataFrame(mongo_docs)
+        # Discard the Mongo ID for the documents
+        docs.pop("_id")
+        # compute the output file directory and name
+        output_dir = 'C:\\Users\\Chiara\\Downloads'
+        output_file = os.path.join(output_dir, 'Result_db.csv')
+        docs.to_csv(output_file, ",", index=False)  # CSV delimited by commas
+        return send_file(output_file, as_attachment=True, download_name='Result2.csv')
     return render_template('search_results.html')
 
-'''
 
-
-# FUNZIONA +-
 @app.route('/download_files/<filenames>/<formats>', methods=['GET', 'POST'])
 def test(filenames, formats):
     if request.method == 'GET':
@@ -266,57 +187,6 @@ def return_format(f):
         case '':
             path = ''
     return path
-
-
-'''
-@app.route('/download_files/', methods=['GET', 'POST'])
-def test():
-       print(request.method)
-       if request.method == 'POST':
-           ref_ids = request.args.get('variable', 'default').split(sep=",")
-           format_string = request.args.get('format', 'default').split(sep=",")
-           for id in ref_ids:
-               print("i: " + id)
-               for format_value in format_string:
-                   print("format:" + format_value)
-                   if format_value == "db":
-                       path = "db_file/" + id + ".db"
-                       filename = id + ".db"
-                       print("path: " + path)
-                   try:
-                       return send_file(path, as_attachment=True)
-                   except FileNotFoundError:
-                       abort(404)
-        return render_template('search_results.html')
-'''
-
-'''
-VECCHIO DOWNLOAD
-
-@app.route('/download_files/')
-def test():
-    ref_ids = request.args.get('variable', 'default').split(sep=",")
-    format_string = request.args.get('format', 'default').split(sep=",")
-    for i in format_string:
-        print(i)
-    for format_value in format_string:
-        if format_value == "zip":
-            download_from_db.create_zip_file(ref_ids, format_string)
-            return render_template('search_results.html')
-        if format_value == "db":
-            download_from_db.download_db_files(ref_ids)
-        elif format_value == "ct":
-            download_from_db.download_ct_files(ref_ids)
-        elif format_value == "bpseq":
-            download_from_db.download_bpseq_files(ref_ids)
-        elif format_value == "db_nh":
-            download_from_db.download_db_nh_files(ref_ids)
-        elif format_value == "ct_nh":
-            download_from_db.download_ct_nh_files(ref_ids)
-        elif format_value == "bpseq_nh":
-            download_from_db.download_bpseq_nh_files(ref_ids)
-    return render_template('search_results.html')
- '''
 
 
 @app.route('/')
