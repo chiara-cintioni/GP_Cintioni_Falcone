@@ -1,0 +1,143 @@
+Organism name 	Length	Unpaired Bases	Paired Bases	Pseudoknotted	Pseudoknot order	RNA type	benchmark id	Genus	Core	Coreplus	Shape	Molecola se validata	Database	bpRNA ID
+Bacillus phage SPO1	908	746	162	Y	1	Group I Introns	CRW_GII_V_1	1	()()[()()(()()]())()	()(())[(())(())(((())()]()))()	[(])	No	CRW	bpRNA_CRW_54540
+Enterobacteria phage T4	607	467	140	Y	1	Group I Introns	CRW_GII_V_2	1	()()(()()[()())()](()()())	()()((())(())[()())()](()()())	([)]	No	CRW	bpRNA_CRW_54541
+Enterobacteria phage T4	1058	874	184	Y	1	Group I Introns	CRW_GII_V_3	1	()[()()(()()]())(()(()())())	()[(())(())((()()]()))(()((()()))())	[(])	No	CRW	bpRNA_CRW_54542
+Enterobacteria phage T4	1036	882	154	Y	1	Group I Introns	CRW_GII_V_4	1	()()[()()(()()]())(()()())	()()[(())(())((()()]()))(()()())	[(])	No	CRW	bpRNA_CRW_54543
+Dermocarpa sp.	268	110	158	Y	1	Group I Introns	CRW_GII_B_5	1	()()[()()(]())(()())	(())()[(())(())((](())))(()())	[(])	No	CRW	bpRNA_CRW_54544
+Prochlorothrix hollandica	373	187	186	Y	1	Group I Introns	CRW_GII_B_6	1	()()[()()(]())(()())	()()[((()))(((())))((]((()))))(()())	[(])	No	CRW	bpRNA_CRW_54545
+Phormidium sp.	270	108	162	Y	1	Group I Introns	CRW_GII_B_7	1	()()[()()(]())()	()()[[((((()))))(((())))((]](())))(())	[(])	No	CRW	bpRNA_CRW_54546
+Scytonema hofmanni	251	101	150	Y	1	Group I Introns	CRW_GII_B_8	1	()()[()()(]())(()())	(())()[(())(())((](())))(()())	[(])	No	CRW	bpRNA_CRW_54547
+Simkania negevensis	736	550	186	Y	1	Group I Introns	CRW_GII_B_9	1	()[()()(]())()	()[((((()))))((((()))))((]()))(())	[(])	No	CRW	bpRNA_CRW_54548
+Synechococcus elongatus PCC 6301	265	109	156	Y	1	Group I Introns	CRW_GII_B_10	1	()()[()()(]())(()())	()()[((()))(())((](())))((())())	[(])	No	CRW	bpRNA_CRW_54549
+Annona cherimola	494	380	114	Y	1	Group I Introns	CRW_GII_E_11	1	()()[()()(]())(()())	()(())[(())(())((]()))(()())	[(])	No	CRW	bpRNA_CRW_54550
+Chlamydomonas moewusii	1844	1624	220	Y	1	Group I Introns	CRW_GII_E_12	1	()()[()()(]())(()()())	()()[(())(())((]((((()))))))(()(())())	[(])	No	CRW	bpRNA_CRW_54551
+Lobochlamys segnis	924	796	128	Y	1	Group I Introns	CRW_GII_E_13	1	()[()()(]())()	()[(())((()))((]()))(())	[(])	No	CRW	bpRNA_CRW_54552
+Gentiana prostrata	336	214	122	Y	1	Group I Introns	CRW_GII_E_14	1	()()[()()(]())(()())	()(())[[(())((()))((]]()))(((()(()))))	[(])	No	CRW	bpRNA_CRW_54553
+Nicotiana tabacum	575	429	146	Y	1	Group I Introns	CRW_GII_E_15	1	()()[()()(]())(()())	()()[(())(((())))((]()))(()())	[(])	No	CRW	bpRNA_CRW_54554
+Pinus thunbergii	550	424	126	Y	1	Group I Introns	CRW_GII_E_16	1	()()[()()(]())(()())	()(())[(())((()))((]()))(()())	[(])	No	CRW	bpRNA_CRW_54555
+Spartina alterniflora	554	412	142	Y	1	Group I Introns	CRW_GII_E_17	1	()()[()()(]())(()())	()(())[((()))(((())))((](())))(()(()))	[(])	No	CRW	bpRNA_CRW_54556
+Spartina anglica	554	414	140	Y	1	Group I Introns	CRW_GII_E_18	1	()()[()()(]())(()())	()(())[((()))(((())))((](())))((()(())))	[(])	No	CRW	bpRNA_CRW_54557
+Sorghum bicolor	510	344	166	Y	1	Group I Introns	CRW_GII_E_19	1	()()[()()(](()()))(()())	()(())[((()))(((())))((](((())()))))((()(())))	[(])	No	CRW	bpRNA_CRW_54558
+Spartina maritima	554	416	138	Y	1	Group I Introns	CRW_GII_E_20	1	()()[()()(]())(()())	()(())[((()))(((())))((](())))((()()))	[(])	No	CRW	bpRNA_CRW_54559
+Spartina x townsendii	554	414	140	Y	1	Group I Introns	CRW_GII_E_21	1	()()[()()(]())(()())	()(())[((()))(((())))((](())))((()(())))	[(])	No	CRW	bpRNA_CRW_54560
+Arxula adeninivorans	450	242	208	Y	1	Group I Introns	CRW_GII_E_22	1	()()()((()())()[)()](()())	()()()((((((()())))))((()))[[)()]](()(()))	([)]	No	CRW	bpRNA_CRW_54561
+Drechslerella brochopaga	443	219	224	Y	1	Group I Introns	CRW_GII_E_23	1	()()()(((()())())()[)()]()	()(())()((((((()())))()))((()))[[)()]]((()))	([)]	No	CRW	bpRNA_CRW_54562
+Ajellomyces capsulatus	408	166	242	Y	1	Group I Introns	CRW_GII_E_24	1	()(()())()(((()())())()[)()](()())	((()))(()())()((((((())(())))()))(((())))[[)(())]](()())	([)]	No	CRW	bpRNA_CRW_54563
+Ajellomyces capsulatus	428	184	244	Y	1	Group I Introns	CRW_GII_E_25	1	()(()())()(((()())())()[)()](()())	((()))(()())()((((((((()))(()))))()))(((())))[[)(())]](()())	([)]	No	CRW	bpRNA_CRW_54564
+Ajellomyces capsulatus	425	185	240	Y	1	Group I Introns	CRW_GII_E_26	1	()(()())()(((()())())()[)()]()()	((()))(()())()((((((((()))(()))))()))(((())))[)(())]()()	([)]	No	CRW	bpRNA_CRW_54565
+Ajellomyces capsulatus	425	185	240	Y	1	Group I Introns	CRW_GII_E_27	1	()(()())()(((()())())()[)()]()()	((()))(()())()((((((((()))(()))))()))(((())))[)(())]()()	([)]	No	CRW	bpRNA_CRW_54566
+Ankistrodesmus stipitatus	408	152	256	Y	1	Group I Introns	CRW_GII_E_28	1	()()()((()())()[)()](()()())	()(())(())(((((((())((())))))))((()))[[)()]](()(())())	([)]	No	CRW	bpRNA_CRW_54567
+Bensingtonia ciliata	357	145	212	Y	1	Group I Introns	CRW_GII_E_29	1	()()()(((()())())()[)()]()	((()))()()(((((((())())))()))(())[[)()]]((()))	([)]	No	CRW	bpRNA_CRW_54568
+Bensingtonia ciliata	360	172	188	Y	1	Group I Introns	CRW_GII_E_30	1	()()()(((()())())()[)()]()	(())(())((((()))))(((((((())())))()))(())[[)()]](())	([)]	No	CRW	bpRNA_CRW_54569
+Bensingtonia yamatoana	468	194	274	Y	1	Group I Introns	CRW_GII_E_31	1	()(()())()((()())()[)()](()()())	(((())))(()())(())((((((((()))(()))))))(((())))[[)()]](()((()))())	([)]	No	CRW	bpRNA_CRW_54570
+Bensingtonia yamatoana	480	194	286	Y	1	Group I Introns	CRW_GII_E_32	1	()(()())()(((()())())()[)()](()()())	()(()((((())))))((()))(((((((())())))()))((((()))))[[)()]]((((())))()())	([)]	No	CRW	bpRNA_CRW_54571
+Cosmarium botrytis	518	202	316	Y	1	Group I Introns	CRW_GII_E_33	1	()()()((()())()[)()](()())	((((()))))(())()((((((((((())))(())))))))(((())))[[)(())]](((()))())	([)]	No	CRW	bpRNA_CRW_54572
+Cenococcum geophilum	572	308	264	Y	1	Group I Introns	CRW_GII_E_34	1	()(()())()(((()())())()[)()](()()())	()(()())()((((((((())())))())))(((())))[[[)()]]]((())(((())))())	([)]	No	CRW	bpRNA_CRW_54573
+Cladonia grayi	283	131	152	Y	1	Group I Introns	CRW_GII_E_35	1	()()()[()()(]())()	(())()()[[((()))((()))((]](())))(())	[(])	No	CRW	bpRNA_CRW_54574
+Cladonia grayi	308	178	130	Y	1	Group I Introns	CRW_GII_E_36	1	()()[()()(]())()	()((()))[(((())))()((]()))(())	[(])	No	CRW	bpRNA_CRW_54575
+'Chlorella' luteoviridis	497	253	244	Y	1	Group I Introns	CRW_GII_E_37	1	()()()((()())()[)()](()()())	(((())))()()((((((())))()))((()))[[)()]](()(())(()))	([)]	No	CRW	bpRNA_CRW_54576
+Cladonia merochlorophaea	267	121	146	Y	1	Group I Introns	CRW_GII_E_38	1	()()()(()()[)()]()	(())()()((((()))(())[))(())](())	([)]	No	CRW	bpRNA_CRW_54577
+Cladonia merochlorophaea	267	133	134	Y	1	Group I Introns	CRW_GII_E_39	1	()()[()()(]())()	()(())[((()))()((](())))(())	[(])	No	CRW	bpRNA_CRW_54578
+Cladonia merochlorophaea	265	137	128	Y	1	Group I Introns	CRW_GII_E_40	1	()()[()()(]())()	()()[((()))(())((](())))(())	[(])	No	CRW	bpRNA_CRW_54579
+Cladonia merochlorophaea	274	140	134	Y	1	Group I Introns	CRW_GII_E_41	1	()()[()()(]())()	()((()))[(((())))()((]()))(())	[(])	No	CRW	bpRNA_CRW_54580
+'Chlorella' mirabilis	526	230	296	Y	1	Group I Introns	CRW_GII_E_42	1	()(()())()(((()())())()[)()]()	(((())))(()())()(((((((())((())))))((()))))(((())))[[)(())]](())	([)]	No	CRW	bpRNA_CRW_54581
+Cryphonectria parasitica	640	392	248	Y	1	Group I Introns	CRW_GII_E_43	1	()()(()())(()()[)()](()()())	(())()(((())((()))))((((()))(())[[))()]](()(())(()))	([)]	No	CRW	bpRNA_CRW_54582
+Characium saccatum	476	192	284	Y	1	Group I Introns	CRW_GII_E_44	1	()()()((()())()[)()](()()())	()(())(())(((((((())())))))((()))[[)(())]](()(())(((()))))	([)]	No	CRW	bpRNA_CRW_54583
+Cosmocladium saxonicum	448	206	242	Y	1	Group I Introns	CRW_GII_E_45	1	()()()(((()())())()[)()]()	(())(())(())((((((((((())))()))))()))(())[[)((()))]](())	([)]	No	CRW	bpRNA_CRW_54584
+Chlorella sorokiniana	515	255	260	Y	1	Group I Introns	CRW_GII_E_46	1	()()()(((()())())()[)()](()()())	(())()()(((((((())((())))))()))((()))[[)()]](()(())())	([)]	No	CRW	bpRNA_CRW_54585
+Dunaliella parva	436	168	268	Y	1	Group I Introns	CRW_GII_E_47	1	()()()((()())()[)()](()()())	()(())(())((((((((()))())))))((()))[[)()]](()(())())	([)]	No	CRW	bpRNA_CRW_54586
+Dunaliella parva	396	148	248	Y	1	Group I Introns	CRW_GII_E_48	1	()()()(((()())())()[)()](()()())	()()()(((((((()(()))))()))((()))[[))()]](()(())())	([)]	No	CRW	bpRNA_CRW_54587
+Dunaliella salina	423	175	248	Y	1	Group I Introns	CRW_GII_E_49	1	()()()(((()())())()[)()](()()())	()()()(((((((()(()))))()))((()))[[))()]](()(())())	([)]	No	CRW	bpRNA_CRW_54588
+Exophiala dermatitidis	426	168	258	Y	1	Group I Introns	CRW_GII_E_50	1	()(()())()(((()())())()[)()](()())	(((())))(()())(())(((((((((())(())))))())))((()))[[)((()))]](()())	([)]	No	CRW	bpRNA_CRW_54589
+Gloeotilopsis planctonica	461	189	272	Y	1	Group I Introns	CRW_GII_E_51	1	()()()(((()())())()[)()](()()())	()(())()((((((()())))()))((()))[[)()]](()(())())	([)]	No	CRW	bpRNA_CRW_54590
+Genicularia spirotaenia	387	183	204	Y	1	Group I Introns	CRW_GII_E_52	1	()(()())()((()())()[)()]()	()(()())()(((((((())(()))))))(())[[)(())]]((()))	([)]	No	CRW	bpRNA_CRW_54591
+Lecanora dispersa	255	133	122	Y	1	Group I Introns	CRW_GII_E_53	1	()()[()()(]())()	()(())[[[(())((()))((]]](())))((()))	[(])	No	CRW	bpRNA_CRW_54592
+Lecanora dispersa	211	91	120	Y	1	Group I Introns	CRW_GII_E_54	1	()()[()()(]())()	(())(((())))[()()((](())))(())	[(])	No	CRW	bpRNA_CRW_54593
+Lecanora dispersa	221	119	102	Y	1	Group I Introns	CRW_GII_E_55	1	()[()()(]())()	(())[[(())(((())))((]](())))(())	[(])	No	CRW	bpRNA_CRW_54594
+Lecanora dispersa	240	110	130	Y	1	Group I Introns	CRW_GII_E_56	1	()()()[()()(]())()	()(())()[[((()))()((]]()))(())	[(])	No	CRW	bpRNA_CRW_54595
+Lecanora dispersa	229	107	122	Y	1	Group I Introns	CRW_GII_E_57	1	()()[()()(]())()	()(())[((()))(())((]()))(())	[(])	No	CRW	bpRNA_CRW_54596
+Lecanora dispersa	328	172	156	Y	1	Group I Introns	CRW_GII_E_58	1	()[()()(]())()	((()))[(((())))(((())))((]()))(((())))	[(])	No	CRW	bpRNA_CRW_54597
+Lecanora dispersa	218	122	96	Y	1	Group I Introns	CRW_GII_E_59	1	()()()(()()[)()]()	()()(())(((())()[))()]()	([)]	No	CRW	bpRNA_CRW_54598
+Mesotaenium caldariorum	439	187	252	Y	1	Group I Introns	CRW_GII_E_60	1	()(()())()(((()())())()[)()](()())	(())(()())(((())))(((((((())((())))))()))((()))[[)()]]((())())	([)]	No	CRW	bpRNA_CRW_54599
+Monilinia fructicola	462	208	254	Y	1	Group I Introns	CRW_GII_E_61	1	()()()((()())()[)()](()()())	()(())()((((((((())()))))))((()))[[)((()))]](()()())	([)]	No	CRW	bpRNA_CRW_54600
+Mougeotia scalaris	573	273	300	Y	1	Group I Introns	CRW_GII_E_62	1	()(()())()(((()())())(()())[)()](()())	(())(()())()(((((((())((())))))()))(((((())(())))))[[)(())]](()())	([)]	No	CRW	bpRNA_CRW_54601
+Pneumocystis carinii	442	204	238	Y	1	Group I Introns	CRW_GII_E_63	1	()(()())()(((()())())()[)()]()	(())(()())()(((((((())(()))))()))((()))[[)((()))]](())	([)]	No	CRW	bpRNA_CRW_54602
+Pneumocystis carinii	375	135	240	Y	1	Group I Introns	CRW_GII_E_64	1	()()()(((()())())()[)()]()	()(())()(((((((())(()))))()))((()))[[)(())]](())	([)]	No	CRW	bpRNA_CRW_54603
+Pneumocystis carinii	355	121	234	Y	1	Group I Introns	CRW_GII_E_65	1	()()()(((()())())()[)()]()	()(())()(((((((())(()))))()))((()))[[)()]](())	([)]	No	CRW	bpRNA_CRW_54604
+Pneumocystis carinii	381	159	222	Y	1	Group I Introns	CRW_GII_E_66	1	()()()((()())()[)()]()	()(())()((((((()(()))))))(((())))[[)()]](())	([)]	No	CRW	bpRNA_CRW_54605
+Penicilliopsis clavariiformis	448	238	210	Y	1	Group I Introns	CRW_GII_E_67	1	()()()((()())()[)()]()	()(())()(((((((())(()))))))((()))[[)(())]](())	([)]	No	CRW	bpRNA_CRW_54606
+Protomyces inouyei	409	161	248	Y	1	Group I Introns	CRW_GII_E_68	1	()(()())()((()())()[)()]()	((()))(()())()(((((((())())))))((()))[[)()]](())	([)]	No	CRW	bpRNA_CRW_54607
+Protomyces inouyei	390	178	212	Y	1	Group I Introns	CRW_GII_E_69	1	()(()())()((()())()[)()](()())	()(()())()((((((()(()))))))(())[[)(())]](()())	([)]	No	CRW	bpRNA_CRW_54608
+Protomyces macrosporus	433	203	230	Y	1	Group I Introns	CRW_GII_E_70	1	()(()())()((()())()[)()]()	((((()))))(()())()((((((((()))())))))((()))[[)()]](())	([)]	No	CRW	bpRNA_CRW_54609
+Protomyces macrosporus	380	170	210	Y	1	Group I Introns	CRW_GII_E_71	1	()(()())()((()())()[)()](()())	()(()())()(((((((())(()))))))(())[[)()]](()())	([)]	No	CRW	bpRNA_CRW_54610
+Protomyces pachydermus	1155	913	242	Y	1	Group I Introns	CRW_GII_E_72	1	()(()())()((()())()[)()]()	(((())))((())())()((((((((())()))))))((()))[[)()]]((()))	([)]	No	CRW	bpRNA_CRW_54611
+Protomyces pachydermus	392	178	214	Y	1	Group I Introns	CRW_GII_E_73	1	()(()())()((()())()[)()](()())	()(()())()((((((()(()))))))(())[[)(())]](()())	([)]	No	CRW	bpRNA_CRW_54612
+Physarum polycephalum	1017	773	244	Y	1	Group I Introns	CRW_GII_E_74	1	()()()[(()())()(]())(()()())	(())(())(())[[((((((((())())))))))((()))((]]()))(()(())())	[(])	No	CRW	bpRNA_CRW_54613
+Protoderma sarcinoidea	476	252	224	Y	1	Group I Introns	CRW_GII_E_75	1	()()()((()())()[)()](()()())	()(())(())(((((((()()))))))((()))[[)()]](()()())	([)]	No	CRW	bpRNA_CRW_54614
+Porphyra spiralis	796	526	270	Y	1	Group I Introns	CRW_GII_E_76	1	()(()())()(((()())())()[)()](()()())	(())(()())()((((((((()))())))()))(())[[)()]](()(())(((()))))	([)]	No	CRW	bpRNA_CRW_54615
+Porphyra spiralis	960	690	270	Y	1	Group I Introns	CRW_GII_E_77	1	()(()())()(((()())())()[)()](()()())	(())(()())()((((((((()))())))()))(())[[)()]](()(())(((()))))	([)]	No	CRW	bpRNA_CRW_54616
+Porphyra spiralis	1107	837	270	Y	1	Group I Introns	CRW_GII_E_78	1	()(()())()(((()())())()[)()](()()())	(())(()())()((((((((()))())))()))(())[[)()]](()(())(((()))))	([)]	No	CRW	bpRNA_CRW_54617
+Porphyra yezoensis	561	349	212	Y	1	Group I Introns	CRW_GII_E_79	1	()(((()())())()[)()](()()())	()(((((((((()()))()))))))(((())))[[)()]](()(())())	([)]	No	CRW	bpRNA_CRW_54618
+Sphaerozosma granulatum	437	187	250	Y	1	Group I Introns	CRW_GII_E_80	1	()()()(((()())())()[)()]()	((()))(())()(((((((((()))()))))()))(())[[)(())]](())	([)]	No	CRW	bpRNA_CRW_54619
+Stegobium paniceum yeast-like symbiont	240	108	132	Y	1	Group I Introns	CRW_GII_E_81	1	()()[()()(]())()	()()[(())()((](())))((()))	[(])	No	CRW	bpRNA_CRW_54620
+Stegobium paniceum yeast-like symbiont	210	96	114		1	Group I Introns	CRW_GII_E_82	1	()()[()()(]())()	()()[(())()((]()))((()))	[(])	No	CRW	bpRNA_CRW_54621
+Stegobium paniceum yeast-like symbiont	260	106	154	Y	1	Group I Introns	CRW_GII_E_83	1	()()[()()(]())()	()(())[((()))()((](())))(())	[(])	No	CRW	bpRNA_CRW_54622
+Stegobium paniceum yeast-like symbiont	259	121	138	Y	1	Group I Introns	CRW_GII_E_84	1	()()[()()(]())()	()((()))[((()))()((](())))((()))	[(])	No	CRW	bpRNA_CRW_54623
+Stegobium paniceum yeast-like symbiont	234	100	134	Y	1	Group I Introns	CRW_GII_E_85	1	()()[()()(]())()	()(())[(())(())((]()))((()))	[(])	No	CRW	bpRNA_CRW_54624
+Sclerotinia sclerotiorum	371	191	180	Y	1	Group I Introns	CRW_GII_E_86	1	()()()((()())()[)()]()	()(())()(((((((((()))()))))))((()))[[)()]](())	([)]	No	CRW	bpRNA_CRW_54625
+Staurastrum sp. M752	423	179	244	Y	1	Group I Introns	CRW_GII_E_87	1	()()()((()())()[)()](()())	((()))(())()((((((((()))())))))(())[[)(())]](()())	([)]	No	CRW	bpRNA_CRW_54626
+Staurastrum sp. M753	415	171	244	Y	1	Group I Introns	CRW_GII_E_88	1	()()()((()())()[)()](()())	((()))(())()((((((((()))())))))(())[[)()]](()())	([)]	No	CRW	bpRNA_CRW_54627
+Tetrahymena cosmopolitanis	451	187	264	Y	1	Group I Introns	CRW_GII_E_89	1	()()()((()())()[)()](()()())	()()(())((((((((()())))))))((()))[[)()]](()(())())	([)]	No	CRW	bpRNA_CRW_54628
+Tetrahymena hyperangularis	451	187	264	Y	1	Group I Introns	CRW_GII_E_90	1	()()()((()())()[)()](()()())	()()(())((((((((()())))))))((()))[[)()]](()(())())	([)]	No	CRW	bpRNA_CRW_54629
+Tetrahymena malaccensis	447	189	258	Y	1	Group I Introns	CRW_GII_E_91	1	()()()((()())()[)()](()()())	()()(())((((((((()())))))))((()))[[)()]](()(())())	([)]	No	CRW	bpRNA_CRW_54630
+Tetrahymena pigmentosa	451	187	264	Y	1	Group I Introns	CRW_GII_E_92	1	()()()((()())()[)()](()()())	()()(())((((((((()())))))))((()))[[)()]](()(())())	([)]	No	CRW	bpRNA_CRW_54631
+Agrocybe aegerita	1424	1246	178	Y	1	Group I Introns	CRW_GII_E_93	1	()(((()())())()[)()]()	()((((((((())())))())))(())[[[)()]]](())	([)]	No	CRW	bpRNA_CRW_54632
+Acanthamoeba castellanii	846	696	150	Y	1	Group I Introns	CRW_GII_E_94	1	()()[()()(]())()	()()[((((()))))((()))((]()))(())	[(])	No	CRW	bpRNA_CRW_54633
+Magnaporthe grisea	285	153	132	Y	1	Group I Introns	CRW_GII_E_95	1	()[()()(]())(()())	()[(())(())((](())))(()())	[(])	No	CRW	bpRNA_CRW_54634
+Metridium senile	880	692	188	Y	1	Group I Introns	CRW_GII_E_96	1	()()[()()(]())(()())	()()[((((()))))((()))((]()))((())())	[(])	No	CRW	bpRNA_CRW_54635
+Metridium senile	1710	1538	172	Y	1	Group I Introns	CRW_GII_E_97	1	()()[()()(]())(()())	()()[(())((((()))))((](())))(()())	[(])	No	CRW	bpRNA_CRW_54636
+Neurospora crassa	1180	1062	118	Y	1	Group I Introns	CRW_GII_E_98	1	()[()()(]())()	()[(())(())((](())))(())	[(])	No	CRW	bpRNA_CRW_54637
+Neurospora crassa	1524	1312	212	Y	1	Group I Introns	CRW_GII_E_99	1	()()()((()())()[)()]()	()()()(((((((())())))))((()))[[)()]](())	([)]	No	CRW	bpRNA_CRW_54638
+Podospora anserina	2630	2498	132	Y	1	Group I Introns	CRW_GII_E_100	1	()[()()(]())()	()[(())((()))((](())))(())	[(])	No	CRW	bpRNA_CRW_54639
+Podospora anserina	1860	1690	170	Y	1	Group I Introns	CRW_GII_E_101	1	()(((()())())()[)()]()	()(((((((()())))(()))))((()))[[)()]](())	([)]	No	CRW	bpRNA_CRW_54640
+Podospora anserina	1443	1215	228	Y	1	Group I Introns	CRW_GII_E_102	1	()()()((()())()[)()]()	()()()(((((((())())))))((()))[[)(())]](())	([)]	No	CRW	bpRNA_CRW_54641
+Podospora anserina	2154	1906	248	Y	1	Group I Introns	CRW_GII_E_103	1	()()()(((()())())()[)()]()	()()()((((((((())()))))(())))(((())))[[)()]]()	([)]	No	CRW	bpRNA_CRW_54642
+Podospora anserina	1381	1165	216	Y	1	Group I Introns	CRW_GII_E_104	1	()()()()()(()()[)()](()()())	()()()()()((())()[[)()]](()()())	([)]	No	CRW	bpRNA_CRW_54643
+Saccharomyces cerevisiae	1210	1008	202	Y	1	Group I Introns	CRW_GII_E_105	1	()()()(()()[())()](()())	()()()((())((()))[[(()))()]](()())	([)]	No	CRW	bpRNA_CRW_54644
+Suillus luteus	611	397	214	Y	1	Group I Introns	CRW_GII_E_106	1	()()(()()[())()](()())	()()((((((())))))(())[[(()))(())]](()())	([)]	No	CRW	bpRNA_CRW_54645
+Suillus luteus	373	165	208	Y	1	Group I Introns	CRW_GII_E_107	1	()()(()()[())()](()())	()()((((((())))))(())[[(()))(())]](()(()))	([)]	No	CRW	bpRNA_CRW_54646
+Suillus luteus	623	445	178	Y	1	Group I Introns	CRW_GII_E_108	1	()[()()(]())()	(((())))[((((()))))()((]()))(((())))	[(])	No	CRW	bpRNA_CRW_54647
+Suillus luteus	555	259	296	Y	1	Group I Introns	CRW_GII_E_109	1	()[(()())()(]())(()())	()[((((((((((((()))))))))))((()))))(((())))((]((()))))(()())	[(])	No	CRW	bpRNA_CRW_54648
+Suillus luteus	617	235	382	Y	1	Group I Introns	CRW_GII_E_110	1	(()())()[(()())()(]())()	(((((((((((())))))))((()))))))()[(((((((()())))))))((()))(((](()))))(())	[(])	No	CRW	bpRNA_CRW_54649
+Suillus luteus	679	497	182	Y	1	Group I Introns	CRW_GII_E_111	1	()(((()())())()[)()]()	((()))((((((((())())))())))(())[[)()]](())	([)]	No	CRW	bpRNA_CRW_54650
+Suillus luteus	646	464	182	Y	1	Group I Introns	CRW_GII_E_112	1	()(((()())())()[)()]()	(((())))((((((((())())))())))((()))[[)()]](())	([)]	No	CRW	bpRNA_CRW_54651
+Schizosaccharomyces pombe	343	207	136	Y	1	Group I Introns	CRW_GII_E_113	1	()()[()()(]())()	()()[(((())))(())((]()))()	[(])	No	CRW	bpRNA_CRW_54652
+Sclerotinia sclerotiorum	1399	1215	184	Y	1	Group I Introns	CRW_GII_E_114	1	()(((()()())())()[)()]()	()((((((((())(())())))())))(())[[)()]](())	([)]	No	CRW	bpRNA_CRW_54653
+Acanthamoeba griffini	556	294	262	Y	1	Group I Introns	CRW_GII_E_115	1	()()()[((()())())()(]())(()())	()(((())))()[[((((((())(()))))()))(())((]]()))((())(()))	[(])	No	CRW	bpRNA_CRW_54736
+Acanthamoeba griffini	526	262	264	Y	1	Group I Introns	CRW_GII_E_116	1	()()()(((()())())()[)()](()())	()((()))()(((((((())(()))))()))(())[[)()]]((())(()))	([)]	No	CRW	bpRNA_CRW_54737
+Aureoumbra lagunensis	468	242	226	Y	1	Group I Introns	CRW_GII_E_117	1	()()()(((()())())()[)()](()()())	()(())()(((((((()())())))))((()))[[)()]]((())(())())	([)]	No	CRW	bpRNA_CRW_54738
+Bangia sp.	537	279	258	Y	1	Group I Introns	CRW_GII_E_118	1	()()()(((()())())()[)()](()()())	()()((()))(((((((((()()))()))))))(((())))[[)()]]((())(())())	([)]	No	CRW	bpRNA_CRW_54739
+Bangia atropurpurea	539	273	266	Y	1	Group I Introns	CRW_GII_E_119	1	()()()(((()())())()[)()](()()())	()(())((()))(((((((((()()))(())))))))((()))[[)()]]((())(())(()))	([)]	No	CRW	bpRNA_CRW_54740
+Bangia fuscopurpurea	1031	765	266	Y	1	Group I Introns	CRW_GII_E_120	1	()()()((()((()())()))()[)()](()()())	()((()))(())((((()(((((()()))()))))))((()))[[)()]]((())(())())	([)]	No	CRW	bpRNA_CRW_54741
+Bangia fuscopurpurea	503	265	238	Y	1	Group I Introns	CRW_GII_E_121	1	()()()((()((()())()))()[)()](()()())	()((()))()((((()(((((()()))()))))))((()))[[)()]]((())(())())	([)]	No	CRW	bpRNA_CRW_54742
+Bangia fuscopurpurea	566	250	316	Y	1	Group I Introns	CRW_GII_E_122	1	()()()(((()())())()[)()](()()())	()()(((())))(((((((((()()))(())))))))((()))[[)()]]((())(())(()))	([)]	No	CRW	bpRNA_CRW_54743
+Cryptendoxyla hypophloia	526	250	276	Y	1	Group I Introns	CRW_GII_E_123	1	()()(()())(()()[)()](()()()())	()()((())())(((((())))(())[[))()]](()(())(())(()))	([)]	No	CRW	bpRNA_CRW_54744
+'Chlorella' saccharophila	454	202	252	Y	1	Group I Introns	CRW_GII_E_124	1	()()()((()())()[)()](()()())	()(())()((((((()())))))((()))[[)()]](()(())())	([)]	No	CRW	bpRNA_CRW_54745
+Chlorella sorokiniana	487	211	276	Y	1	Group I Introns	CRW_GII_E_125	1	()()()((()())()[)()](()()())	()(())(())(((((((())())))))((()))[[)()]](()(())())	([)]	No	CRW	bpRNA_CRW_54746
+Exophiala nigra	523	233	290	Y	1	Group I Introns	CRW_GII_E_126	2	()()((()[)())(()()[)()](()(])()())	()()(((()[)(())))(((())(())[[))(())]](()((((]))))(())())	([)([)](])	No	CRW	bpRNA_CRW_54747
+Hildenbrandia rubra	543	261	282	Y	1	Group I Introns	CRW_GII_E_127	1	()(()())()((()())()[)()](()()())	()(()())()(((((((((()))()))))))((()))[[)()]](()((()))(()))	([)]	No	CRW	bpRNA_CRW_54748
+Porphyra leucosticta	605	363	242	Y	1	Group I Introns	CRW_GII_E_128	1	()((()((()())()))()[)()](()()())	()((((()(((((()()))()))))))(((())))[[)()]]((())(())())	([)]	No	CRW	bpRNA_CRW_54749
+Tetrahymena thermophila	506	232	274	Y	1	Group I Introns	CRW_GII_E_129	1	()()()((()())()[)()](()()())	()()(())((((((((()())))))))((()))[[)()]](()(())())	([)]	No	CRW	bpRNA_CRW_54750
+Tetrahymena thermophila	506	232	274	Y	1	Group I Introns	CRW_GII_E_130	1	()()()((()())()[)()](()()())	()()(())((((((((()())))))))((()))[[)()]](()(())())	([)]	No	CRW	bpRNA_CRW_55598
+Enterobacteria phage U5	206	112	94	Y	1	Group I Introns	RFAM_GII_V_131	1	()(()()[)()]()	()(((())(((())))[[))()]]()	([)]	No	RFAM	bpRNA_RFAM_4614
+Marchantia polymorpha (liverwort)	299	193	106	Y	1	Group I Introns	RFAM_GII_E_132	1	()()(()()[)()]()	(())()(((())(((())))[[))()]]()	([)]	No	RFAM	bpRNA_RFAM_4615
+Nicotiana tabacum (common tobacco)	488	370	118	Y	1	Group I Introns	RFAM_GII_E_133	1	()()(()()[)()]()	(())()(((())((()))[[))()]]()	([)]	No	RFAM	bpRNA_RFAM_4616
+Vicia faba (fava bean)	436	318	118	Y	1	Group I Introns	RFAM_GII_E_134	1	()()(()()[)()]()	(())()(((())((()))[[))()]]()	([)]	No	RFAM	bpRNA_RFAM_4617
+Pneumocystis carinii	387	265	122	Y	1	Group I Introns	RFAM_GII_E_135	1	()()(()()[)()]()	()()(((())((()))[[))()]]()	([)]	No	RFAM	bpRNA_RFAM_4618
+Zea mays	443	325	118	Y	1	Group I Introns	RFAM_GII_E_136	1	()()(()()[)()]()	(())()(((())((()))[[))()]]()	([)]	No	RFAM	bpRNA_RFAM_4619
+Tetrahymena thermophila	342	220	122	Y	1	Group I Introns	RFAM_GII_E_137	1	()()(()()[)()]()	()()((((()))((()))[[))()]]()	([)]	No	RFAM	bpRNA_RFAM_4620
+Tetrahymena hyperangularis	344	222	122	Y	1	Group I Introns	RFAM_GII_E_138	1	()()(()()[)()]()	()()((((()))((()))[[))()]]()	([)]	No	RFAM	bpRNA_RFAM_4621
+Chlamydomonas moewusii	358	246	112	Y	1	Group I Introns	RFAM_GII_E_139	1	()()(()()[)()]()	(())(())(((())((((()))))[[))()]]()	([)]	No	RFAM	bpRNA_RFAM_4622
+Chlamydomonas moewusii	419	299	120	Y	1	Group I Introns	RFAM_GII_E_140	1	()()(()()[)()]()	()(())((((()))((()))[[))()]]()	([)]	No	RFAM	bpRNA_RFAM_4623
+Chlamydomonas moewusii	377	267	110	Y	1	Group I Introns	RFAM_GII_E_141	1	()()(()()[)()]()	(())(())((((()))(((())))[[))()]]()	([)]	No	RFAM	bpRNA_RFAM_4624
+Chlamydomonas moewusii	279	167	112	Y	1	Group I Introns	RFAM_GII_E_142	1	()()(()()[)()]()	(())(())(((())(((())))[[))()]]()	([)]	No	RFAM	bpRNA_RFAM_4625

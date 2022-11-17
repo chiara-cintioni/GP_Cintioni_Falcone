@@ -28,10 +28,10 @@ class RnaObject:
                 self.s_len = element
                 cont += 1
             elif cont == 2:
-                self.num_weak_bonds = element
+                self.num_decoupled = element
                 cont += 1
             elif cont == 3:
-                self.num_decoupled = element
+                self.num_weak_bonds = element
                 cont += 1
             elif cont == 4:
                 self.pseudo_knotted = str(element).strip()
@@ -157,6 +157,23 @@ class RnaObject:
 
 
     def add_accession_number(self):
+        dir_path = "files/ct_files"
+        benchmark_file = self.benchmark_id.strip() + ".ct"
+        for file_to_read in os.listdir(dir_path):
+            if file_to_read == benchmark_file:
+                file_path = os.path.join(dir_path, benchmark_file)
+                if os.path.isfile(file_path):
+                    file_to_read = open(file_path,"r")
+                    for line in file_to_read:
+                        if line.startswith("# Original Source:"):
+                            line = line.split(sep="; ")
+                            acc_num = line[-1].split(sep=":")[-1].split(sep=";")[0]
+                            self.accession_number = acc_num
+                            return 0
+        return -1
+
+
+    def add_accession_number_old(self):
         dir_path = "files/benchmark_db_files"
         benchmark_file = self.benchmark_id.strip() + ".db"
         for file_to_read in os.listdir(dir_path):
@@ -169,23 +186,4 @@ class RnaObject:
                             self.accession_number = line.strip().split(sep=": ")[1]
                             return 0
         return -1
-
-    """
-    def add_strain(self):
-        dir_path = "files/benchmark_db_files"
-        benchmark_file = self.benchmark_id.strip() + ".db"
-        for file_to_read in os.listdir(dir_path):
-            if file_to_read == benchmark_file:
-                file_path = os.path.join(dir_path, benchmark_file)
-                if os.path.isfile(file_path):
-                    file_to_read = open(file_path,"r")
-                    for line in file_to_read:
-                        line = line.strip()
-                        if line.startswith("G") or line.startswith("C") or line.startswith("U") or line.startswith("A") or line.startswith("N"):
-                            self.strain = self.strain + line
-                            return self.strain
-        self.strain = "--"
-        return self.strain
-    """
-
 

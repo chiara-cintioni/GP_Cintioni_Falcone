@@ -4,7 +4,7 @@ import mongo_services
 
 
 def read_files():
-    dir_path = input("Insert the path of the directory that contains ONLY the csv files: ")
+    dir_path = input("Insert the path of the directory that contains ONLY the txt files: ")
     for file_to_read in os.listdir(dir_path):
         file_path = os.path.join(dir_path, file_to_read)
         if os.path.isfile(file_path):
