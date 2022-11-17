@@ -2,16 +2,16 @@
 import io
 import json
 import os
+import tempfile
 import time
 import zipfile
 
 import pandas
 from bson import json_util
 from flask import Flask, render_template, request, send_file
-from pandas.io.json import json_normalize
-from pip._internal.utils import datetime
+from pandas import json_normalize
 from pymongo import MongoClient
-
+import csv
 import search_script
 
 # usiamo l'oggetto Flask per creare l'istanza della nostra app Flask con il nome app.
@@ -31,11 +31,12 @@ app.config[
 app.config[
     "DB_FILES_NH"] = "C:\\Users\\Chiara\\OneDrive\\Desktop\\GP-Master\\GP_DA_GIT\\GroupProject-master\\RIBOflaskapp\\static\\client\\db_nH_file"
 
+
 # ora che abbiamo creato l'app, la useremo per gestire le richieste HTTP che riceviamo.
 
-client = MongoClient('mongodb+srv://DeniseFalcone:Giappone4ever@cluster0.yelotpf.mongodb.net/test', 27017)
+#client = MongoClient('mongodb+srv://DeniseFalcone:Giappone4ever@cluster0.yelotpf.mongodb.net/test', 27017)
 # db = client.RIBOdb
-# client = MongoClient('localhost')
+client = MongoClient('localhost')
 db = client.RIBOdb
 collection = db.rna_sequences
 
@@ -47,8 +48,7 @@ def search():
 
 @app.route('/search/res/', methods=['GET', 'POST'])
 def search_result():
-    # This is a conditional statement. It checks if the request method is POST.
-    if request.method == 'POST':
+      if request.method == 'POST':
         org_name = request.form['Organism name']
         from_length = request.form['Length_from']
         to_length = request.form['Length_to']
@@ -99,7 +99,6 @@ def search_result():
         result_taxonomy = search_script.search_taxonomy(taxonomy, result_benchmark)
         result = result_taxonomy.find()
         return render_template("search_results.html", result_list=result)
-    return render_template('search_results.html')
 
 
 @app.route('/download_files_csv/<filenames>/<taxonomy>', methods=['GET', 'POST'])
@@ -111,37 +110,32 @@ def download(filenames, taxonomy):
         for filename in filenames:
             if filename != '' and taxonomy[0] != '':
                 search_script.get_file_with_one_taxonomy(filename, taxonomy[0])
-        # make an API call to the MongoDB server
-        mongo_docs = db.get_collection("temp").find()
-        # Convert the mongo docs to a DataFrame
-    #OPZIONE 1: TAXON SEPARATI MA SALTA L'ORDINE CORRETTE DELLE COLONNE
-        #sanitized = json.loads(json_util.dumps(mongo_docs))
-        #normalized = json_normalize(sanitized)
-        #docs = pandas.DataFrame(normalized)
-    #OPZIONE 2: STRINGA TAXONOMY TUTTA INSIEME
-        docs = pandas.DataFrame(mongo_docs)
-        # Discard the Mongo ID for the documents
-        docs.pop("_id")
-        # compute the output file directory and name
-        output_dir = 'C:\\Users\\Chiara\\Downloads'
-        output_file = os.path.join(output_dir, 'Result_db.csv')
-        docs.to_csv(output_file, ",", index=False)  # CSV delimited by commas
-        return send_file(output_file, as_attachment=True, download_name='Result2.csv')
-    return render_template('search_results.html')
+        mongo_docs = db.get_collection("temp").find({},{'_id':False})
+        sanitized = json.loads(json_util.dumps(mongo_docs))
+        normalized = json_normalize(sanitized)
+        docs = pandas.DataFrame(normalized)
+        '''
+        Consider using os.path.join(tempfile.gettempdir(), os.urandom(24).hex()) instead. 
+        It's reliable, cross-platform, and the only caveat is that it doesn't work on FAT partitions. 
+        NamedTemporaryFile has a number of issues, not the least of which is that it can fail to create files because of a permission error,
+        fail to detect the permission error, and then loop millions of times, hanging your program and your filesystem.
+        '''
+        temp = os.path.join(tempfile.gettempdir(), os.urandom(24).hex())
+        print("temp: "+temp)
+        docs.to_csv(temp, sep=',', index=False)
+        return send_file(temp, as_attachment=True, download_name='Result2.csv')
+
 
 
 @app.route('/download_files/<filenames>/<formats>', methods=['GET', 'POST'])
 def test(filenames, formats):
     if request.method == 'GET':
-        print("url: " + request.url)
         memory_file = io.BytesIO()
         with zipfile.ZipFile(memory_file, 'w') as zf:
             filenames = filenames.split(sep=',')
             formats = formats.split(sep=',')
             for f in formats:
-                print("f: " + f)
                 path = return_format(f)
-                print("path: " + path)
                 if path != '':
                     for file in filenames:
                         if file != '':
@@ -160,8 +154,8 @@ def test(filenames, formats):
                                     zf.writestr(data, long_line)
                                     break
         memory_file.seek(0)
+        search_result()
         return send_file(memory_file, as_attachment=True, download_name='files.zip')
-    return render_template('search_results.html')
 
 
 def return_format(f):
