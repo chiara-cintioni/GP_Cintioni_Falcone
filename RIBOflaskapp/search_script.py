@@ -633,21 +633,27 @@ def get_file_with_one_taxonomy(filename, taxonomy):
     collection = db.get_collection("rna_sequences")
     string_taxonomy = 'Taxonomy.'+taxonomy+'.Classified'
     result = collection.aggregate([
-        {
-            '$match': {
-                'Benchmark ID': filename
-            }
-        }, {
+            {
+                '$match': {
+                    'Benchmark ID': filename
+                }
+            }, {
             '$unwind': {
                 'path': '$Taxonomy',
                 'preserveNullAndEmptyArrays': True
             }
         }, {
             '$match': {
-                string_taxonomy: 'Yes'
-            }
-        },
-        {
+                '$or': [
+                    {
+                        string_taxonomy: 'No'
+                    }, {
+                        string_taxonomy: 'Yes'
+                    }
+                ]
+            },
+
+        }, {
             '$merge': {
                 'into': 'temp',
                 'on': '_id',

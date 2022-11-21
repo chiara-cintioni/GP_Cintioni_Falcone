@@ -72,6 +72,35 @@ nav ul li a{
     display: none;
 }
 
+#search_table {
+    border: 2px solid #1b3b5d;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#search_table td{
+    font-size: 17px;
+    padding: 7px 11px;
+}
+
+#search_table td:nth-child(2), #search_table td:nth-child(4){
+    background-color:#E0EAF6;;
+    width: 1px;
+    white-space: nowrap;
+}
+
+#search_table td:nth-child(1), #search_table td:nth-child(3){
+    background-color:#D0E0F1;
+    width: 1px;
+    white-space: nowrap;
+}
+
+#search_button_div{
+    text-align: center;
+    padding: 50px;
+    font-size: 20px;
+
+}
 
 @media (max-width: 958px){
     label.logo{

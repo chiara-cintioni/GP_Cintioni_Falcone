@@ -6,18 +6,20 @@ import tempfile
 import time
 import zipfile
 
-import pandas
+
 from bson import json_util
 from flask import Flask, render_template, request, send_file
+import pandas
 from pandas import json_normalize
 from pymongo import MongoClient
-import csv
+
 import search_script
 
 # usiamo l'oggetto Flask per creare l'istanza della nostra app Flask con il nome app.
 # __name__ è il nome del modulo python corrente. Usato per dire all'app dove si trova. Serve perché Flask definisce dei path dietro le quinte.
 app = Flask(__name__)
 
+#per ubuntu per prendere i file : /var/www/gci/Flask_App/RIBOflaskapp/static/client/nomefile
 app.config[
     "DB_FILES"] = "C:\\Users\\Chiara\\OneDrive\\Desktop\\GP-Master\\GP_DA_GIT\\GroupProject-master\\RIBOflaskapp\\static\\client\\db_file"
 app.config[
@@ -35,7 +37,6 @@ app.config[
 # ora che abbiamo creato l'app, la useremo per gestire le richieste HTTP che riceviamo.
 
 #client = MongoClient('mongodb+srv://DeniseFalcone:Giappone4ever@cluster0.yelotpf.mongodb.net/test', 27017)
-# db = client.RIBOdb
 client = MongoClient('localhost')
 db = client.RIBOdb
 collection = db.rna_sequences
@@ -159,27 +160,26 @@ def test(filenames, formats):
 
 
 def return_format(f):
-    match f:
-        case '.db':
-            path = app.config['DB_FILES']
-            return path
-        case '.ct':
-            path = app.config['CT_FILES']
-            return path
-        case '.bpseq':
-            path = app.config['BPSEQ_FILES']
-            return path
-        case 'nH.db':
-            path = app.config['DB_FILES_NH']
-            return path
-        case 'nH.ct':
-            path = app.config['CT_FILES_MH']
-            return path
-        case 'nH.bpseq':
-            path = app.config['BPSEQ_FILES_NH']
-            return path
-        case '':
-            path = ''
+    if f =='.db':
+        path = app.config['DB_FILES']
+        return path
+    elif f == '.ct':
+        path = app.config['CT_FILES']
+        return path
+    elif f == '.bpseq':
+        path = app.config['BPSEQ_FILES']
+        return path
+    elif f =='nH.db':
+        path = app.config['DB_FILES_NH']
+        return path
+    elif f== 'nH.ct':
+        path = app.config['CT_FILES_MH']
+        return path
+    elif f=='nH.bpseq':
+        path = app.config['BPSEQ_FILES_NH']
+        return path
+    else :
+        path = ''
     return path
 
 

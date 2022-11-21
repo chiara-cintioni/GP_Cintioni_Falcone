@@ -1,13 +1,3 @@
-/* NAVIGATION BAR PROVA
-let menuOpenBtn = document.querySelector(".navbar .fa-bars");
-let closeOpenBtn = document.querySelector(".navbar .fa-times");
-let navLinks = document.querySelector(".nav-links");
-
-menuOpenBtn.addEventListener("click", ()=>{
-    navLinks.style.left= "0";
-})
-*/
-
 
 function check_taxon_rank(rank){
     var value = rank.value;
@@ -95,16 +85,6 @@ function get_all_ref_ids() {
     return ref_id_string;
 }
 
-/*
-function download() {
-    var content = get_table_header().concat("\n", get_data_rows())
-    var blob = new Blob(content, {
-        type: "text/plain;charset=utf-8"
-    });
-    saveAs(blob, "search-result.csv");
-}
-*/
-
 function check_format_dl(){
     var check_buttons = document.getElementsByClassName("check_button_format")
     var result = '';
@@ -127,6 +107,7 @@ function check_taxonomy_dl(){
     return  result;
 }
 
+
 function download_csv_from_db() {
     var all_ref_id = get_all_ref_ids();
     var taxonomy = check_taxonomy_dl();
@@ -139,7 +120,6 @@ function download_csv_from_db() {
         },
         success: function(data) {
             saveAs(data, "rna_sequences.csv");
-
         }
     });
 }
@@ -162,50 +142,31 @@ function download_file_from_db() {
 }
 
 
-/*
-function download_file_from_db() {
-    var all_ref_id = get_all_ref_ids();
-    var formats = check_format_dl();
-    var url = '/download_files/' + all_ref_id +'/'+ formats;
-    var xhr = new XMLHttpRequest();
-    xhr.overrideMimeType('application/zip');
-    xhr.onprogress = function (e){
-           
-            var progr = value[0] + value[1];
-            $('#progress').css('width', progr + '%').attr('aria-valuenow', progr);
-        };
-    xhr.onload = function (){
-        $('#progress').css('width', '100%').attr('aria-valuenow', 100);
-        var res_array = new Uint8Array (xhr.response);
-        var blob = new Blob ([res_array], {type: 'application/zip'});
-        saveAs(blob, "test.zip");
-    }
-    xhr.open('GET', url, true);
-    xhr.responseType='arraybuffer';
-    xhr.send();
-}
-*/
-
-
-
-
-function redirect_to_download() {
-    var content = get_data_rows();
-    for (var i = 0; i < content.length; i++) {
-        localStorage.setItem(i.toString(), content[i].toString());
+function final_download(){
+    if (confirm ('Are you sure you want to download these files? \n' +
+        'N.B. Please consider that if you are downloading a lot of files it might take some time.')) {
+        download_csv_from_db();
+        download_file_from_db();
     }
 }
+
+
+
 
 function showHideRow(row) {
     $("#" + row).toggle();
 }
 
 
+/**
+ * It checks if the taxonomy is classified, and if it is, it calls the function to show the taxonomy
+ * @param bench_id - the id of the bench
+ * @returns The taxonomy of the sequence.
+ */
 function show_taxonomy(bench_id){
     if(document.getElementById("silva_taxon"+bench_id)){
         return;
     }
-    if (document.getElementById("silva_taxonomy" + bench_id))
     if (document.getElementById("silva_taxonomy" + bench_id).innerHTML.toString().split("'")[3] === 'Yes'){
         show_taxonomy_silva(bench_id);
     }else{
