@@ -1,8 +1,8 @@
 from pymongo import MongoClient
 
 #client = MongoClient('mongodb://localhost:27017', 27017)
-#client = MongoClient('mongodb+srv://DeniseFalcone:Giappone4ever@cluster0.yelotpf.mongodb.net/test', 27017)
-client = MongoClient('localhost')
+client = MongoClient('mongodb+srv://DeniseFalcone:Giappone4ever@cluster0.yelotpf.mongodb.net/test', 27017)
+#client = MongoClient('localhost')
 db = client.RIBOdb
 #db = client.RIBO_flask_db
 
@@ -666,3 +666,34 @@ def get_file_with_one_taxonomy(filename, taxonomy):
     return res_col
 
 
+def search_db_name (db_name,collection):
+    if db_name == '':
+        return collection
+    result = collection.aggregate([
+        {
+            '$match': {
+                'Reference database': db_name
+            }
+        },
+        {
+            '$out': 'temp'
+        }
+    ])
+    res_col = db.temp
+    return res_col
+
+def search_is_validated (is_validated, collection):
+    if is_validated == '':
+        return collection
+    result = collection.aggregate([
+        {
+            '$match': {
+                'Is Validated': is_validated
+            }
+        },
+        {
+            '$out': 'temp'
+        }
+    ])
+    res_col = db.temp
+    return res_col

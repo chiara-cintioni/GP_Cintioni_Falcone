@@ -2,9 +2,33 @@
     font-family: montserrat;
 }
 
+
 h1{
     text-transform: uppercase;
+    text-align: center;
+    font-size: xxx-large;
+    margin-top: -35px;
 }
+
+h1 {
+    margin-top: -50px;
+  font-size: 60px;
+  text-transform: uppercase;
+  font-family: 'Gambetta', serif;
+  letter-spacing: -3px;
+  transition: 700ms ease;
+  font-variation-settings: "wght" 311;
+  color: darkred;
+  outline: none;
+  text-align: center;
+}
+
+h1:hover {
+  font-variation-settings: "wght" 582;
+  letter-spacing: 1px;
+}
+
+
 
 body{
     background: #eff5fb;
@@ -74,13 +98,21 @@ nav ul li a{
 
 #search_table {
     border: 2px solid #1b3b5d;
+    margin-top: 50px;
     margin-left: auto;
     margin-right: auto;
+    width: 100%;
 }
 
+input#leng_f, input#leng_t, input#weak_f, input#weak_t {
+    width: 122px;
+}
+
+
 #search_table td{
-    font-size: 17px;
+    font-size: 20px;
     padding: 7px 11px;
+    height: 55px;
 }
 
 #search_table td:nth-child(2), #search_table td:nth-child(4){
@@ -94,12 +126,34 @@ nav ul li a{
     width: 1px;
     white-space: nowrap;
 }
+button{
+    background: #eff5fb;
+    border-color: #1b3b5d;
+}
+
+button:hover{
+   /* background-color: #b0cbe8;
+    transition: .5s;*/
+    border: 2px solid white;
+    color: white;
+    background:  #1b3b5d ;
+    box-shadow: 10px 10px 0px #3778be;
+    top: -5px;
+    left:-5px;
+}
+#s_tutorial_btn{
+    font-size: 20px;
+}
 
 #search_button_div{
     text-align: center;
-    padding: 50px;
-    font-size: 20px;
+    padding: 40px;
+    font-size: 30px;
+}
 
+#search_button, #reset_button{
+    width: 145px;
+    margin-right: 30px;
 }
 
 @media (max-width: 958px){
@@ -218,14 +272,7 @@ nav ul li a i{
   white-space: nowrap;
 }
 
-button{
-    background: #eff5fb;
-}
 
-button:hover{
-    background-color: #b0cbe8;
-    transition: .5s;
-}
 
 /* Tabella che si espande*/
 

@@ -36,8 +36,8 @@ app.config[
 
 # ora che abbiamo creato l'app, la useremo per gestire le richieste HTTP che riceviamo.
 
-#client = MongoClient('mongodb+srv://DeniseFalcone:Giappone4ever@cluster0.yelotpf.mongodb.net/test', 27017)
-client = MongoClient('localhost')
+client = MongoClient('mongodb+srv://DeniseFalcone:Giappone4ever@cluster0.yelotpf.mongodb.net/test', 27017)
+#client = MongoClient('localhost')
 db = client.RIBOdb
 collection = db.rna_sequences
 
@@ -82,6 +82,8 @@ def search_result():
         shape = request.form['Shape']
         rank = request.form['Taxonomy_rank']
         taxon = request.form['rank_value']
+        db_name = request.form['Database']
+        is_val = request.form['Is Validated']
         # taxonomy rank deve essere fatto come primo controllo di campo ricerca: il problema sta nella collection temp che potrebbe essere cancellata ce semo capiti
         result_taxonomy_rank = search_script.search_rank(taxonomy, rank, taxon, collection)
         result_org_name = search_script.search_org_name(org_name, result_taxonomy_rank)
@@ -98,7 +100,9 @@ def search_result():
         result_shape = search_script.search_shape(shape, result_core_plus)
         result_benchmark = search_script.search_benchmark(benchmark, result_shape)
         result_taxonomy = search_script.search_taxonomy(taxonomy, result_benchmark)
-        result = result_taxonomy.find()
+        result_db_name = search_script.search_db_name(db_name, result_taxonomy)
+        result_is_validated = search_script.search_is_validated(is_val, result_db_name)
+        result = result_is_validated.find()
         return render_template("search_results.html", result_list=result)
 
 
