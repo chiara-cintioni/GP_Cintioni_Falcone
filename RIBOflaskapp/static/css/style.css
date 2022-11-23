@@ -11,8 +11,8 @@ h1{
 }
 
 h1 {
-    margin-top: -50px;
-  font-size: 60px;
+    margin-top: -60px;
+  font-size: 40px;
   text-transform: uppercase;
   font-family: 'Gambetta', serif;
   letter-spacing: -3px;
@@ -98,10 +98,10 @@ nav ul li a{
 
 #search_table {
     border: 2px solid #1b3b5d;
-    margin-top: 50px;
+    margin-top: 40px;
     margin-left: auto;
     margin-right: auto;
-    width: 100%;
+    width: 80%;
 }
 
 input#leng_f, input#leng_t, input#weak_f, input#weak_t {
@@ -110,9 +110,9 @@ input#leng_f, input#leng_t, input#weak_f, input#weak_t {
 
 
 #search_table td{
-    font-size: 20px;
+    font-size: 15px;
     padding: 7px 11px;
-    height: 55px;
+    height: 40px;
 }
 
 #search_table td:nth-child(2), #search_table td:nth-child(4){
@@ -126,6 +126,8 @@ input#leng_f, input#leng_t, input#weak_f, input#weak_t {
     width: 1px;
     white-space: nowrap;
 }
+
+
 button{
     background: #eff5fb;
     border-color: #1b3b5d;
@@ -141,20 +143,19 @@ button:hover{
     top: -5px;
     left:-5px;
 }
-#s_tutorial_btn{
-    font-size: 20px;
-}
 
 #search_button_div{
     text-align: center;
     padding: 40px;
-    font-size: 30px;
+    font-size: 18px;
 }
 
-#search_button, #reset_button{
-    width: 145px;
+#search_button, #reset_button, #s_tutorial_btn{
+    width: 125px;
     margin-right: 30px;
+    font-size: 18px;
 }
+
 
 @media (max-width: 958px){
     label.logo{
@@ -277,32 +278,82 @@ nav ul li a i{
 /* Tabella che si espande*/
 
 
-        .container_table {
-            margin: 0 auto;
-            padding: 0px;
-            text-align: center;
-            width: 995px;
-        }
+.container_table {
+    margin:16px;
+    padding: 32px;
+    text-align: center;
+
+   /* width: 995px;*/
+}
+
+#selection_download{
+    display: inline-block;
+    padding: 16px 16px;
+    border: solid black;
+    vertical-align: top;
+    margin-left: 25px;
+    position: fixed;
+
+}
+
+#table_result_div{
+    display: inline-block;
+    padding: 16px 16px;
+    border: solid black;
+}
 
 
+#result_table {
+    width: 500px;
+    text-align: left;
+    border-collapse: collapse;
+    color: #2E2E2E;
+    border: #A4A4A4;
+}
 
-        #result_table {
-            width: 500px;
-            text-align: left;
-            border-collapse: collapse;
-            color: #2E2E2E;
-            border: #A4A4A4;
-        }
+#result_table tr:hover {
+    background-color: #b0cbe8;
+    cursor: pointer;
 
-        #result_table tr:hover {
-            background-color: #b0cbe8;
-            cursor: pointer;
+}
 
-        }
+#result_table .hidden_row {
+    display: none;
+}
 
-        #result_table .hidden_row {
-            display: none;
-        }
+.modal-body{
+    text-align: initial;
+    font-size: 18px;
+}
+.modal-title, #taxonomies{
+    font-weight: bold;
+    font-size: 19px;
+}
+
+#taxa_container {
+    display: grid;
+    grid-template-areas: 'header header header header header';
+}
+
+.taxa_div{
+    text-align: center;
+    border: 1px solid black;
+    padding: 20px;
+}
+
+#taxa_name {
+    grid-area: header;
+    background-color: #E0EAF6;
+    border: 1px solid black;
+}
+.popover-test{
+    text-decoration: underline;
+    color: #1b3b5d;
+}
+
+.popover-test:hover{
+    cursor: pointer;
+}
 
 /* Pagina download */
 
