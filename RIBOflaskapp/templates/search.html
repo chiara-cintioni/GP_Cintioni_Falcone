@@ -89,6 +89,7 @@
                         <option value="5S">5S</option>
                         <option value="16S">16S</option>
                         <option value="23S">23S</option>
+                        <option value="Group I Introns">Group I Introns</option>
                         <option value="Other">Others</option>
                     </select></td>
                     <td><a>Taxon:</a></td>
@@ -99,7 +100,7 @@
             <div id="search_button_div">
                 <button type="submit" id="search_button">Search</button>
                 <button type="Reset" value="Reset" id="reset_button">Reset</button>
-                <button onclick="location.href='{{ url_for('s_tutorial') }}'" type="button"> Search Tutorial </button>
+                <button onclick="location.href='{{ url_for('s_tutorial') }}'" type="button" id="s_tutorial_btn"> Search Tutorial </button>
             </div>
         </form>
     </div>

@@ -4,7 +4,7 @@
 
 {% block content %}
 <form action="/search/">
-    <button type="submit"> Previous page </button>
+    <button type="submit" id="dl_prev"> Previous page </button>
 </form>
 <h1>Result</h1>
 <div class="container_table">
@@ -12,7 +12,7 @@
         <table class="result_table" id="result_table">
         <thead>
              <tr>
-                 <th><input id="check_all" type="checkbox"></th>
+                 <th><input id="check_all" class="td_check_btn" type="checkbox"></th>
                  <th>Organism name</th>
                  <th>Reference ID</th>
                  <th>Accession Number</th>
@@ -23,7 +23,7 @@
         <tbody class="result_tbody">
             {% for element in result_list %}
             <tr id="table_row" >
-                <td>
+                <td class="td_check_btn">
                     <input onclick="show_taxonomy('{{ element['Benchmark ID'] }}')" class="check_button" type="checkbox" name="id_checkbox" id="{{ element['Benchmark ID'] }}">
                 </td>
                 <td >
@@ -38,8 +38,8 @@
                 <td>
                     {{ element['Rna Type'] }}
                 </td>
-                <td type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{ element['Benchmark ID'] }}" onclick="show_taxonomy('{{ element['Benchmark ID'] }}')">
-                    +
+                <td  class="more_info" data-toggle="modal" data-target="#exampleModal{{ element['Benchmark ID'] }}" onclick="show_taxonomy('{{ element['Benchmark ID'] }}')">
+                   ...
                 </td>
             </tr>
                 <!-- Modal -->
@@ -104,7 +104,9 @@
         </table>
     </div>
     <div id="selection_download">
+        <h3 id="dl_option">Download  options</h3>
         <div id="download_div">
+            <p>Additional files to dowload:</p>
             <input class="check_button_format" type="checkbox" id="bpseq" value=".bpseq">
             <label for="bpseq"> bpseq format</label><br>
             <input class="check_button_format" type="checkbox" id="bpseq_nH" value="nH.bpseq">
@@ -117,10 +119,11 @@
             <label for="db"> db format</label><br>
             <input class="check_button_format" type="checkbox" id="db_nh" value="nH.db">
             <label for="db_nh"> db-nH format</label><br>
-            <button type="button"  id="dl_button" onclick="final_download()">Download</button>
+
             <!--<progress id="progress_bar" value=gino_value max="100" min="0" ></progress>-->
         </div>
         <div id="choose_taxonomy_div">
+            <p>Taxonomy to download with the csv:</p>
             <input type="radio" class="check_button_taxonomy" name="taxonomy_button" id="SILVA" value="SILVA">
             <label for="SILVA"> SILVA taxonomy</label><br>
             <input type="radio" class="check_button_taxonomy" name="taxonomy_button" id="ENA" value="ENA" checked>
@@ -132,6 +135,7 @@
             <input type="radio" class="check_button_taxonomy" name ="taxonomy_button" id="GTDB" value="GTDB">
             <label for="GTDB"> GTDB Taxonomy</label><br>
         </div>
+        <button type="button"  id="dl_button" onclick="final_download()">Download</button>
     </div>
 </div>
     <script>

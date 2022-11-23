@@ -26,12 +26,32 @@ h1 {
 h1:hover {
   font-variation-settings: "wght" 582;
   letter-spacing: 1px;
+  cursor: default;
+}
+
+#dl_option {
+    margin-top: -60px;
+  font-size: 20px;
+  text-transform: uppercase;
+  font-family: 'Gambetta', serif;
+  letter-spacing: -1px;
+  transition: 700ms ease;
+  font-variation-settings: "wght" 311;
+  color: darkred;
+  outline: none;
+  text-align: center;
+}
+
+#dl_option:hover {
+  font-variation-settings: "wght" 582;
+  letter-spacing: 1px;
+    cursor: default;
 }
 
 
-
 body{
-    background: #eff5fb;
+   background: white;
+
     margin: 0;
     padding: 0;
 }
@@ -49,14 +69,14 @@ label.logo{
     line-height: 80px;
     padding: 10px 30px;
     position: absolute;
-    z-index: 1;
+    z-index: 2;
 }
 
 label.text-logo{
     line-height: 80px;
     margin-left: 130px;
     position: absolute;
-    z-index: 1;
+    z-index: 2;
 }
 
 nav ul{
@@ -72,6 +92,11 @@ nav ul li{
     display: inline-block;
 }
 
+
+.td_check_btn{
+  width: 30px;
+}
+
 nav ul li a{
     display: block;
     padding: 0 15px;
@@ -81,6 +106,11 @@ nav ul li a{
     text-decoration: none;
     line-height: 80px;
     font-size: 16px;
+    z-index: 1;
+}
+
+nav ul ul li{
+    z-index: 1;
 }
 
 .checkbtn{
@@ -128,20 +158,24 @@ input#leng_f, input#leng_t, input#weak_f, input#weak_t {
 }
 
 
-button{
+#search_button, #reset_button, #s_tutorial_btn{
     background: #eff5fb;
     border-color: #1b3b5d;
 }
 
-button:hover{
-   /* background-color: #b0cbe8;
-    transition: .5s;*/
+#search_button:hover, #reset_button:hover, #s_tutorial_btn:hover, #dl_button:hover, #dl_prev:hover{
     border: 2px solid white;
     color: white;
     background:  #1b3b5d ;
     box-shadow: 10px 10px 0px #3778be;
     top: -5px;
     left:-5px;
+}
+.more_info{
+    width: auto;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 20px;
 }
 
 #search_button_div{
@@ -150,11 +184,17 @@ button:hover{
     font-size: 18px;
 }
 
-#search_button, #reset_button, #s_tutorial_btn{
+#search_button, #reset_button{
     width: 125px;
     margin-right: 30px;
     font-size: 18px;
 }
+
+ #s_tutorial_btn{
+    width: 135px;
+    margin-right: 30px;
+    font-size: 18px;
+ }
 
 
 @media (max-width: 958px){
@@ -185,21 +225,25 @@ button:hover{
         background: #295a8e;
         margin: 50px 0;
         line-height: 30px;
+        z-index: 1;
     }
     nav ul li a{
         font-size: 20px;
+        z-index: 1;
     }
     nav ul ul li a{
         display: block;
         background: #3778be;
         margin: 50px 0;
         line-height: 30px;
+        z-index: 1;
     }
     nav ul ul ul li a{
         display: block;
         background: #3778be;
         margin: 50px 0;
         line-height: 30px;
+        z-index: 1;
     }
     a.active{
         background: none;
@@ -254,7 +298,6 @@ nav ul li a i{
 }
 
 .result_table {
-  border: 1px solid black;
   white-space: nowrap;
 }
 
@@ -262,6 +305,7 @@ nav ul li a i{
   border-collapse: collapse;
   width: 100%;
   border: 1px solid black;
+  text-align: center;
 }
 
 .result_table tr {
@@ -271,6 +315,7 @@ nav ul li a i{
 .result_table tr td{
   border: 1px solid black;
   white-space: nowrap;
+  text-align: center;
 }
 
 
@@ -282,24 +327,23 @@ nav ul li a i{
     margin:16px;
     padding: 32px;
     text-align: center;
-
-   /* width: 995px;*/
 }
 
 #selection_download{
     display: inline-block;
     padding: 16px 16px;
-    border: solid black;
     vertical-align: top;
-    margin-left: 25px;
+    margin-left: 75px;
     position: fixed;
-
+    height: 500px;
+    width: 335px;
 }
 
 #table_result_div{
     display: inline-block;
     padding: 16px 16px;
-    border: solid black;
+    margin-top: -25px;
+    margin-left: -315px;
 }
 
 
@@ -358,7 +402,24 @@ nav ul li a i{
 /* Pagina download */
 
 #download_div {
-    text-align: right;
+    text-align: center;
+    border: 3px solid black;
+    border-radius: 15px;
+    color: black;
+}
+
+#choose_taxonomy_div{
+    text-align: center;
+    border: 3px solid black;
+    border-radius: 15px;
+    margin-top: 20px;
+    color: black;
+}
+
+#dl_button{
+    border-radius: 15px;
+    margin-top: 20px;
+    font-size: 20px;
 }
 
 #output {
