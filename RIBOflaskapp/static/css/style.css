@@ -2,7 +2,6 @@
     font-family: montserrat;
 }
 
-
 h1{
     text-transform: uppercase;
     text-align: center;
@@ -11,7 +10,7 @@ h1{
 }
 
 h1 {
-    margin-top: -60px;
+    margin-top: -75px;
   font-size: 40px;
   text-transform: uppercase;
   font-family: 'Gambetta', serif;
@@ -30,7 +29,7 @@ h1:hover {
 }
 
 #dl_option {
-    margin-top: -60px;
+  margin-top: 15px;
   font-size: 20px;
   text-transform: uppercase;
   font-family: 'Gambetta', serif;
@@ -196,13 +195,31 @@ input#leng_f, input#leng_t, input#weak_f, input#weak_t {
     font-size: 18px;
  }
 
-
 @media (max-width: 958px){
     label.logo{
         padding: 0 30px;
     }
     nav ul li a {
         font-size: 16px;
+    }
+    #search_table, #search_table tr, #search_table td{
+        display: block;
+    }
+    #search_table{
+        background: #D0E0F1 ;
+    }
+    #search_table td:nth-child(1), #search_table td:nth-child(3) {
+        background: #D0E0F1 ;
+        white-space: nowrap;
+        width: auto;
+    }
+    #search_table td:nth-child(2), #search_table td:nth-child(4){
+        background-color:#D0E0F1;
+        width: 1px;
+        white-space: nowrap;
+    }
+    #search_button, #reset_button, #s_tutorial_btn{
+        margin: 7px;
     }
 }
 
@@ -255,6 +272,25 @@ input#leng_f, input#leng_t, input#weak_f, input#weak_t {
     }
     #check:checked ~ ul{
         left: 0;
+    }
+
+    #search_table, #search_table tr, #search_table td{
+        display: block;
+    }
+    #search_table{
+        background: #D0E0F1;
+    }
+    #search_table td:nth-child(2), #search_table td:nth-child(4){
+    background-color:#D0E0F1;
+    width: 1px;
+    white-space: nowrap;
+}
+    #search_table td:nth-child(1), #search_table td:nth-child(3){
+        white-space: nowrap;
+        background: #D0E0F1;
+    }
+    #search_button, #reset_button, #s_tutorial_btn{
+        margin: 7px;
     }
 }
 
@@ -319,30 +355,30 @@ nav ul li a i{
 }
 
 
-
 /* Tabella che si espande*/
 
 
 .container_table {
-    margin:16px;
+    margin-left: -100px;
     padding: 32px;
     text-align: center;
 }
 
-#selection_download{
-    display: inline-block;
-    padding: 16px 16px;
-    vertical-align: top;
-    margin-left: 75px;
+#dl_option_div{
+    vertical-align: middle;
+    margin-right: 30px;
     position: fixed;
-    height: 500px;
-    width: 335px;
+    display: inline-block;
 }
+
+#selection_download{
+    display: flex;
+}
+
 
 #table_result_div{
     display: inline-block;
     padding: 16px 16px;
-    margin-top: -25px;
     margin-left: -315px;
 }
 
@@ -399,26 +435,31 @@ nav ul li a i{
     cursor: pointer;
 }
 
-/* Pagina download */
-
 #download_div {
     text-align: center;
     border: 3px solid black;
     border-radius: 15px;
     color: black;
+    margin: 15px;
+    width: 200px;
+}
+
+#search_box{
+    vertical-align: middle;
+    align-items: center;
 }
 
 #choose_taxonomy_div{
     text-align: center;
     border: 3px solid black;
     border-radius: 15px;
-    margin-top: 20px;
+    margin: 15px;
     color: black;
+    width: 202px;
 }
 
 #dl_button{
     border-radius: 15px;
-    margin-top: 20px;
     font-size: 20px;
 }
 

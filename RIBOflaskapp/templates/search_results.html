@@ -103,8 +103,9 @@
             </tbody>
         </table>
     </div>
+<div id="dl_option_div">
+    <h3 id="dl_option">Download options</h3>
     <div id="selection_download">
-        <h3 id="dl_option">Download  options</h3>
         <div id="download_div">
             <p>Additional files to dowload:</p>
             <input class="check_button_format" type="checkbox" id="bpseq" value=".bpseq">
@@ -135,8 +136,10 @@
             <input type="radio" class="check_button_taxonomy" name ="taxonomy_button" id="GTDB" value="GTDB">
             <label for="GTDB"> GTDB Taxonomy</label><br>
         </div>
-        <button type="button"  id="dl_button" onclick="final_download()">Download</button>
     </div>
+    <button type="button"  id="dl_button" onclick="final_download()">Download</button>
+</div>
+
 </div>
     <script>
     $(function() {
@@ -148,7 +151,12 @@
                 $(".check_button").prop("checked", false);
             }
         });
+    })
+</script>
 
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#result_table').DataTable();
     })
 </script>
 {% endblock %}
