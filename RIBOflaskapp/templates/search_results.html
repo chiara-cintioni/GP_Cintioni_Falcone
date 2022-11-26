@@ -29,7 +29,7 @@
                 <td >
                     {{ element['Organism name'] }}
                 </td>
-                <td id="ref_id">
+                <td id="ref_id" class="ref_class">
                     {{ element['Benchmark ID'] }}
                 </td>
                 <td>
@@ -103,6 +103,7 @@
             </tbody>
         </table>
     </div>
+
 <div id="dl_option_div">
     <h3 id="dl_option">Download options</h3>
     <div id="selection_download">
@@ -120,9 +121,9 @@
             <label for="db"> db format</label><br>
             <input class="check_button_format" type="checkbox" id="db_nh" value="nH.db">
             <label for="db_nh"> db-nH format</label><br>
-
             <!--<progress id="progress_bar" value=gino_value max="100" min="0" ></progress>-->
         </div>
+
         <div id="choose_taxonomy_div">
             <p>Taxonomy to download with the csv:</p>
             <input type="radio" class="check_button_taxonomy" name="taxonomy_button" id="SILVA" value="SILVA">
@@ -139,24 +140,46 @@
     </div>
     <button type="button"  id="dl_button" onclick="final_download()">Download</button>
 </div>
-
 </div>
     <script>
-    $(function() {
-        //If check_all checked then check all table rows
-        $("#check_all").on("click", function () {
-            if ($("#check_all").prop("checked")) {
-                $(".check_button").prop("checked", true);
-            } else {
-                $(".check_button").prop("checked", false);
-            }
+    $(document).ready(function () {
+        var table =  $('#result_table').DataTable({
+            pageLength: 10
         });
+        $('#frm_table').on('submit', function (e){
+            var form = this;
+            var params = table.$('input,select,textarea').serializeArray();
+            //var row_sel = table.column(0).checkboxes.selected();
+            $.each(params, function(){
+                if(!$.contains(document, form[this.name])){
+                    $(form).append(
+                        $('<input>')
+                            .attr('type', 'hidden')
+                            .attr('name',this.name)
+                            .val(this.value)
+                    );
+                }
+            });
+        });
+    })
+    </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+      var table =  $('#result_table').DataTable();
+      //Select all function for checkboxes
+      $('#check_all').on('click', function(){
+        var rows = table.rows({ 'search': 'applied' }).nodes();
+        $('input[type="checkbox"]', rows).prop('checked', this.checked);
+      });
+      $('#result_table tbody').on('change', 'input[type="checkbox"]', function(){
+          if(!this.checked){
+             var el = $('#check_all').get(0);
+             if(el && el.checked && ('indeterminate' in el)){
+                el.indeterminate = true;
+             }
+          }
+      });
     })
 </script>
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#result_table').DataTable();
-    })
-</script>
 {% endblock %}

@@ -104,7 +104,6 @@ function check_taxonomy_dl(){
     return  result;
 }
 
-
 function download_csv_from_db() {
     var all_ref_id = get_all_ref_ids();
     var taxonomy = check_taxonomy_dl();
@@ -121,6 +120,23 @@ function download_csv_from_db() {
     });
 }
 
+/*
+function download_csv_from_db() {
+    var all_ref_id = get_all_ref_ids();
+    var taxonomy = check_taxonomy_dl();
+    $.ajax({
+        url: '/download_files_csv/' + all_ref_id +'/'+ taxonomy,
+        type: 'GET',
+        context: document.body,
+        xhrFields:{
+            responseType: 'blob'
+        },
+        success: function(data) {
+            saveAs(data, "rna_sequences.csv");
+        }
+    });
+}
+*/
 
 function download_file_from_db() {
     var all_ref_id = get_all_ref_ids();
