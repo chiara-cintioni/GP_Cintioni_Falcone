@@ -59,6 +59,12 @@ function get_table_header() {
     return ths_array;
 }
 
+
+/**
+ * It returns the reference id of the row if the checkbox is checked, otherwise it returns an empty string
+ * @param row - the row of the table that the user is currently on
+ * @returns The reference id of the row that is selected.
+ */
 function get_reference_id(row){
     var ref_id = row.firstElementChild.nextElementSibling.nextElementSibling;
     var button = row.firstElementChild;
@@ -70,6 +76,24 @@ function get_reference_id(row){
     }
 }
 
+/*
+ORIGINAL
+function get_reference_id(row){
+    var ref_id = row.firstElementChild.nextElementSibling.nextElementSibling;
+    var button = row.firstElementChild;
+    var boolean_button = button.firstElementChild.checked;
+    if (boolean_button === true) {
+        return ref_id.innerText;
+    } else {
+        return '';
+    }
+}
+*/
+function get_all_ref_ids() {
+    return rows_selected;
+}
+/*
+ORIGINAL
 function get_all_ref_ids() {
     var rows = document.getElementsByTagName('tr')
     ref_id_string = '';
@@ -81,7 +105,7 @@ function get_all_ref_ids() {
     }
     return ref_id_string;
 }
-
+*/
 function check_format_dl(){
     var check_buttons = document.getElementsByClassName("check_button_format")
     var result = '';
@@ -103,9 +127,22 @@ function check_taxonomy_dl(){
     }
     return  result;
 }
+/*
+ORIGINAL
+function check_taxonomy_dl(){
+    var check_buttons = document.getElementsByClassName("check_button_taxonomy")
+    var result = '';
+    for(var i = 0; i < check_buttons.length; i++) {
+        if(check_buttons[i].checked === true){
+            result = check_buttons[i].value + "," + result;
+        }
+    }
+    return  result;
+}
+*/
 
 function download_csv_from_db() {
-    var all_ref_id = get_all_ref_ids();
+    var all_ref_id = rows_selected;
     var taxonomy = check_taxonomy_dl();
     $.ajax({
         url: '/download_files_csv/' + all_ref_id +'/'+ taxonomy,
@@ -121,6 +158,7 @@ function download_csv_from_db() {
 }
 
 /*
+ORIGINAL
 function download_csv_from_db() {
     var all_ref_id = get_all_ref_ids();
     var taxonomy = check_taxonomy_dl();
@@ -158,6 +196,7 @@ function download_file_from_db() {
 function final_download(){
     if (confirm ('Are you sure you want to download these files? \n' +
         'N.B. Please consider that if you are downloading a lot of files it might take some time.')) {
+        console.log("sono qui");
         download_csv_from_db();
         download_file_from_db();
     }

@@ -140,30 +140,11 @@
     </div>
     <button type="button"  id="dl_button" onclick="final_download()">Download</button>
 </div>
+<p id="hidden_ref_array" hidden></p>
 </div>
-    <script>
-    $(document).ready(function () {
-        var table =  $('#result_table').DataTable({
-            pageLength: 10
-        });
-        $('#frm_table').on('submit', function (e){
-            var form = this;
-            var params = table.$('input,select,textarea').serializeArray();
-            //var row_sel = table.column(0).checkboxes.selected();
-            $.each(params, function(){
-                if(!$.contains(document, form[this.name])){
-                    $(form).append(
-                        $('<input>')
-                            .attr('type', 'hidden')
-                            .attr('name',this.name)
-                            .val(this.value)
-                    );
-                }
-            });
-        });
-    })
-    </script>
+    
 <script type="text/javascript">
+    var rows_selected = [];
     $(document).ready(function() {
       var table =  $('#result_table').DataTable();
       //Select all function for checkboxes
@@ -179,6 +160,48 @@
              }
           }
       });
+    })
+</script>
+<script>
+    var table =  $('#result_table').DataTable();
+    var rows_selected = [];
+    cont = 0
+    $(document).ready(function() {
+        $('#check_all').on('click', function(e){
+            var data = table.rows().data();
+            if(this.checked){
+                for(var i=0; i<data.length; i++) {
+                    rows_selected[i] = data[i][2];
+                }
+            } else {
+                rows_selected.length = 0;
+                console.log("Array deselezionato", rows_selected);
+            }
+            e.stopPropagation();
+            var node= document.createTextNode(rows_selected);
+            var element = document.getElementById("hidden_ref_array");
+            element.appendChild(node);
+        });
+        $('#result_table tbody').on('click', 'input[type="checkbox"]', function(e){
+            var $row = $(this).closest('tr');
+            var data = table.row($row).data();
+            var ref_id= data[2];
+            if(this.checked){
+                $row.addClass('selected');
+                rows_selected[cont]= ref_id;
+                console.log("cont: "+cont)
+                cont++;
+
+            } else {
+                $row.removeClass('selected');
+                rows_selected[rows_selected.indexOf(ref_id)] = '';
+            }
+            e.stopPropagation();
+            var node= document.createTextNode(rows_selected);
+            var element = document.getElementById("hidden_ref_array");
+            element.appendChild(node);
+        });
+
     })
 </script>
 
