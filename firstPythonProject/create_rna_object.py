@@ -1,5 +1,5 @@
 import os
-
+import re
 import pandas as pd
 # class that creates a RnaObject that contains all the info
 # make it possible to add more taxonomies
@@ -8,7 +8,7 @@ class RnaObject:
     def __init__(self, info):
         self.strain = ''
         self.accession_number = ''
-        elements = info.split(sep="	")
+        elements = re.split(r'\t+',info)
         cont = 0
         self.silva = False
         self.silva_taxonomy = ''
@@ -22,51 +22,54 @@ class RnaObject:
         self.gtdb_taxonomy = ''
         for element in elements:
             if cont == 0:
-                self.organism_name = str(element).strip()
+                self.db_name = str(element).strip()
                 cont += 1
             elif cont == 1:
-                self.s_len = element
+                self.organism_name = str(element).strip()
                 cont += 1
             elif cont == 2:
-                self.num_decoupled = element
+                self.s_len = element
                 cont += 1
             elif cont == 3:
-                self.num_weak_bonds = element
+                self.num_decoupled = element
                 cont += 1
             elif cont == 4:
-                self.pseudo_knotted = str(element).strip()
+                self.num_weak_bonds = element
                 cont += 1
             elif cont == 5:
-                self.pseudo_order = element
+                self.pseudo_knotted = str(element).strip()
                 cont += 1
             elif cont == 6:
-                self.rna_type = str(element).strip()
+                self.pseudo_order = element
                 cont += 1
             elif cont == 7:
-                self.benchmark_id = str(element).strip()
+                self.rna_type = str(element).strip()
                 cont += 1
             elif cont == 8:
-                self.genus = element
+                self.benchmark_id = str(element).strip()
                 cont += 1
             elif cont == 9:
-                self.core = str(element).strip()
+                self.genus = element
                 cont += 1
             elif cont == 10:
-                self.core_plus = str(element).strip()
+                self.core = str(element).strip()
                 cont += 1
             elif cont == 11:
+                self.core_plus = str(element).strip()
+                cont += 1
+            elif cont == 12:
                 self.shape = str(element).strip()
                 if not self.shape:
                     self.shape = "--"
                 cont += 1
-            elif cont == 12:
-                self.is_validated = str(element).strip()
-                cont += 1
             elif cont == 13:
-                self.db_name = str(element).strip()
+                self.is_validated = str(element).strip()
                 cont += 1
             elif cont == 14:
                 self.link_db = str(element).strip()
+                cont += 1
+            if cont == 14:
+                self.link_db = "--"
 
 
 
@@ -85,7 +88,7 @@ class RnaObject:
             self.silva = False
         else:
             self.silva = True
-            self.silva_taxonomy = str(line)
+            self.silva_taxonomy = str(line.values).removesuffix("']]").removeprefix("[['")
 
 
     def add_taxonomy_ena(self):
@@ -105,7 +108,8 @@ class RnaObject:
             self.ena = False
         else:
             self.ena = True
-            self.ena_taxonomy = str(line)
+            self.ena_taxonomy = str(line.values).removesuffix("']]").removeprefix("[['")
+
 
     def add_taxonomy_ltp(self):
         """
@@ -121,7 +125,7 @@ class RnaObject:
             self.ltp = False
         else:
             self.ltp = True
-            self.ltp_taxonomy = str(line)
+            self.ltp_taxonomy = str(line.values).removesuffix("']]").removeprefix("[['")
 
     def add_taxonomy_ncbi(self):
         """
@@ -137,7 +141,7 @@ class RnaObject:
             self.ncbi = False
         else:
             self.ncbi = True
-            self.ncbi_taxonomy = str(line)
+            self.ncbi_taxonomy = str(line.values).removesuffix("']]").removeprefix("[['")
 
     def add_taxonomy_gtdb(self):
         """
@@ -153,7 +157,7 @@ class RnaObject:
             self.gtdb = False
         else:
             self.gtdb = True
-            self.gtdb_taxonomy = str(line)
+            self.gtdb_taxonomy = str(line.values).removesuffix("']]").removeprefix("[['")
 
 
     def add_accession_number(self):

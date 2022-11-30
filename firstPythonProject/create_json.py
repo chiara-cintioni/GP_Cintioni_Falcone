@@ -47,7 +47,7 @@ def get_first_word(word):
 
 def get_first_taxa(line):
     word = line.split(sep=';')[0].strip()
-    return word.split(sep=" ")[-1]
+    return word
 
 
 """
@@ -91,7 +91,7 @@ def get_domain(obj1):
     return "unknown"
 """
 
-def create_file_json(file, output, file_path):
+def create_file_json(file, output):
     output.write('[')
     lines = file.readlines()[1:]
     c = 0
@@ -137,6 +137,7 @@ def create_file_json(file, output, file_path):
         output.write('\"Core\": \"' + obj1.core + '\",')
         output.write('\"Core plus\": \"' + obj1.core_plus + '\",')
         output.write('\"Shape\": \"' + obj1.shape + '\",')
+        output.write('\"Is Validated\": \"' + obj1.is_validated + '\",')
         # obj1.db_name da inserire al posto di CRW
         output.write('\"Reference database\": \"' + obj1.db_name + '\",')
         # obj1.link_db da inserire al posto del link diretto
@@ -145,6 +146,8 @@ def create_file_json(file, output, file_path):
         output.write('\"Taxonomy\": [{')
         if obj1.silva:
             cont = 0
+            cont_no_rank = 0
+            cont_unknown = 0
             output.write('\"SILVA\": {')
             output.write('\"Classified\": \"Yes\"')
             taxa = get_first_taxa(obj1.silva_taxonomy)
@@ -153,7 +156,11 @@ def create_file_json(file, output, file_path):
                 output.write(',')
                 rank = search_rank(taxa)
                 if rank == " ":
-                    rank = "unknown"
+                    rank = "unknown " + str(cont_unknown)
+                    cont_unknown += 1
+                elif rank == "no rank":
+                    rank = "no rank " + str(cont_no_rank)
+                    cont_no_rank +=1
                 output.write('\"' + rank + '\": \"' + taxa + '\"')
                 taxa = obj1.silva_taxonomy.split(sep=';')[cont]
                 cont += 1
@@ -164,6 +171,8 @@ def create_file_json(file, output, file_path):
             output.write("}},")
         if obj1.ena:
             cont = 0
+            cont_no_rank = 0
+            cont_unknown = 0
             output.write('{\"ENA\": {')
             output.write('\"Classified\": \"Yes\"')
             taxa = get_first_taxa(obj1.ena_taxonomy)
@@ -172,7 +181,11 @@ def create_file_json(file, output, file_path):
                 output.write(',')
                 rank = search_rank(taxa)
                 if rank == " ":
-                    rank = "unknown"
+                    rank = "unknown " + str(cont_unknown)
+                    cont_unknown += 1
+                elif rank == "no rank":
+                    rank = "no rank " + str(cont_no_rank)
+                    cont_no_rank += 1
                 output.write('\"' + rank + '\": \"' + taxa + '\"')
                 taxa = obj1.ena_taxonomy.split(sep=';')[cont]
                 cont += 1
@@ -183,6 +196,8 @@ def create_file_json(file, output, file_path):
             output.write("}},")
         if obj1.ltp:
             cont = 0
+            cont_no_rank = 0
+            cont_unknown = 0
             output.write('{\"LTP\": {')
             output.write('\"Classified\": \"Yes\"')
             taxa = get_first_taxa(obj1.ltp_taxonomy)
@@ -191,7 +206,11 @@ def create_file_json(file, output, file_path):
                 output.write(',')
                 rank = search_rank(taxa)
                 if rank == " ":
-                    rank = "unknown"
+                    rank = "unknown " + str(cont_unknown)
+                    cont_unknown += 1
+                elif rank == "no rank":
+                    rank = "no rank " + str(cont_no_rank)
+                    cont_no_rank += 1
                 output.write('\"' + rank + '\": \"' + taxa + '\"')
                 taxa = obj1.ltp_taxonomy.split(sep=';')[cont]
                 cont += 1
@@ -201,6 +220,8 @@ def create_file_json(file, output, file_path):
             output.write('\"Classified\": \"No\"')
             output.write("}},")
         if obj1.ncbi:
+            cont_no_rank = 0
+            cont_unknown = 0
             cont = 0
             output.write('{\"NCBI\": {')
             output.write('\"Classified\": \"Yes\"')
@@ -210,7 +231,11 @@ def create_file_json(file, output, file_path):
                 output.write(',')
                 rank = search_rank(taxa)
                 if rank == " ":
-                    rank = "unknown"
+                    rank = "unknown " + str(cont_unknown)
+                    cont_unknown += 1
+                elif rank == "no rank":
+                    rank = "no rank " + str(cont_no_rank)
+                    cont_no_rank += 1
                 output.write('\"' + rank + '\": \"' + taxa + '\"')
                 taxa = obj1.ncbi_taxonomy.split(sep=';')[cont]
                 cont += 1
@@ -220,6 +245,8 @@ def create_file_json(file, output, file_path):
             output.write('\"Classified\": \"No\"')
             output.write("}},")
         if obj1.gtdb:
+            cont_no_rank = 0
+            cont_unknown = 0
             cont = 0
             output.write('{\"GTDB\": {')
             output.write('\"Classified\": \"Yes\"')
@@ -230,8 +257,12 @@ def create_file_json(file, output, file_path):
                 result = search_gtdb_rank(taxa)
                 rank = result[0]
                 taxa = result[1]
-                if rank == "":
-                    rank = "unknown"
+                if rank == " ":
+                    rank = "unknown " + str(cont_unknown)
+                    cont_unknown += 1
+                elif rank == "no rank":
+                    rank = "no rank " + str(cont_no_rank)
+                    cont_no_rank += 1
                 output.write('\"' + rank + '\": \"' + taxa + '\"')
                 taxa = obj1.gtdb_taxonomy.split(sep=';')[cont]
                 cont += 1
@@ -244,6 +275,5 @@ def create_file_json(file, output, file_path):
         print(c)
         c += 1
     output.write("]")
-
 
 

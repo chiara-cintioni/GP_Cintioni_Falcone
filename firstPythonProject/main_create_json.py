@@ -14,6 +14,6 @@ def read_files():
                     output = file_to_read.replace(".txt", ".json")
                     print("Creating json of: ", output)
                     output = open(os.path.join(output_path, output), "w")
-                    create_json.create_file_json(f, output, file_path)
+                    create_json.create_file_json(f, output)
     print("The creation of the json files to insert into mongodb has finished.\n")
     return "files/json_files"

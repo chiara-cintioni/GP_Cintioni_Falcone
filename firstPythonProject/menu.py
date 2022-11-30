@@ -3,12 +3,12 @@ import mongo_services
 
 
 def menu():
-    print("Welcome, what would you like to do?"),
-    print("1. Insert a txt file (with one or more rna sequences) into mongodb."),
-    print("2. Modify a single rna sequence."),
-    print("3. Delete a single rna sequence."),
-    print("4. Delete all."),
-    print("0. Exit."),
+    print("Welcome, what would you like to do?")
+    print("1. Insert a txt file (with one or more rna sequences) into mongodb.")
+    print("2. Modify a single rna sequence.")
+    print("3. Delete a single rna sequence.")
+    print("4. Delete all.")
+    print("0. Exit.")
     result = input("Insert the number of the action you want to do: ")
     if not result.isnumeric():
         print("Sorry, you have to insert a number.")
