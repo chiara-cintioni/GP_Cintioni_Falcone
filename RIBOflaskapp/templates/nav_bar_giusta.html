@@ -9,41 +9,38 @@
     <!--<script src="https://kit.fontawesome.com/817de29756.js" ></script>-->
 </head>
 <body>
-   <div class="dropdown">
-        <nav>
-             <input type="checkbox" id="check">
-                <label for="check" class="checkbtn">
-                    <i class="fas fa-bars"></i>
-                </label>
-            <label class="logo">
-                <img src="{{ url_for('static', filename='img/UNICAM_logo.png') }}" width="80" height="95">
-            </label>
-            <label class="text-logo">
-                <img src="{{ url_for('static', filename='img/UNICAM_scritta.webp') }}" width="126" height="40">
-            </label>
+   <header>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <label class="logo">
+            <img src="{{ url_for('static', filename='img/UNICAM_logo.png') }}" width="80" height="95">
+        </label>
+        <label class="text-logo">
+            <img src="{{ url_for('static', filename='img/UNICAM_scritta.webp') }}" width="126" height="40">
+        </label>
+       <nav class="navbar_1">
             <ul>
-                <li><a class="active" href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="#">Search<i class="fas fa-caret-down"></i></a>
-                    <ul>
-                        <li><a href="{{ url_for('search') }}">Search</a></li>
-                        <li><a href="{{ url_for('search_result') }}">Download</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Documentation<i class="fas fa-caret-down"></i></a>
-                    <ul>
-                        <li><a href="#">Tutorial<i style="transform: rotate(-90deg);" class="fas fa-caret-down"></i></a>
-                            <ul>
-                                <li><a href="{{ url_for('s_tutorial') }}">Search</a></li>
-                                <li><a href="{{ url_for('d_tutorial') }}">Download</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="{{ url_for('info') }}">Info</a></li>
-                        <li><a href="{{ url_for('sources') }}">Sources</a></li>
-                    </ul>
-                </li>
-                <li><a href="{{ url_for('contact') }}">Contact us</a></li>
+                 <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('search') }}">Search</a></li>
+                    <li><a>Documentation <i class="fas fa-caret-down"></i></a>
+                        <ul>
+                            <li><a>Tutorial<i style="transform: rotate(-90deg);" class="fas fa-caret-down"></i></a>
+                                <ul>
+                                    <li><a href="{{ url_for('s_tutorial') }}">Search</a></li>
+                                    <li><a href="{{ url_for('d_tutorial') }}">Download</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="{{ url_for('info') }}">Info</a></li>
+                            <li><a href="{{ url_for('sources') }}">Sources</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="{{ url_for('contact') }}">Contact us</a></li>
+                </ul>
             </ul>
         </nav>
-   </div>
+   </header>
 </body>
 </html>

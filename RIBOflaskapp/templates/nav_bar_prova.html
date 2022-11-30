@@ -4,20 +4,48 @@
     <meta charset="utf-8">
     <title> RIBO </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style_unicam.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!--<script src="https://kit.fontawesome.com/817de29756.js" ></script>-->
 </head>
-<body>
-    <nav>
-        <div class="logo">RIBO</div>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Gallery</a></li>
-            <li><a href="#">Feedback</a></li>
-        </ul>
-    </nav>
-</body>
+    <body>
+        <header>
+             <input type="checkbox" id="mn_bars">
+                <label for="mn_bars">
+                    <i class="fas fa-bars"></i>
+                </label>
+                <label class="logo">
+                    <a href="http://www.emanuelamerelli.eu/bigdata/doku.php?id=start">
+                        <img id="logo_lab" src="{{ url_for('static', filename='img/logo_lab_bioShape.png') }}" width="100" height="100">
+                    </a>
+                    <a href="{{ url_for('home') }}">
+                        <img id="logo_uni" src="{{ url_for('static', filename='img/UNICAM_logo.png') }}" width="80" height="95">
+                    </a>
+                </label>
+                <label class="text-logo" >
+                    <a href="{{ url_for('home') }}">
+                        <img id="unicam_text" src="{{ url_for('static', filename='img/UNICAM_scritta.webp') }}" width="126" height="40">
+                    </a>
+                </label>
+                <nav class="navbar_prova">
+                    <ul>
+                        <li><a href="{{ url_for('home') }}">Home</a></li>
+                        <li><a href="{{ url_for('search') }}">Search</a></li>
+                        <li><a href="#">Documentation <i class="fas fa-caret-down"></i></a>
+                            <ul>
+                                <li><a href="{{ url_for('info') }}">Info</a></li>
+                                <li><a href="{{ url_for('sources') }}">Sources</a></li>
+                                <li><a href="#">Tutorial<i style="transform: rotate(-90deg);" class="fas fa-caret-down"></i></a>
+                                    <ul>
+                                        <li><a href="{{ url_for('s_tutorial') }}">Search</a></li>
+                                        <li><a href="{{ url_for('d_tutorial') }}">Download</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="{{ url_for('contact') }}">Contact us</a></li>
+                    </ul>
+                </nav>
+        </header>
+    </body>
 </html>
