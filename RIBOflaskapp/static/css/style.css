@@ -1,25 +1,25 @@
 *{
     font-family: montserrat;
 }
-
+/*
 h1{
     text-transform: uppercase;
     text-align: center;
     font-size: xxx-large;
     margin-top: -35px;
 }
-
+*/
 h1 {
     margin-top: -75px;
-  font-size: 40px;
-  text-transform: uppercase;
-  font-family: 'Gambetta', serif;
-  letter-spacing: -3px;
-  transition: 700ms ease;
-  font-variation-settings: "wght" 311;
-  color: darkred;
-  outline: none;
-  text-align: center;
+    font-size: 40px;
+    text-transform: uppercase;
+    font-family: 'Gambetta', serif;
+    letter-spacing: -3px;
+    transition: 700ms ease;
+    font-variation-settings: "wght" 311;
+    color: darkred;
+    outline: none;
+    text-align: center;
 }
 
 h1:hover {
@@ -47,55 +47,129 @@ h1:hover {
     cursor: default;
 }
 
+header{
+    background: #1b3b5d;
+    top: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    padding: 0 7%;
+    box-shadow: 0 5px 10px rgba(0,0,0,.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+}
 
+body {
+    min-height: 100vh;
+    background: #E0EAF6 center;
+}
+
+/* vecchio
 body{
    background: white;
-
     margin: 0;
     padding: 0;
-}
-
+}*/
+/*
 .dropdown{
     margin: 0 auto;
-}
-
+}*
+/*
 nav{
     height: 80px;
     background: #1b3b5d;
-}
+}*/
 
 label.logo{
     line-height: 80px;
     padding: 10px 30px;
     position: absolute;
     z-index: 2;
+    top: -4px;
+    cursor: pointer;
+    margin-left: -100px;
 }
 
 label.text-logo{
     line-height: 80px;
-    margin-left: 130px;
+    margin-left: 125px;
     position: absolute;
     z-index: 2;
+    cursor: pointer;
 }
 
+header .navbar_prova {
+    height: 70px;
+}
+
+header .navbar_prova ul {
+    list-style: none;
+    float: left;
+    cursor: pointer;
+}
+
+/*
 nav ul{
     padding: 0;
     float: right;
     margin: 0 30px 0 0;
-}
+}*/
 
-nav ul li{
+header .navbar_prova ul li{
     background: #1b3b5d;
     position: relative;
     list-style: none;
     display: inline-block;
 }
 
-
+/*
 .td_check_btn{
   width: 30px;
+}*/
+
+header .navbar_prova ul li a{
+    display: block;
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 20px;
+    cursor: pointer;
+}
+header .navbar_prova ul li a:hover{
+    text-decoration: underline;
+    background: #1b3b5d;
+    color: #b0cbe8;
 }
 
+header .navbar_prova ul li ul {
+    position: absolute;
+    left: 0;
+    width: 200px;
+    background: #1b3b5d;
+    display: none;
+}
+header .navbar_prova ul li ul li{
+    width: 200px;
+    margin-left: -40px;
+    top: -1px;
+}
+header .navbar_prova ul li ul li ul{
+    left: 200px;
+    top: 0px;
+}
+header .navbar_prova ul li:focus-within>ul,
+header .navbar_prova ul li:hover>ul{
+    display: initial;
+}
+#mn_bars{
+    display: none;
+}
+i.fas.fa-bars{
+    display: none;
+}
+/*
 nav ul li a{
     display: block;
     padding: 0 15px;
@@ -106,11 +180,12 @@ nav ul li a{
     line-height: 80px;
     font-size: 16px;
     z-index: 1;
-}
+}*/
 
+/*
 nav ul ul li{
     z-index: 1;
-}
+}*/
 
 .checkbtn{
     font-size: 30px;
@@ -195,12 +270,71 @@ input#leng_f, input#leng_t, input#weak_f, input#weak_t {
     font-size: 18px;
  }
 
-@media (max-width: 958px){
-    label.logo{
-        padding: 0 30px;
+@media(max-width: 991px){
+    header{
+        padding: 20px;
     }
-    nav ul li a {
-        font-size: 16px;
+    #mn_bars,i.fas.fa-bars{
+        display: initial;
+        font-size: 20px;
+        cursor: pointer;
+        color: white;
+        margin-left: -45px;
+    }
+    #logo_lab{
+       width: 80px;
+       height: 80px;
+       margin-left: 60px;
+    }
+    #logo_uni{
+       width: 70px;
+       height: 85px;
+    }
+    header label .logo{
+        top: 0px;
+        padding: 5px;
+        position: absolute;
+        z-index: 2;
+    }
+    #unicam_text{
+        margin-left: 30px;
+    }
+    header .navbar_prova{
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        display: none;
+        background: #1b3b5d;
+    }
+    header .navbar_prova ul{
+        padding: 0;
+        width: 100%;
+    }
+    header .navbar_prova ul li{
+        width: 100%;
+    }
+    header .navbar_prova ul li a{
+        width: 100%;
+    }
+    header .navbar_prova ul li ul{
+        position: relative;
+        width: 100%;
+        padding: 0px 0px 0px 40px;
+    }
+    header .navbar_prova ul li ul li{
+        background: #1b3b5d;
+    }
+    header .navbar_prova ul li ul li ul{
+        width: 100%;
+        left: 0;
+        padding: 0px 0px 0px 40px;
+    }
+    header .navbar_prova ul li ul li ul li{
+        width: 100%;
+    }
+    #mn_bars:checked ~ .navbar_prova{
+        display: initial;
     }
     #search_table, #search_table tr, #search_table td{
         display: block;
@@ -221,8 +355,71 @@ input#leng_f, input#leng_t, input#weak_f, input#weak_t {
     #search_button, #reset_button, #s_tutorial_btn{
         margin: 7px;
     }
-}
+    #result_table, #result_table td, #result_table tr,
+    #result_table th, #result_table tbody, #result_table thead {
+        display:block;
+    }
+    #result_table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    #result_table{
+        margin-left: auto;
+    }
+    #table_result_div{
+        margin-left: auto;
+    }
+    #result_table tr{
+        border: 1px solid black;
+    }
+    #result_table td{
+        border: none;
+        border-bottom: 1px solid black;
+        position: relative;
+        padding-left: 50%;
+    }
+    #result_table td:before{
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+    }
+    #result_table td:nth-of-type(1){
+        padding-right: 0;
+    }
+     #result_table td:nth-of-type(1):before{
+         content: "Select";
+    }
+    #result_table td:nth-of-type(2):before{
+        content: "Organism name";
+    }
+    #result_table td:nth-of-type(3):before{
+        content: "Reference ID";
+    }
+    #result_table td:nth-of-type(4):before{
+        content: "Accession number";
+    }
+    #result_table td:nth-of-type(5):before{
+        content: "RNA Type";
+    }
+    #result_table td:nth-of-type(6):before{
+        content: "More information";
+        font-weight: initial;
+        font-size: 16px;
+    }
 
+    #dl_option_div{
+        position: initial;
+        display: inline-block;
+    }
+    .dataTables_wrapper .dataTables_info{
+        margin-left: auto;
+    }
+}
+/*
 @media (max-width: 858px){
     .checkbtn{
         display:block;
@@ -292,14 +489,74 @@ input#leng_f, input#leng_t, input#weak_f, input#weak_t {
     #search_button, #reset_button, #s_tutorial_btn{
         margin: 7px;
     }
-}
+     #result_table, #result_table td, #result_table tr,
+    #result_table th, #result_table tbody, #result_table thead {
+        display:block;
+    }
+      #result_table{
+        margin-left: auto;
+    }
+    #result_table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    #result_table tr{
+        border: 1px solid black;
+    }
+    #result_table td{
+        border: none;
+        border-bottom: 1px solid black;
+        position: relative;
+        padding-left: 50%;
+    }
+    #result_table td:before{
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+    }
+    #result_table td:nth-of-type(1){
+        padding-right: 0;
+    }
+     #result_table td:nth-of-type(1):before{
+         content: "Select";
+    }
+    #result_table td:nth-of-type(2):before{
+        content: "Organism name";
+    }
+    #result_table td:nth-of-type(3):before{
+        content: "Reference ID";
+    }
+    #result_table td:nth-of-type(4):before{
+        content: "Accession number";
+    }
+    #result_table td:nth-of-type(5):before{
+        content: "RNA Type";
+    }
+    #result_table td:nth-of-type(6):before{
+        content: "More information";
+        font-weight: initial;
+        font-size: 16px;
+    }
+    #table_result_div{
+        margin-left: auto;
+    }
+    #dl_option_div{
+        position: initial;
+        display: inline-block;
+    }
+    .DataTables_wrapper .DataTables_info{
+        margin: auto;
+    }
 
-nav ul li a:hover{
-    background: #295a8e;
-    text-decoration: none;
-    color:#b0cbe8;
 }
+*/
 
+
+/*
 nav ul ul{
     position: absolute;
     top: 80px;
@@ -328,9 +585,9 @@ nav ul ul ul li{
 nav ul li a i{
     margin: 5px;
 }
-
+*/
 .container {
-    margin-top: 100px;
+    margin-top: 150px;
 }
 
 .result_table {
