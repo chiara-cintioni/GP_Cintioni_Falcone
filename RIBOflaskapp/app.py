@@ -42,6 +42,12 @@ db = client.RIBOdb
 collection = db.rna_sequences
 
 
+if __name__ == '__main__':
+    app.run(debug=True)
+
+app.config.from_pyfile('config.py')
+
+
 @app.route('/search/', methods=('GET', 'POST'))
 def search():
     return render_template('search.html')
@@ -128,7 +134,7 @@ def download(filenames, taxonomy):
         temp = os.path.join(tempfile.gettempdir(), os.urandom(24).hex())
         print("temp: "+temp)
         docs.to_csv(temp, sep=',', index=False)
-        return send_file(temp, as_attachment=True, download_name='Result2.csv')
+        return send_file(temp, as_attachment=True, download_name='Result.csv')
 
 
 
@@ -216,6 +222,3 @@ def d_tutorial():
 def info():
     return render_template('info.html')
 
-
-if __name__ == '__main__':
-    app.run(debug=True)
