@@ -107,7 +107,7 @@ header .nav_bar ul li:focus-within>ul,
 header .nav_bar ul li:hover>ul{
     display: initial;
 }
-#mn_bars{
+#mn_bars_checkbox{
     display: none;
 }
 i.fas.fa-bars{
@@ -128,7 +128,7 @@ input#leng_f, input#leng_t, input#weak_f, input#weak_t {
     width: 122px;
 }
 
-#search_box{
+#search_container{
     vertical-align: middle;
     align-items: center;
 }
@@ -157,7 +157,7 @@ input#leng_f, input#leng_t, input#weak_f, input#weak_t {
     border-color: #1b3b5d;
 }
 
-#search_button:hover, #reset_button:hover, #s_tutorial_btn:hover, #dl_button:hover, #dl_prev:hover{
+#search_button:hover, #reset_button:hover, #s_tutorial_btn:hover, #dl_button:hover, #prev_button:hover{
     border: 2px solid white;
     color: white;
     background:  #1b3b5d ;
@@ -166,7 +166,7 @@ input#leng_f, input#leng_t, input#weak_f, input#weak_t {
     left:-5px;
 }
 
-#search_button_div{
+#search_buttons_div{
     text-align: center;
     padding: 40px;
     font-size: 18px;
@@ -200,7 +200,7 @@ input#leng_f, input#leng_t, input#weak_f, input#weak_t {
     font-size: 20px;
 }
 
-#download_div {
+#choose_format_div {
     text-align: center;
     border: 3px solid black;
     border-radius: 15px;
@@ -284,7 +284,7 @@ input#leng_f, input#leng_t, input#weak_f, input#weak_t {
   text-align: center;
 }
 
-.container_table {
+.result_container {
     margin-left: -100px;
     padding: 32px;
     text-align: center;
@@ -404,7 +404,7 @@ input#leng_f, input#leng_t, input#weak_f, input#weak_t {
     header{
         padding: 20px;
     }
-    #mn_bars,i.fas.fa-bars{
+    #mn_bars_checkbox,i.fas.fa-bars{
         display: initial;
         font-size: 20px;
         cursor: pointer;
@@ -463,7 +463,7 @@ input#leng_f, input#leng_t, input#weak_f, input#weak_t {
     header .nav_bar ul li ul li ul li{
         width: 100%;
     }
-    #mn_bars:checked ~ .nav_bar{
+    #mn_bars_checkbox:checked ~ .nav_bar{
         display: initial;
     }
     /* search */

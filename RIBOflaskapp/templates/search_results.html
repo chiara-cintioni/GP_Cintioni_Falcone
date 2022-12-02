@@ -4,162 +4,162 @@
 
 {% block content %}
 <form action="/search/">
-    <button type="submit" id="dl_prev"> Previous page </button>
+    <button type="submit" id="prev_button"> Previous page </button>
 </form>
 <h1>Result</h1>
-<div class="container_table">
+<div class="result_container">
     <div id="table_result_div">
         <table class="result_table" id="result_table">
-        <thead>
-             <tr>
-                 <th><input id="check_all" class="td_check_btn" type="checkbox"></th>
-                 <th>Organism name</th>
-                 <th>Reference ID</th>
-                 <th>Accession Number</th>
-                 <th>RNA Type</th>
-                 <th>More Information</th>
-             </tr>
-        </thead>
-        <tbody class="result_tbody">
-            {% for element in result_list %}
-            <tr id="table_row" >
-                <td class="td_check_btn">
-                    <input onclick="show_taxonomy('{{ element['Benchmark ID'] }}')" class="check_button" type="checkbox" name="id_checkbox" id="{{ element['Benchmark ID'] }}">
-                </td>
-                <td >
-                    {{ element['Organism name'] }}
-                </td>
-                <td id="ref_id" class="ref_class">
-                    {{ element['Benchmark ID'] }}
-                </td>
-                <td>
-                    {{ element['Accession number'] }}
-                </td>
-                <td>
-                    {{ element['Rna Type'] }}
-                </td>
-                <td class="more_info" data-toggle="modal" data-target="#exampleModal{{ element['Benchmark ID'] }}" onclick="show_taxonomy('{{ element['Benchmark ID'] }}')">
-                   ...
-                </td>
-            </tr>
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal{{ element['Benchmark ID'] }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">{{ element['Organism name'] }}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body" >
-                            <p name="hidden_element">Organism name: {{ element['Organism name'] }}</p>
-                            <p name="hidden_element">Accession number: {{ element['Accession number'] }}</p>
-                            <p name="hidden_element">Length: {{ element['Length'] }}</p>
-                            <p name="hidden_element">Number of decoupled nucleotides: {{ element['Number of decoupled nucleotides'] }}</p>
-                            <p name="hidden_element">Number of weak bonds: {{ element['Number of weak bonds'] }}</p>
-                            <p name="hidden_element">Is pseudoknotted: {{ element['Is Pseudoknotted'] }}</p>
-                            <p name="hidden_element">Pseudoknot order: {{ element['Pseudoknot order'] }}</p>
-                            <p name="hidden_element">Rna type: {{ element['Rna Type'] }}</p>
-                            <p name="hidden_element">Genus: {{ element['Genus'] }}</p>
-                            <p name="hidden_element">Core: {{ element['Core'] }}</p>
-                            <p name="hidden_element">Core plus: {{ element['Core plus'] }}</p>
-                            <p name="hidden_element">Shape: {{ element['Shape'] }}</p>
-                            <p name="hidden_element">Reference ID: {{ element['Benchmark ID'] }}</p>
-                            <p name="hidden_element">Database name: inserire campo db</p>
-                            <p name="hidden_element">Database link: inserire campo db link</p>
-                            <hr>
-                            <p id="taxonomies">TAXONOMIES</p>
-                          <div id='taxa_container'>
-                            <div id="silva_div{{ element['Benchmark ID'] }}" class="taxa_div">
-                                <p id="taxa_name">SILVA</p>
-                                <p style="display: none;" id="silva_taxonomy{{ element['Benchmark ID'] }}" >{{ element['Taxonomy'][0]['SILVA']}}</p>
+            <thead>
+                 <tr>
+                     <th><input id="check_all" class="td_check_btn" type="checkbox"></th>
+                     <th>Organism name</th>
+                     <th>Reference ID</th>
+                     <th>Accession Number</th>
+                     <th>RNA Type</th>
+                     <th>More Information</th>
+                 </tr>
+            </thead>
+            <tbody class="result_tbody">
+                {% for element in result_list %}
+                    <tr id="table_row" >
+                        <td class="td_check_btn">
+                            <input onclick="show_taxonomy('{{ element['Benchmark ID'] }}')" class="check_button" type="checkbox" name="id_checkbox" id="{{ element['Benchmark ID'] }}">
+                        </td>
+                        <td >
+                            {{ element['Organism name'] }}
+                        </td>
+                        <td id="ref_id" class="ref_class">
+                            {{ element['Benchmark ID'] }}
+                        </td>
+                        <td>
+                            {{ element['Accession number'] }}
+                        </td>
+                        <td>
+                            {{ element['Rna Type'] }}
+                        </td>
+                        <td class="more_info" data-toggle="modal" data-target="#exampleModal{{ element['Benchmark ID'] }}" onclick="show_taxonomy('{{ element['Benchmark ID'] }}')">
+                           ...
+                        </td>
+                    </tr>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal{{ element['Benchmark ID'] }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">{{ element['Organism name'] }}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p name="hidden_element">Organism name: {{ element['Organism name'] }}</p>
+                                    <p name="hidden_element">Accession number: {{ element['Accession number'] }}</p>
+                                    <p name="hidden_element">Length: {{ element['Length'] }}</p>
+                                    <p name="hidden_element">Number of decoupled nucleotides: {{ element['Number of decoupled nucleotides'] }}</p>
+                                    <p name="hidden_element">Number of weak bonds: {{ element['Number of weak bonds'] }}</p>
+                                    <p name="hidden_element">Is pseudoknotted: {{ element['Is Pseudoknotted'] }}</p>
+                                    <p name="hidden_element">Pseudoknot order: {{ element['Pseudoknot order'] }}</p>
+                                    <p name="hidden_element">Rna type: {{ element['Rna Type'] }}</p>
+                                    <p name="hidden_element">Genus: {{ element['Genus'] }}</p>
+                                    <p name="hidden_element">Core: {{ element['Core'] }}</p>
+                                    <p name="hidden_element">Core plus: {{ element['Core plus'] }}</p>
+                                    <p name="hidden_element">Shape: {{ element['Shape'] }}</p>
+                                    <p name="hidden_element">Reference ID: {{ element['Benchmark ID'] }}</p>
+                                    <p name="hidden_element">Database name: inserire campo db</p>
+                                    <p name="hidden_element">Database link: inserire campo db link</p>
+                                    <hr>
+                                    <p id="taxonomies">TAXONOMIES</p>
+                                    <div id='taxa_container'>
+                                        <div id="silva_div{{ element['Benchmark ID'] }}" class="taxa_div">
+                                            <p id="taxa_name">SILVA</p>
+                                            <p style="display: none;" id="silva_taxonomy{{ element['Benchmark ID'] }}" >{{ element['Taxonomy'][0]['SILVA']}}</p>
+                                        </div>
+                                        <div id="ena_div{{ element['Benchmark ID'] }}" class="taxa_div">
+                                            <p id="taxa_name">ENA</p>
+                                            <p  style="display: none;" id="ena_taxonomy{{ element['Benchmark ID'] }}" >{{ element['Taxonomy'][1]['ENA']}}</p>
+                                        </div>
+                                        <div id="ltp_div{{ element['Benchmark ID'] }}" class="taxa_div">
+                                            <p id="taxa_name">LTP</p>
+                                            <p  style="display: none;" id="ltp_taxonomy{{ element['Benchmark ID'] }}" >{{ element['Taxonomy'][2]['LTP']}}</p>
+                                        </div>
+                                        <div id="ncbi_div{{ element['Benchmark ID'] }}" class="taxa_div">
+                                            <p id="taxa_name">NCBI</p>
+                                            <p  style="display: none;" id="ncbi_taxonomy{{ element['Benchmark ID'] }}" >{{ element['Taxonomy'][3]['NCBI']}}</p>
+                                        </div>
+                                        <div id="gtdb_div{{ element['Benchmark ID'] }}" class="taxa_div">
+                                            <p id="taxa_name">GTDB</p>
+                                            <p  style="display: none;" id="gtdb_taxonomy{{ element['Benchmark ID'] }}" >{{ element['Taxonomy'][4]['GTDB']}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
                             </div>
-                            <div id="ena_div{{ element['Benchmark ID'] }}" class="taxa_div">
-                                <p id="taxa_name">ENA</p>
-                                <p  style="display: none;" id="ena_taxonomy{{ element['Benchmark ID'] }}" >{{ element['Taxonomy'][1]['ENA']}}</p>
-                            </div>
-                            <div id="ltp_div{{ element['Benchmark ID'] }}" class="taxa_div">
-                                <p id="taxa_name">LTP</p>
-                                <p  style="display: none;" id="ltp_taxonomy{{ element['Benchmark ID'] }}" >{{ element['Taxonomy'][2]['LTP']}}</p>
-                            </div>
-                            <div id="ncbi_div{{ element['Benchmark ID'] }}" class="taxa_div">
-                                <p id="taxa_name">NCBI</p>
-                                <p  style="display: none;" id="ncbi_taxonomy{{ element['Benchmark ID'] }}" >{{ element['Taxonomy'][3]['NCBI']}}</p>
-                            </div>
-                            <div id="gtdb_div{{ element['Benchmark ID'] }}" class="taxa_div">
-                                <p id="taxa_name">GTDB</p>
-                                <p  style="display: none;" id="gtdb_taxonomy{{ element['Benchmark ID'] }}" >{{ element['Taxonomy'][4]['GTDB']}}</p>
-                            </div>
-                          </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
             </tbody>
         </table>
     </div>
-
-<div id="dl_option_div">
-    <h3 id="dl_option">Download options</h3>
-    <div id="selection_download">
-        <div id="download_div">
-            <p>Additional files to dowload:</p>
-            <input class="check_button_format" type="checkbox" id="bpseq" value=".bpseq">
-            <label for="bpseq"> bpseq format</label><br>
-            <input class="check_button_format" type="checkbox" id="bpseq_nH" value="nH.bpseq">
-            <label for="bpseq_nh"> bpseq-nH format</label><br>
-            <input class="check_button_format" type="checkbox" id="ct" value=".ct">
-            <label for="ct"> ct format</label><br>
-            <input class="check_button_format" type="checkbox" id="ct_nH" value="nH.ct">
-            <label for="ct_nh"> ct-nH format</label><br>
-            <input class="check_button_format" type="checkbox" id="db" value=".dbn">
-            <label for="db"> dbn format</label><br>
-            <input class="check_button_format" type="checkbox" id="db_nh" value="nH.dbn">
-            <label for="db_nh"> dbn-nH format</label><br>
-            <!--<progress id="progress_bar" value=gino_value max="100" min="0" ></progress>-->
+    <div id="dl_option_div">
+        <h3 id="dl_option">Download options</h3>
+        <div id="selection_download">
+            <div id="choose_format_div">
+                <p>Additional files to download:</p>
+                <input class="check_button_format" type="checkbox" id="bpseq" value=".bpseq">
+                <label for="bpseq"> bpseq format</label><br>
+                <input class="check_button_format" type="checkbox" id="bpseq_nH" value="_nH.bpseq">
+                <label for="bpseq_nh"> bpseq-nH format</label><br>
+                <input class="check_button_format" type="checkbox" id="ct" value=".ct">
+                <label for="ct"> ct format</label><br>
+                <input class="check_button_format" type="checkbox" id="ct_nH" value="_nH.ct">
+                <label for="ct_nh"> ct-nH format</label><br>
+                <input class="check_button_format" type="checkbox" id="db" value=".dbn">
+                <label for="db"> dbn format</label><br>
+                <input class="check_button_format" type="checkbox" id="db_nh" value="_nH.dbn">
+                <label for="db_nh"> dbn-nH format</label><br>
+                <input class="check_button_format" type="checkbox" id="fasta" value=".fasta">
+                <label for="fasta"> fasta format</label><br>
+                <input class="check_button_format" type="checkbox" id="fasta_nh" value="_nH.fasta">
+                <label for="fasta_nh"> fasta-nH format</label><br>
+            </div>
+            <div id="choose_taxonomy_div">
+                <p>Taxonomy to download with the csv:</p>
+                <input type="radio" class="check_button_taxonomy" name="taxonomy_button" id="SILVA" value="SILVA">
+                <label for="SILVA"> SILVA taxonomy</label><br>
+                <input type="radio" class="check_button_taxonomy" name="taxonomy_button" id="ENA" value="ENA" checked>
+                <label for="ENA"> ENA taxonomy</label><br>
+                <input type="radio" class="check_button_taxonomy" name="taxonomy_button" id="LTP" value="LTP">
+                <label for="LTP"> LTP taxonomy</label><br>
+                <input type="radio" class="check_button_taxonomy" name="taxonomy_button" id="NCBI" value="NCBI">
+                <label for="NCBI"> NCBI Taxonomy</label><br>
+                <input type="radio" class="check_button_taxonomy" name ="taxonomy_button" id="GTDB" value="GTDB">
+                <label for="GTDB"> GTDB Taxonomy</label><br>
+            </div>
         </div>
-
-        <div id="choose_taxonomy_div">
-            <p>Taxonomy to download with the csv:</p>
-            <input type="radio" class="check_button_taxonomy" name="taxonomy_button" id="SILVA" value="SILVA">
-            <label for="SILVA"> SILVA taxonomy</label><br>
-            <input type="radio" class="check_button_taxonomy" name="taxonomy_button" id="ENA" value="ENA" checked>
-            <label for="ENA"> ENA taxonomy</label><br>
-            <input type="radio" class="check_button_taxonomy" name="taxonomy_button" id="LTP" value="LTP">
-            <label for="LTP"> LTP taxonomy</label><br>
-            <input type="radio" class="check_button_taxonomy" name="taxonomy_button" id="NCBI" value="NCBI">
-            <label for="NCBI"> NCBI Taxonomy</label><br>
-            <input type="radio" class="check_button_taxonomy" name ="taxonomy_button" id="GTDB" value="GTDB">
-            <label for="GTDB"> GTDB Taxonomy</label><br>
-        </div>
+        <button type="button"  id="dl_button" onclick="final_download()">Download</button>
     </div>
-    <button type="button"  id="dl_button" onclick="final_download()">Download</button>
+    <p id="hidden_ref_array" hidden></p>
 </div>
-<p id="hidden_ref_array" hidden></p>
-</div>
-
 <script type="text/javascript">
     var rows_selected = [];
     $(document).ready(function() {
-      var table =  $('#result_table').DataTable();
-      //Select all function for checkboxes
-      $('#check_all').on('click', function(){
-        var rows = table.rows({ 'search': 'applied' }).nodes();
-        $('input[type="checkbox"]', rows).prop('checked', this.checked);
-      });
-      $('#result_table tbody').on('change', 'input[type="checkbox"]', function(){
-          if(!this.checked){
-             var el = $('#check_all').get(0);
-             if(el && el.checked && ('indeterminate' in el)){
-                el.indeterminate = true;
-             }
-          }
-      });
+        var table =  $('#result_table').DataTable();
+        //Select all function for checkboxes
+        $('#check_all').on('click', function(){
+            var rows = table.rows({ 'search': 'applied' }).nodes();
+            $('input[type="checkbox"]', rows).prop('checked', this.checked);
+        });
+        $('#result_table tbody').on('change', 'input[type="checkbox"]', function(){
+            if(!this.checked){
+                var el = $('#check_all').get(0);
+                if(el && el.checked && ('indeterminate' in el)){
+                    el.indeterminate = true;
+                }
+            }
+        });
     })
 </script>
 <script>
@@ -201,8 +201,6 @@
             var element = document.getElementById("hidden_ref_array");
             element.appendChild(node);
         });
-
     })
 </script>
-
 {% endblock %}

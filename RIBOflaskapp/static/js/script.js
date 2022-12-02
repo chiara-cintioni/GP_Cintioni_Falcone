@@ -1,183 +1,54 @@
 
-function check_taxon_rank(rank){
-    var value = rank.value;
-    if (value !== '' ) {
-        document.getElementById("Taxon_id").disabled = false;
-    } else {
-        document.getElementById("Taxon_id").disabled = true;
-    }
-}
-
-function get_row_data(button) {
-    var boolean_button = button.firstElementChild.checked;
-    if (boolean_button === true) {
-        var bench_id = button.nextElementSibling.nextElementSibling.innerText;
-        var hidden_row = document.getElementById("hidden_row"+bench_id);
-        //fino a qua, ok
-        var hidden_row_children = hidden_row.getElementsByTagName("p");
-        console.log("hidden row child: "+hidden_row_children);
-        var hrc_array = [];
-        for (var i = 0; i < hidden_row_children.length; i++) {
-            if(hidden_row_children[i].hasAttribute("name")){
-                hrc_array[i] = hidden_row_children.item(i).innerText;
-            }
-        }
-        return hrc_array;
-    } else {
-        return [];
-    }
-}
-
-function get_data_rows() {
-    var rows = document.getElementsByTagName('tr');
-    var array = [];
-    var array_temp = [];
-    for (var i = 1; i < rows.length; i++) {
-        if (i % 2 !== 0) {
-            array_temp = get_row_data(rows.item(i).firstElementChild);
-            if (array_temp.length !== 0) {
-                array = array.concat(array_temp + "\n");
-            }
-        }
-    }
-    return array;
-}
-
-
-function get_table_header() {
-    var rows = document.getElementsByTagName('tr');
-    var row = rows[0];
-    var ths = row.getElementsByTagName('th');
-    var ths_array = [];
-    for (var i = 1; i < ths.length; i++) {
-        if (i === (ths.length - 1)) {
-            ths_array[i - 1] = ths.item(i).innerText;
-        } else {
-            ths_array[i - 1] = ths.item(i).innerText + ",";
-        }
-    }
-    return ths_array;
-}
-
-
 /**
- * It returns the reference id of the row if the checkbox is checked, otherwise it returns an empty string
- * @param row - the row of the table that the user is currently on
- * @returns The reference id of the row that is selected.
+ * If the user selects a taxon rank, enable the taxon dropdown menu
+ * @param rank - the select box where the user can select a taxon rank
  */
-function get_reference_id(row){
-    var ref_id = row.firstElementChild.nextElementSibling.nextElementSibling;
-    var button = row.firstElementChild;
-    var boolean_button = button.firstElementChild.checked;
-    if (boolean_button === true) {
-        return ref_id.innerText;
-    } else {
-        return '';
-    }
+function check_taxon_rank(rank){
+    document.getElementById("Taxon_id").disabled = rank.value === '';
 }
 
-/*
-ORIGINAL
-function get_reference_id(row){
-    var ref_id = row.firstElementChild.nextElementSibling.nextElementSibling;
-    var button = row.firstElementChild;
-    var boolean_button = button.firstElementChild.checked;
-    if (boolean_button === true) {
-        return ref_id.innerText;
-    } else {
-        return '';
-    }
-}
-*/
-function get_all_ref_ids() {
-    return rows_selected;
-}
-/*
-ORIGINAL
-function get_all_ref_ids() {
-    var rows = document.getElementsByTagName('tr')
-    ref_id_string = '';
-    for(var i = 1; i < rows.length; i++) {
-            var temp = get_reference_id(rows[i]);
-            if (temp !== '') {
-                var ref_id_string = ref_id_string + temp + ",";
-            }
-    }
-    return ref_id_string;
-}
-*/
 function check_format_dl(){
-    var check_buttons = document.getElementsByClassName("check_button_format")
-    var result = '';
-    for(var i = 0; i < check_buttons.length; i++) {
-        if(check_buttons[i].checked === true){
-            result = check_buttons[i].value + "," + result;
+    var check_button_format = document.getElementsByClassName("check_button_format")
+    var formats_string = '';
+    for(var i = 0; i < check_button_format.length; i++) {
+        if(check_button_format[i].checked === true){
+            formats_string = check_button_format[i].value + "," + formats_string;
         }
     }
-    return  result;
+    return  formats_string;
 }
 
 function check_taxonomy_dl(){
-    var check_buttons = document.getElementsByClassName("check_button_taxonomy")
-    var result = '';
-    for(var i = 0; i < check_buttons.length; i++) {
-        if(check_buttons[i].checked === true){
-            result = check_buttons[i].value + "," + result;
+    var check_buttons_taxonomy = document.getElementsByClassName("check_button_taxonomy")
+    var taxonomy_string = '';
+    for(var i = 0; i < check_buttons_taxonomy.length; i++) {
+        if(check_buttons_taxonomy[i].checked === true){
+            taxonomy_string = check_buttons_taxonomy[i].value + "," + taxonomy_string;
         }
     }
-    return  result;
+    return  taxonomy_string;
 }
-/*
-ORIGINAL
-function check_taxonomy_dl(){
-    var check_buttons = document.getElementsByClassName("check_button_taxonomy")
-    var result = '';
-    for(var i = 0; i < check_buttons.length; i++) {
-        if(check_buttons[i].checked === true){
-            result = check_buttons[i].value + "," + result;
-        }
-    }
-    return  result;
-}
-*/
 
 function download_csv_from_db() {
-    var all_ref_id = rows_selected;
+    var all_ref_ids = rows_selected;
     var taxonomy = check_taxonomy_dl();
     $.ajax({
-        url: '/download_files_csv/' + all_ref_id +'/'+ taxonomy,
+        url: '/download_files_csv/' + all_ref_ids +'/'+ taxonomy,
         type: 'GET',
         context: document.body,
         xhrFields:{
             responseType: 'blob'
         },
         success: function(data) {
-            saveAs(data, "rna_sequences.csv");
+            let date = new Date().toJSON();
+            let filename = date.concat(".csv")
+            saveAs(data, filename);
         }
     });
 }
-
-/*
-ORIGINAL
-function download_csv_from_db() {
-    var all_ref_id = get_all_ref_ids();
-    var taxonomy = check_taxonomy_dl();
-    $.ajax({
-        url: '/download_files_csv/' + all_ref_id +'/'+ taxonomy,
-        type: 'GET',
-        context: document.body,
-        xhrFields:{
-            responseType: 'blob'
-        },
-        success: function(data) {
-            saveAs(data, "rna_sequences.csv");
-        }
-    });
-}
-*/
 
 function download_file_from_db() {
-    var all_ref_id = get_all_ref_ids();
+    var all_ref_id = rows_selected;
     var formats = check_format_dl();
     $.ajax({
         url: '/download_files/' + all_ref_id +'/'+ formats,
@@ -187,28 +58,20 @@ function download_file_from_db() {
             responseType: 'blob',
         },
         success: function(data) {
-            saveAs(data, "rna_sequences_files.zip");
+            let date = new Date().toJSON();
+            let filename = date.concat(".zip")
+            saveAs(data, filename);
         }
     });
 }
 
-
 function final_download(){
     if (confirm ('Are you sure you want to download these files? \n' +
         'N.B. Please consider that if you are downloading a lot of files it might take some time.')) {
-        console.log("sono qui");
         download_csv_from_db();
         download_file_from_db();
     }
 }
-
-
-
-function showHideRow(row) {
-    $("#" + row).toggle();
-}
-
-
 
 /**
  * It checks if the taxonomy is classified, and if it is, it calls the function to show the taxonomy
@@ -222,43 +85,43 @@ function show_taxonomy(bench_id){
     if (document.getElementById("silva_taxonomy" + bench_id).innerHTML.toString().split("'")[3] === 'Yes'){
         show_taxonomy_silva(bench_id);
     }else{
-        var el_s = document.createElement("p");
-        var nd_s = document.createTextNode("Not Classified");
-        el_s.appendChild(nd_s);
-        el_s.setAttribute("id", "silva_taxon"+bench_id)
-        document.getElementById("silva_div"+bench_id).appendChild(el_s);
+        var el_silva = document.createElement("p");
+        var nd_silva = document.createTextNode("Not Classified");
+        el_silva.appendChild(nd_silva);
+        el_silva.setAttribute("id", "silva_taxon"+bench_id)
+        document.getElementById("silva_div"+bench_id).appendChild(el_silva);
     }
-     if (document.getElementById("ena_taxonomy" + bench_id).innerHTML.toString().split("'")[3] === 'Yes'){
+    if (document.getElementById("ena_taxonomy" + bench_id).innerHTML.toString().split("'")[3] === 'Yes'){
         show_taxonomy_ena(bench_id);
     }else{
-        var el_e = document.createElement("p");
-        var nd_e = document.createTextNode("Not Classified");
-        el_e.appendChild(nd_e);
-        document.getElementById("ena_div"+bench_id).appendChild(el_e);
+        var el_ena = document.createElement("p");
+        var nd_ena = document.createTextNode("Not Classified");
+        el_ena.appendChild(nd_ena);
+        document.getElementById("ena_div"+bench_id).appendChild(el_ena);
     }
-     if (document.getElementById("ltp_taxonomy" + bench_id).innerHTML.toString().split("'")[3] === 'Yes'){
+    if (document.getElementById("ltp_taxonomy" + bench_id).innerHTML.toString().split("'")[3] === 'Yes'){
         show_taxonomy_ltp(bench_id);
     }else{
-        var el_l = document.createElement("p");
-        var nd_l = document.createTextNode("Not Classified");
-        el_l.appendChild(nd_l);
-        document.getElementById("ltp_div"+bench_id).appendChild(el_l);
+        var el_ltp = document.createElement("p");
+        var nd_ltp = document.createTextNode("Not Classified");
+        el_ltp.appendChild(nd_ltp);
+        document.getElementById("ltp_div"+bench_id).appendChild(el_ltp);
     }
-     if (document.getElementById("ncbi_taxonomy" + bench_id).innerHTML.toString().split("'")[3] === 'Yes'){
+    if (document.getElementById("ncbi_taxonomy" + bench_id).innerHTML.toString().split("'")[3] === 'Yes'){
         show_taxonomy_ncbi(bench_id);
     }else{
-        var el_n = document.createElement("p");
-        var nd_n = document.createTextNode("Not Classified");
-        el_n.appendChild(nd_n);
-        document.getElementById("ncbi_div"+bench_id).appendChild(el_n);
+        var el_ncbi = document.createElement("p");
+        var nd_ncbi = document.createTextNode("Not Classified");
+        el_ncbi.appendChild(nd_ncbi);
+        document.getElementById("ncbi_div"+bench_id).appendChild(el_ncbi);
     }
-     if (document.getElementById("gtdb_taxonomy" + bench_id).innerHTML.toString().split("'")[3] === 'Yes'){
+    if (document.getElementById("gtdb_taxonomy" + bench_id).innerHTML.toString().split("'")[3] === 'Yes'){
         show_taxonomy_gtdb(bench_id);
     }else{
-        var el_g = document.createElement("p");
-        var nd_g = document.createTextNode("Not Classified");
-        el_g.appendChild(nd_g);
-        document.getElementById("gtdb_div"+bench_id).appendChild(el_g);
+        var el_gtdb = document.createElement("p");
+        var nd_gtdb = document.createTextNode("Not Classified");
+        el_gtdb.appendChild(nd_gtdb);
+        document.getElementById("gtdb_div"+bench_id).appendChild(el_gtdb);
     }
 }
 
@@ -339,8 +202,8 @@ function show_taxonomy_gtdb(bench_id) {
 }
 
 function show_taxonomy_ltp(bench_id) {
-    var ena = document.getElementById('ltp_taxonomy'+bench_id).innerHTML.toString();
-    var temp = ena.split("'");
+    var ltp = document.getElementById('ltp_taxonomy'+bench_id).innerHTML.toString();
+    var temp = ltp.split("'");
     var position = document.getElementById("ltp_div"+bench_id);
     var rank = []
     var rank_cont = 0
@@ -364,8 +227,8 @@ function show_taxonomy_ltp(bench_id) {
 }
 
 function show_taxonomy_ncbi(bench_id) {
-    var ena = document.getElementById('ncbi_taxonomy'+bench_id).innerHTML.toString();
-    var temp = ena.split("'");
+    var ncbi = document.getElementById('ncbi_taxonomy'+bench_id).innerHTML.toString();
+    var temp = ncbi.split("'");
     var position = document.getElementById("ncbi_div"+bench_id);
     var rank = []
     var rank_cont = 0
