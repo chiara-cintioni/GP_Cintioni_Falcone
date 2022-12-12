@@ -1,4 +1,4 @@
-# REALIZZAZIONE DI UN DATABASE CON RELATIVO SITO WEB PER LA RACCOLTA DI SEQUENQUE DI RNA
+# REALIZZAZIONE DI UN DATABASE CON RELATIVO SITO WEB PER LA RACCOLTA DI SEQUENZE DI RNA
 
 Il progetto si pone come obiettivo l'implementazione di un database dove mantenere le informazioni relative alle molecole di RNA,
 e la realizzazione di un sito web che consenta agli utenti di accedere ad esse, con la possibilità di scaricare: oltre alle informazioni sulle molecole,
