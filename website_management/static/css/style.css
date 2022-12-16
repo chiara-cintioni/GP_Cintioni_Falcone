@@ -17,6 +17,9 @@ h1 {
     outline: none;
     text-align: center;
 }
+h2{
+    font-size: 23px;
+}
 
 h1:hover {
   font-variation-settings: "wght" 582;
@@ -54,6 +57,9 @@ h3 a{
     justify-content: space-between;
     margin-top: 30px;
 }
+#s_tutorial_div h3, #d_tutorial_div h3{
+    font-size: 21px;
+}
 
 /* nav_bar */
 header{
@@ -71,7 +77,7 @@ header{
 }
 body {
     min-height: 100vh;
-    background: #E0EAF6 center;
+    background:whitesmoke center;
 }
 label.logo{
     line-height: 80px;
@@ -212,6 +218,9 @@ input#leng_f, input#leng_t, input#weak_f, input#weak_t {
     width: 135px;
     margin-right: 30px;
     font-size: 18px;
+ }
+ #s_tutorial_div{
+     margin-bottom: 100px;
  }
 
 /* search result */

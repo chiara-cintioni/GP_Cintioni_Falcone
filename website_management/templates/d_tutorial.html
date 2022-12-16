@@ -3,5 +3,35 @@
 {% block title %}Download tutorial{% endblock %}
 
 {% block content %}
-<h1>DOWNLOAD tutorial!!!</h1>
+<h1>DOWNLOAD tutorial</h1>
+    <div id="d_tutorial_div">
+    <h2>Here you will find the tutorial to make the download of selected results from the result table obtained after the search.</h2>
+    <hr>
+        <h2 style="font-weight: bold">Result table
+            <h3>
+                The table shows the results of the search performed.
+                To see all the information of a single result table click on the three dots in the more information column.
+                <img src="{{ url_for('static', filename='img/d_tutorial_imgs/more_info_1.png') }}" width="168px" height="69px">
+                <br>A pop-up will appear with all the information including the taxonomies that classify this organism.
+                <br>By hovering over the taxons in the taxonomies you can see the rank of that taxon.
+                <br><img src="{{ url_for('static', filename='img/d_tutorial_imgs/more_info_2.png') }}" width="156px" height="178px" style="border: 1px solid #1b3b5d">
+                <img src="{{ url_for('static', filename='img/d_tutorial_imgs/more_info_3.png') }}" width="175px" height="178px" style="border: 1px solid #1b3b5d">
+            </h3>
+        </h2>
+
+        <hr>
+        <h2 style="font-weight: bold">Download
+            <h3>
+                To make a download of one more organism, select it by clicking on the small square.
+                In case you want to do the download of all organisms, select the square in the upper left corner of the table (next to Organism name).
+                Once the organisms are selected, a csv will be downloaded that will contain all the information plus a taxonomy to be selected (by default the csv will be downloaded with the ENA taxonomy).
+                <br><img src="{{ url_for('static', filename='img/d_tutorial_imgs/taxonomy_file.png') }}" width="130px" height="195px">
+                <br>Additional files can also be downloaded for each organism selected, and more than one file extension (db, ct, bpseq_nH ect) of these can be selected at the same time.
+                A zipper folder containing the additional files will be downloaded (the csv file is downloaded separately).
+                <br><img src="{{ url_for('static', filename='img/d_tutorial_imgs/add_files.png') }}" width="130px" height="195px">
+                <img src="{{ url_for('static', filename='img/d_tutorial_imgs/add_file_2.png') }}" width="130px" height="195px" >
+            </h3>
+        </h2>
+    </div>
+
 {% endblock %}

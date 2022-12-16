@@ -203,6 +203,3 @@ def d_tutorial():
     return render_template('d_tutorial.html')
 
 
-@app.route('/information/')
-def info():
-    return render_template('info.html')
