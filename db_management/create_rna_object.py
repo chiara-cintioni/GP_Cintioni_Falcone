@@ -89,6 +89,7 @@ class RnaObject:
         else:
             self.silva = True
             self.silva_taxonomy = str(line.values).removesuffix("']]").removeprefix("[['")
+            self.silva_taxonomy = self.silva_taxonomy.removesuffix("\"]]").removeprefix("[[\"")
 
 
     def add_taxonomy_ena(self):
@@ -109,6 +110,7 @@ class RnaObject:
         else:
             self.ena = True
             self.ena_taxonomy = str(line.values).removesuffix("']]").removeprefix("[['")
+            self.ena_taxonomy = self.ena_taxonomy.removesuffix("\"]]").removeprefix("[[\"")
 
 
     def add_taxonomy_ltp(self):
@@ -126,6 +128,7 @@ class RnaObject:
         else:
             self.ltp = True
             self.ltp_taxonomy = str(line.values).removesuffix("']]").removeprefix("[['")
+            self.ltp_taxonomy = self.ltp_taxonomy.removesuffix("\"]]").removeprefix("[[\"")
 
     def add_taxonomy_ncbi(self):
         """
@@ -142,6 +145,7 @@ class RnaObject:
         else:
             self.ncbi = True
             self.ncbi_taxonomy = str(line.values).removesuffix("']]").removeprefix("[['")
+            self.ncbi_taxonomy = self.ncbi_taxonomy.removesuffix("\"]]").removeprefix("[[\"")
 
     def add_taxonomy_gtdb(self):
         """
@@ -158,6 +162,7 @@ class RnaObject:
         else:
             self.gtdb = True
             self.gtdb_taxonomy = str(line.values).removesuffix("']]").removeprefix("[['")
+            self.gtdb_taxonomy = self.gtdb_taxonomy.removesuffix("\"]]").removeprefix("[[\"")
 
 
     def add_accession_number(self):
@@ -175,19 +180,3 @@ class RnaObject:
                             self.accession_number = acc_num
                             return 0
         return -1
-
-
-    def add_accession_number_old(self):
-        dir_path = "files/benchmark_db_files"
-        benchmark_file = self.benchmark_id.strip() + ".db"
-        for file_to_read in os.listdir(dir_path):
-            if file_to_read == benchmark_file:
-                file_path = os.path.join(dir_path, benchmark_file)
-                if os.path.isfile(file_path):
-                    file_to_read = open(file_path,"r")
-                    for line in file_to_read:
-                        if line.startswith("#Accession Number:"):
-                            self.accession_number = line.strip().split(sep=": ")[1]
-                            return 0
-        return -1
-
