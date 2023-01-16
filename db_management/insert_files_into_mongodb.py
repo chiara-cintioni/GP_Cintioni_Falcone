@@ -135,6 +135,3 @@ def files_menu():
         files_menu()
 
 
-files_menu()
-
-

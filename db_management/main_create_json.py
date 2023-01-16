@@ -1,6 +1,5 @@
 import os
 import create_json
-import mongo_services
 
 
 def read_files():

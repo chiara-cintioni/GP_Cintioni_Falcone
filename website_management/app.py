@@ -9,21 +9,21 @@ from bson import json_util
 from flask import Flask, render_template, request, send_file
 from pandas import json_normalize
 from pymongo import MongoClient
-
 import config
 import search_script
 
 app = Flask(__name__)
 
+# Connecting to the MongoDB database.
 client = MongoClient('mongodb+srv://DeniseFalcone:Giappone4ever@cluster0.yelotpf.mongodb.net/test', 27017)
-# client = MongoClient('localhost')
 db = client.RIBOdb
 collection = db.rna_sequences
 
+# Loading the configuration from the config.py file.
+app.config.from_pyfile('config.py')
+
 if __name__ == '__main__':
     app.run(debug=True)
-
-app.config.from_pyfile('config.py')
 
 
 @app.route('/search/', methods=('GET', 'POST'))
@@ -31,11 +31,14 @@ def search():
     return render_template('search.html')
 
 
+# It takes the input from the user and uses it to search the database
+# :return: The result of the search.
 @app.route('/search/res/', methods=['POST'])
 def search_result():
     if request.method == 'POST':
         org_name = request.form['Organism name']
         from_length = request.form['Length_from']
+        # if the user doesn't insert any input, the variable takes the default value
         if from_length == '':
             from_length = -1
         to_length = request.form['Length_to']
@@ -68,7 +71,7 @@ def search_result():
         taxon = request.form['rank_value']
         db_name = request.form['Database']
         is_validated = request.form['Is Validated']
-        # taxonomy rank deve essere fatto come prima ricerca.
+        # the order of the result search in the database needs to be in this order, or it doesn't work.
         result_taxonomy_rank = search_script.search_rank(taxonomy, rank, taxon, collection)
         result_org_name = search_script.search_org_name(org_name, result_taxonomy_rank)
         result_acc_num = search_script.search_acc_num(acc_num, result_org_name)
@@ -86,10 +89,17 @@ def search_result():
         result_taxonomy = search_script.search_taxonomy(taxonomy, result_benchmark)
         result_db_name = search_script.search_db_name(db_name, result_taxonomy)
         result_is_validated = search_script.search_is_validated(is_validated, result_db_name)
+        # result gets the final output of the user research
         result = result_is_validated.find()
         return render_template("search_results.html", result_list=result)
 
 
+# It takes a list of filenames and a taxonomy, then it searches the database for all the documents that have the
+# given taxonomy and the given filenames, then it creates a temporary file with the results, then it sends the
+# temporary file to the user.
+# :param filenames: a list of filenames to download
+# :param taxonomy: the taxonomy you want to search for
+# :return: The file is being returned.
 @app.route('/download_files_csv/<filenames>/<taxonomy>', methods=['GET'])
 def download(filenames, taxonomy):
     if request.method == 'GET':
@@ -103,19 +113,20 @@ def download(filenames, taxonomy):
         sanitized_mongo_docs = json.loads(json_util.dumps(mongo_docs))
         normalized_mongo_docs = json_normalize(sanitized_mongo_docs)
         final_mongo_docs = pandas.DataFrame(normalized_mongo_docs)
-        '''
-        Consider using os.path.join(tempfile.gettempdir(), os.urandom(24).hex()) instead. 
-        It's reliable, cross-platform, and the only caveat is that it doesn't work on FAT partitions. 
-        NamedTemporaryFile has a number of issues, not the least of which is that it can fail to create files because of
-        a permission error, fail to detect the permission error, and then loop millions of times, 
-        hanging your program and your filesystem.
-        '''
+        # We use os.path.join(tempfile.gettempdir(), os.urandom(24).hex()) because it's reliable, cross-platform and
+        # the only caveat is that it doesn't work on FAT partitions. NamedTemporaryFile has a number of issues,
+        # not the least of which is that it can fail to create files because of a permission error, fail to detect
+        # the permission error, and then loop millions of times, hanging your program and your filesystem.
         temp_file = os.path.join(tempfile.gettempdir(), os.urandom(24).hex())
         final_mongo_docs.to_csv(temp_file, sep=',', index=False)
-        # Tolto il download_name
         return send_file(temp_file, as_attachment=True)
 
 
+# It takes two strings as input, one containing the filenames and the other containing the formats, and it returns a zip
+# file containing the files with the specified filenames and formats.
+# :param filenames: a string of filenames separated by commas
+# :param formats: a string of file extensions separated by commas
+# :return: a zip file containing the files selected by the user.
 @app.route('/download_files/<filenames>/<formats>', methods=['GET'])
 def download_zip_files(filenames, formats):
     if request.method == 'GET':
@@ -201,5 +212,3 @@ def s_tutorial():
 @app.route('/tutorial/download')
 def d_tutorial():
     return render_template('d_tutorial.html')
-
-
