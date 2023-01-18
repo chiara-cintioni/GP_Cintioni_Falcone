@@ -2,6 +2,8 @@ import main_create_json
 import mongo_services
 
 
+# It's a menu that allows the user to choose what to do.
+# :return: The menu() function is being returned.
 def menu():
     print("Welcome, what would you like to do?")
     print("1. Insert a txt file (with one or more rna sequences) into mongodb.")

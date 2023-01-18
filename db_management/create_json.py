@@ -1,6 +1,14 @@
 from create_rna_object import RnaObject
+import pandas as pd
 
+rank_file = open("files/taxonomy/TaxaName_TaxaRank.txt", "r")
+dataframe = pd.read_table(rank_file)
+rank_file.close()
 
+# It takes a taxa string and returns the rank and taxa name
+#
+# :param taxa: the taxa you want to search for
+# :return: A list with the gtdb rank and the taxa name.
 def search_gtdb_rank(taxa):
     rank_taxa = taxa.split(sep="__")
     if rank_taxa[0] == 'd':
@@ -20,7 +28,12 @@ def search_gtdb_rank(taxa):
     return [rank, rank_taxa[-1]]
 
 
-def search_rank(word_to_search):
+# It opens the TaxaName_TaxaRank file, reads all the lines, and for each line it checks if the first word is the word we're looking for (the taxa name).
+# If it is, it returns the last word of the line (the rank)
+#
+# :param word_to_search: the word you want to search for
+# :return: The rank of the word searched.
+def search_rank_vecchio(word_to_search):
     rank_file = open("files/taxonomy/TaxaName_TaxaRank.txt", "r")
     rank_file_lines = rank_file.readlines()
     for line in rank_file_lines:
@@ -33,64 +46,51 @@ def search_rank(word_to_search):
     return " "
 
 
+# It takes a word as an input, searches the dataframe for that word, and returns the rank of the word if it is found
+#
+# :param word_to_search: the word you want to search for
+# :return: The rank of the taxa or " " if null
+def search_rank(word_to_search):
+    line = dataframe.loc[dataframe['Taxa_Name'] == word_to_search, ['Taxa_Rank']]
+    if line.empty:
+        return " "
+    rank = line['Taxa_Rank'].values[0]
+    return rank
+
+
+# It takes a line of text, splits it into a list of words, and returns the last word
+#
+# :param line: the line of text that we're processing
+# :return: The final word in the line.
 def get_final_word(line):
     res = line.split(sep='	')
     final_word = res[-1]
     return final_word
 
 
+# It takes a line of text, splits it into a list of words, and returns the first word
+#
+# :param line: the line of text that we're processing
+# :return: The first word in the line.
 def get_first_word(word):
     res = word.split(sep='	')
     first_word = res[0]
     return first_word
 
 
+# It takes a line of text, splits it into a list of words, takes the first word, and returns it
+#
+# :param line: the line of text that we're reading in
+# :return: The first word (taxa) in the line.
 def get_first_taxa(line):
     word = line.split(sep=';')[0].strip()
     return word
 
 
-"""
-def get_domain(obj1):
-    taxa = get_first_taxa(obj1.silva_taxonomy)
-    cont = 0
-    domain = ''
-    while taxa != "" and cont < len(obj1.silva_taxonomy.split(sep=';')):
-        rank = search_rank(taxa)
-        if rank == "superkingdom":
-            domain = taxa
-            return domain
-    taxa = get_first_taxa(obj1.ena_taxonomy)
-    cont = 0
-    while taxa != "" and cont < len(obj1.ena_taxonomy.split(sep=';')):
-        rank = search_rank(taxa)
-        if rank == "superkingdom":
-            domain = taxa
-            return domain
-    taxa = get_first_taxa(obj1.ltp_taxonomy)
-    cont = 0
-    while taxa != "" and cont < len(obj1.ltp_taxonomy.split(sep=';')):
-        rank = search_rank(taxa)
-        if rank == "superkingdom":
-            domain = taxa
-            return domain
-    taxa = get_first_taxa(obj1.ncbi_taxonomy)
-    cont = 0
-    while taxa != "" and cont < len(obj1.ncbi_taxonomy.split(sep=';')):
-        rank = search_rank(taxa)
-        if rank == "superkingdom":
-            domain = taxa
-            return domain
-    taxa = get_first_taxa(obj1.gtdb_taxonomy)
-    cont = 0
-    while taxa != "" and cont < len(obj1.gtdb_taxonomy.split(sep=';')):
-        rank = search_rank(taxa)
-        if rank == "domain":
-            domain = taxa
-            return domain
-    return "unknown"
-"""
-
+# It takes a txt file (with the organisms info) as input, and writes a json file as output
+#
+#     :param file: the file to be read
+#     :param output: the file you want to write to
 def create_file_json(file, output):
     output.write('[')
     lines = file.readlines()[1:]
@@ -138,10 +138,8 @@ def create_file_json(file, output):
         output.write('\"Core plus\": \"' + obj1.core_plus + '\",')
         output.write('\"Shape\": \"' + obj1.shape + '\",')
         output.write('\"Is Validated\": \"' + obj1.is_validated + '\",')
-        # obj1.db_name da inserire al posto di CRW
         output.write('\"Reference database\": \"' + obj1.db_name + '\",')
-        # obj1.link_db da inserire al posto del link diretto
-        output.write('\"Reference database link\": \"' + obj1.link_db + '\",')
+        output.write('\"Description\": \"' + obj1.description + '\",')
         output.write('\"Benchmark ID\": \"' + obj1.benchmark_id + '\",')
         output.write('\"Taxonomy\": [{')
         if obj1.silva:

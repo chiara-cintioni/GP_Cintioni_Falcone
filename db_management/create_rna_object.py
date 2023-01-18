@@ -66,10 +66,8 @@ class RnaObject:
                 self.is_validated = str(element).strip()
                 cont += 1
             elif cont == 14:
-                self.link_db = str(element).strip()
+                self.description = str(element).strip()
                 cont += 1
-            if cont == 14:
-                self.link_db = "--"
 
 
 
@@ -82,7 +80,7 @@ class RnaObject:
         silva_taxonomy = open('files/taxonomy/silva_taxonomy.csv', 'r')
         df = pd.read_table(silva_taxonomy)
         pd.set_option('display.max_colwidth', None)
-        line = df.loc[df['organism_name'].str.contains(self.organism_name, case=False), ['taxonomy']]
+        line = df.loc[df['organism_name'] == self.organism_name, ['taxonomy']]
         empty_df = pd.DataFrame(columns=['taxonomy'])
         if empty_df.equals(line):
             self.silva = False
@@ -103,7 +101,7 @@ class RnaObject:
         ena_taxonomy = open('files/taxonomy/ena_taxonomy.csv', 'r')
         df = pd.read_table(ena_taxonomy)
         pd.set_option('display.max_colwidth', None)
-        line = df.loc[df['organism_name'].str.contains(self.organism_name, case=False), ['taxonomy']]
+        line = df.loc[df['organism_name'] == self.organism_name, ['taxonomy']]
         empty_df = pd.DataFrame(columns=['taxonomy'])
         if empty_df.equals(line):
             self.ena = False
@@ -121,7 +119,7 @@ class RnaObject:
         """
         ltp_taxonomy = open('files/taxonomy/ltp_taxonomy.csv', 'r')
         df = pd.read_table(ltp_taxonomy)
-        line = df.loc[df['organism_name'].str.contains(self.organism_name, case=False), ['taxonomy']]
+        line = df.loc[df['organism_name'] == self.organism_name, ['taxonomy']]
         empty_df = pd.DataFrame(columns=['taxonomy'])
         if empty_df.equals(line):
             self.ltp = False
@@ -138,7 +136,7 @@ class RnaObject:
         ncbi_taxonomy = open('files/taxonomy/ncbi_taxonomy.csv', 'r')
         df = pd.read_table(ncbi_taxonomy)
         pd.set_option('display.max_colwidth', None)
-        line = df.loc[df['organism_name'].str.contains(self.organism_name, case=False), ['taxonomy']]
+        line = df.loc[df['organism_name'] == self.organism_name, ['taxonomy']]
         empty_df = pd.DataFrame(columns=['taxonomy'])
         if empty_df.equals(line):
             self.ncbi = False
@@ -155,7 +153,7 @@ class RnaObject:
         gtdb_taxonomy = open('files/taxonomy/gtdb_taxonomy.csv', 'r')
         df = pd.read_table(gtdb_taxonomy)
         pd.set_option('display.max_colwidth', None)
-        line = df.loc[df['organism_name'].str.contains(self.organism_name, case=False), ['taxonomy']]
+        line = df.loc[df['organism_name'] == self.organism_name, ['taxonomy']]
         empty_df = pd.DataFrame(columns=['taxonomy'])
         if empty_df.equals(line):
             self.gtdb = False
