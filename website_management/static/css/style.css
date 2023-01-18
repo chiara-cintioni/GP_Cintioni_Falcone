@@ -79,6 +79,13 @@ body {
     min-height: 100vh;
     background:whitesmoke center;
 }
+#PhyloRNA_title{
+    line-height: 80px;
+    z-index: 2;
+    top: -4px;
+    cursor: pointer;
+    margin-left: 250px;
+}
 label.logo{
     line-height: 80px;
     padding: 10px 30px;
@@ -435,9 +442,17 @@ input#leng_f, input#leng_t, input#weak_f, input#weak_t {
     .dataTables_wrapper .dataTables_info{
         margin-left: auto;
     }
+    /* nav-bar PhyloRNA title*/
+    #PhyloRNA_title{
+        line-height: 80px;
+        z-index: 2;
+        top: -4px;
+        cursor: pointer;
+        margin-left: 180px;
+    }
 }
 
-@media(max-width: 991px){
+@media(max-width: 1127px){
     /* nav_bar */
 
     header{
