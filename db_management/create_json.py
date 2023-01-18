@@ -141,6 +141,7 @@ def create_file_json(file, output):
         output.write('\"Reference database\": \"' + obj1.db_name + '\",')
         output.write('\"Description\": \"' + obj1.description + '\",')
         output.write('\"Benchmark ID\": \"' + obj1.benchmark_id + '\",')
+        output.write('\"Reference\": \"' + obj1.reference + '\",')
         output.write('\"Taxonomy\": [{')
         if obj1.silva:
             cont = 0

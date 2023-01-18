@@ -68,6 +68,9 @@ class RnaObject:
             elif cont == 14:
                 self.description = str(element).strip()
                 cont += 1
+            elif cont == 15:
+                self.reference = str(element).strip()
+                cont += 1
 
 
 
