@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 
-client = MongoClient('mongodb+srv://DeniseFalcone:Giappone4ever@cluster0.yelotpf.mongodb.net/test', 27017)
-# client = MongoClient('localhost')
+#client = MongoClient('mongodb+srv://DeniseFalcone:Giappone4ever@cluster0.yelotpf.mongodb.net/test', 27017)
+client = MongoClient('localhost')
 db = client.RIBOdb
 
 
