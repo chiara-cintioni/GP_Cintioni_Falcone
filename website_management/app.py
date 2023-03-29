@@ -15,7 +15,7 @@ import search_script
 app = Flask(__name__)
 
 # Connecting to the MongoDB database.
-#client = MongoClient('mongodb+srv://DeniseFalcone:Giappone4ever@cluster0.yelotpf.mongodb.net/test', 27017)
+# client = MongoClient('mongodb+srv://DeniseFalcone:Giappone4ever@cluster0.yelotpf.mongodb.net/test', 27017)
 client = MongoClient('localhost')
 db = client.RIBOdb
 collection = db.rna_sequences
@@ -95,55 +95,6 @@ def search_result():
         return render_template("search_results.html", result_list=result)
 
 
-# It takes a list of filenames and a taxonomy, then it searches the database for all the documents that have the
-# given taxonomy and the given filenames, then it creates a temporary file with the results, then it sends the
-# temporary file to the user.
-# :param filenames: a list of filenames to download
-# :param taxonomy: the taxonomy you want to search for
-# :return: The file is being returned.
-'''
-@app.route('/download_files_csv/<filenames>/<taxonomy>', methods=['GET'])
-def download(filenames, taxonomy):
-    if request.method == 'GET':
-        filenames = filenames.split(sep=',')
-        taxonomy = taxonomy.split(sep=',')[0]
-        db.get_collection("temp").delete_many({})
-        for filename in filenames:
-            if filename != '' and taxonomy != '':
-                search_script.get_file_with_one_taxonomy(filename, taxonomy)
-        mongo_docs = db.get_collection("temp").find({}, {'_id': False})
-        sanitized_mongo_docs = json.loads(json_util.dumps(mongo_docs))
-        normalized_mongo_docs = json_normalize(sanitized_mongo_docs)
-        final_mongo_docs = pandas.DataFrame(normalized_mongo_docs)
-        # We use os.path.join(tempfile.gettempdir(), os.urandom(24).hex()) because it's reliable, cross-platform and
-        # the only caveat is that it doesn't work on FAT partitions. NamedTemporaryFile has a number of issues,
-        # not the least of which is that it can fail to create files because of a permission error, fail to detect
-        # the permission error, and then loop millions of times, hanging your program and your filesystem.
-        temp_file = os.path.join(tempfile.gettempdir(), os.urandom(24).hex())
-        final_mongo_docs.to_csv(temp_file, sep=',', index=False)
-        return send_file(temp_file, as_attachment=True)
-
-'''
-
-'''
-@app.route('/download_files_csv', methods=['POST'])
-def download():
-    filenames = request.form.getlist('filenames')
-    taxonomy = request.args.get("taxonomy")
-    db.get_collection("temp").delete_many({})
-    for filename in filenames:
-        if filename != '' and taxonomy != '':
-            search_script.get_file_with_one_taxonomy(filename, taxonomy)
-    mongo_docs = db.get_collection("temp").find({}, {'_id': False})
-    sanitized_mongo_docs = json.loads(json_util.dumps(mongo_docs))
-    normalized_mongo_docs = json_normalize(sanitized_mongo_docs)
-    final_mongo_docs = pandas.DataFrame(normalized_mongo_docs)
-    temp_file = os.path.join(tempfile.gettempdir(), os.urandom(24).hex())
-    final_mongo_docs.to_csv(temp_file, sep=',', index=False)
-    return send_file(temp_file, as_attachment=True)
-'''
-
-
 @app.route('/download_files_csv', methods=['POST'])
 def download():
     data = request.json
@@ -164,6 +115,7 @@ def download():
     temp_file = os.path.join(tempfile.gettempdir(), os.urandom(24).hex())
     final_mongo_docs.to_csv(temp_file, sep=',', index=False)
     return send_file(temp_file, as_attachment=True)
+
 
 # It takes two strings as input, one containing the filenames and the other containing the formats, and it returns a zip
 # file containing the files with the specified filenames and formats.

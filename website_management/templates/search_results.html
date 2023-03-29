@@ -3,11 +3,18 @@
 {% block title %}Search results{% endblock %}
 
 {% block content %}
+<body class="wait-alert" >
+    <div class="wait-alert-message" >
+        <p>Please wait, the page is loading...</p>
+    </div>
+</body>
+
+
 <form action="/search/">
     <button type="submit" id="prev_button"> Previous page </button>
 </form>
 <h1>Result</h1>
-<div class="result_container">
+<div class="result_container" id="pippo" style="-webkit-filter: blur(2px);">
     <div id="table_result_div">
         <table class="result_table" id="result_table">
             <thead>
@@ -141,7 +148,9 @@
             </div>
         </div>
         <button type="button"  id="dl_button" onclick="final_download()">Download</button>
-        <progress id="download-progress" max="100" value="0"></progress>
+        <div id="progress_dl_div">
+            <progress id="download-progress" max="100" value="0"></progress>
+        </div>
     </div>
     <p id="hidden_ref_array" hidden></p>
 </div>
@@ -204,5 +213,16 @@
             element.appendChild(node);
         });
     })
+</script>
+<script>
+    document.documentElement.style.pointerEvents = 'none';
+    // Nasconde l'alert quando la pagina è completamente caricata
+    window.addEventListener('load', function() {
+    var waitAlert = document.querySelector('.wait-alert-message');
+    waitAlert.style.display = 'none';
+    // Riabilita gli eventi di puntatore sulla pagina dopo il caricamento
+    document.documentElement.style.pointerEvents = 'auto';
+    });
+    document.getElementById("pippo").style.webkitFilter= "blur(0px)";
 </script>
 {% endblock %}

@@ -29,14 +29,15 @@ function check_taxonomy_dl(){
     return  taxonomy_string;
 }
 
-/*
 function download_csv_from_db() {
     var all_ref_ids = rows_selected;
     var taxonomy = check_taxonomy_dl();
+    var jsonData = JSON.stringify({filenames: all_ref_ids, taxonomy: taxonomy});
     $.ajax({
-        url: '/download_files_csv/' + all_ref_ids +'/'+ taxonomy,
-        type: 'GET',
-        context: document.body,
+        url: '/download_files_csv',
+        type: 'POST',
+        data: jsonData,
+        contentType: 'application/json',
         xhrFields:{
             responseType: 'blob'
         },
@@ -44,95 +45,22 @@ function download_csv_from_db() {
             let date = new Date().toJSON();
             let filename = date.concat(".csv")
             saveAs(data, filename);
+            document.getElementById("download-progress").value = 0;
+            clearInterval(interval);
         }
     });
+    var timer = (all_ref_ids.length/10) * 2000;
+    var progress_bar = document.getElementById("download-progress");
+    var interval = setInterval(function() {
+        progress_bar.value += 10;
+        if (progress_bar.value >= 100) {
+            clearInterval(interval);
+        }
+    }, timer/10);
 }
-*/
-/*
-function download_csv_from_db() {
-    var all_ref_ids = rows_selected;
-    var taxonomy = check_taxonomy_dl();
-    var formData = new FormData();
-    for (var i = 0; i < all_ref_ids.length; i++) {
-        formData.append("filenames", all_ref_ids[i]);
-    }
-    formData.append("taxonomy", taxonomy);
-    $.ajax({
-        url: '/download_files_csv?taxonomy=' + taxonomy,
-        type: 'POST',
-        data: formData,
-        processData: false,
-        contentType: false,
-        xhrFields:{
-            responseType: 'blob'
-        },
-        success: function(content) {
-            let date = new Date().toJSON();
-            let filename = date.concat(".csv");
-            saveAs(content, filename);
-        }
-    });
-}*/
 
-/*
-Funziona forse?
-function download_csv_from_db() {
-    var all_ref_ids = rows_selected;
-    var taxonomy = check_taxonomy_dl();
-    var jsonData = JSON.stringify({filenames: all_ref_ids, taxonomy: taxonomy});
-    $.ajax({
-        url: '/download_files_csv',
-        type: 'POST',
-        data: jsonData,
-        contentType: 'application/json',
-        xhrFields:{
-            responseType: 'blob'
-        },
-        success: function(data) {
-            let date = new Date().toJSON();
-            let filename = date.concat(".csv")
-            saveAs(data, filename);
-        }
-    });
-}
-*/function download_csv_from_db() {
-    var all_ref_ids = rows_selected;
-    var taxonomy = check_taxonomy_dl();
-    var jsonData = JSON.stringify({filenames: all_ref_ids, taxonomy: taxonomy});
-    $.ajax({
-        url: '/download_files_csv',
-        type: 'POST',
-        data: jsonData,
-        contentType: 'application/json',
-        xhrFields:{
-            responseType: 'blob'
-        },
-        xhr: function() {
-            var xhr = $.ajaxSettings.xhr();
-            xhr.onprogress = function(e) {
-                var percentage = e.loaded / e.total * 100;
-                console.log(percentage + '%');
-                $("#download-progress").attr("value", percentage);
-            };
-            return xhr;
-        },
-        success: function(data) {
-            let date = new Date().toJSON();
-            let filename = date.concat(".csv")
-            saveAs(data, filename);
-            $("#download-progress").removeClass("active");
-            $("#download-progress").attr("value", 0);
-        },
-        beforeSend: function() {
-            $("#download-progress").addClass("active");
-        },
-        error: function() {
-            $("#download-progress").removeClass("active");
-            $("#download-progress").attr("value", 0);
-            alert("Si è verificato un errore durante il download del file.");
-        }
-    });
-}
+
+
 
 
 function download_file_from_db() {
@@ -157,7 +85,7 @@ function final_download(){
     if (confirm ('Are you sure you want to download these files? \n' +
         'N.B. Please consider that if you are downloading a lot of files it might take some time.')) {
         download_csv_from_db();
-        //download_file_from_db();
+        download_file_from_db();
     }
 }
 
