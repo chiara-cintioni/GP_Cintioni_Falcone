@@ -14,7 +14,7 @@
     <button type="submit" id="prev_button"> Previous page </button>
 </form>
 <h1>Result</h1>
-<div class="result_container" id="pippo" style="-webkit-filter: blur(2px);">
+<div class="result_container" id="result_container_div" style="-webkit-filter: blur(2px);">
     <div id="table_result_div">
         <table class="result_table" id="result_table">
             <thead>
@@ -223,6 +223,6 @@
     // Riabilita gli eventi di puntatore sulla pagina dopo il caricamento
     document.documentElement.style.pointerEvents = 'auto';
     });
-    document.getElementById("pippo").style.webkitFilter= "blur(0px)";
+    document.getElementById("result_container_div").style.webkitFilter= "blur(0px)";
 </script>
 {% endblock %}
