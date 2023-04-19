@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+    {% block title %}
+        Search
+    {% endblock %}
+
+    {% block content %}
+        <h1>Search</h1>
+        <div id="search_container">
+            <form name="search_form" action="/search/res/" method="POST" autocomplete="on">
+                <table id="search_table">
+                    <tr>
+                        <td><a>Organism name:</a></td>
+                        <td><input type="text" name="Organism name" placeholder="Organism name" size="20"></td>
+                        <td><a>Accession number:</a></td>
+                        <td><input type="text" name="Accession number" placeholder="Accession number" size="20"></td>
+                    </tr>
+                    <tr>
+                        <td><a>Unpaired Bases:</a></td>
+                        <td><input type="number" name="Number of decoupled nucleotides" placeholder="Unpaired Bases"></td>
+                        <td><a>Number of weak bonds:</a></td>
+                        <td><input type="number" name="Number_of_weak_bonds_from" id="weak_f" placeholder="From">
+                        <input type="number" name="Number_of_weak_bonds_to" id="weak_t" placeholder="To"></td>
+                    </tr>
+                    <tr>
+                        <td><a>Shape:</a></td>
+                        <td><input type="text" name="Shape" placeholder="Shape"></td>
+                        <td><a>Length:</a></td>
+                        <td><input type="number" name="Length_from" id="leng_f" placeholder="From">
+                        <input type="number" name="Length_to" id="leng_t" placeholder="To"></td>
+                    </tr>
+                    <tr>
+                        <td><a>Is Pseudoknotted:</a></td>
+                        <td><select  name="Is Pseudoknotted" >
+                            <option value=''>---</option>
+                            <option value="Y">Yes</option>
+                            <option value="N">No</option>
+                        </select></td>
+                        <td><a>Pseudoknot order:</a></td>
+                        <td><input type="number" name="Pseudoknot order" placeholder="Pseudoknot order"></td>
+
+                    </tr>
+                    <tr>
+                        <td><a>Core:</a></td>
+                        <td><input type="text" name="Core" placeholder="Core"></td>
+                        <td><a>Core plus:</a></td>
+                        <td><input type="text" name="Core plus" placeholder="Core plus"></td>
+                    </tr>
+                    <tr>
+                        <td><a>Is Validated:</a></td>
+                        <td><select  name="Is Validated">
+                            <option value=''>---</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select></td>
+                        <td><a>Database:</a></td>
+                        <td><input type="text" name="Database" placeholder="Database"></td>
+                    </tr>
+                    <tr>
+                        <td><a>Genus:</a></td>
+                        <td><input type="number" name="Genus" placeholder="Genus"></td>
+                        <td><a>Taxonomy:</a></td>
+                        <td><select  name="Taxonomy">
+                            <option value=''>---</option>
+                            <option value="ENA">ENA</option>
+                            <option value="SILVA">SILVA</option>
+                            <option value="GTDB">GTDB</option>
+                            <option value="LTP">LTP</option>
+                            <option value="NCBI">NCBI</option>
+                        </select></td>
+                    </tr>
+                    <tr>
+                        <td><a>Reference ID:</a></td>
+                        <td><input type="text" name="Benchmark ID" placeholder="Reference ID" size="20"></td>
+                        <td><a>Taxonomy rank:</a></td>
+                        <td><select  name="Taxonomy_rank" onchange="check_taxon_rank(this)">
+                            <option value=''>---</option>
+                            <option value="superkingdom">Superkingdom</option>
+                            <option value="phylum">Phylum</option>
+                            <option value="class">Class</option>
+                            <option value="order">Order</option>
+                            <option value="family">Family</option>
+                            <option value="genus">Genus</option>
+                        </select></td>
+                    </tr>
+                    <tr>
+                        <td><a>RNA Type:</a></td>
+                        <td><select  name="Rna Type">
+                            <option value=''>Any</option>
+                            <option value="5S">5S</option>
+                            <option value="16S">16S</option>
+                            <option value="23S">23S</option>
+                            <option value="Group I Introns">Group I Introns</option>
+                            <option value="Group II Introns">Group II Introns</option>
+                            <option value="tRNA">tRNA</option>
+                            <option value="Other">Others</option>
+                        </select></td>
+                        <td><a>Taxon:</a></td>
+                        <td><input id="Taxon_id" type="text" name="rank_value" placeholder="Taxon" disabled></td>
+                        <input type="hidden" id="Taxon_id" type="text" name="rank_value" value="">
+                    </tr>
+                </table>
+                <div id="search_buttons_div">
+                    <button type="submit" id="search_button">Search</button>
+                    <button type="reset" value="reset" id="reset_button">Reset</button>
+                    <button onclick="location.href='{{ url_for('s_tutorial') }}'" type="button" id="s_tutorial_btn"> Search Tutorial </button>
+                </div>
+            </form>
+        </div>
+    {% endblock %}

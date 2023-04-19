@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% block title %}Search tutorial{% endblock %}
+
+{% block content %}
+    <h1>SEARCH tutorial</h1>
+    <div id="s_tutorial_div">
+        <h2>On this page you will find the step-by-step research tutorial.</h2>
+        <hr>
+        <h2>This is an example of a correct research of an organism in the database. If you don't enter any value,
+            the search will show all the rna sequences in the database.
+            <img src="{{ url_for('static', filename='img/s_tutorial_imgs/Phormidium_example.png') }}" width="775px"
+                 height="339px">
+        </h2>
+        <hr>
+        <h2 style="font-weight: bold">1. Search with Organism name:
+            <h3>
+                the name has to be written with only the first character of the name in uppercase.
+            </h3>
+            <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_organism_name.png') }}" width="435px"
+                 height="40px" style=" border: 2px solid #1b3b5d">
+        </h2>
+        <hr>
+        <h2 style="font-weight: bold">2. Search with Accession number:
+            <h3>
+                enter the accession number.
+            </h3>
+            <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_accession_number.png') }}"
+                 width="435px" height="40px" style=" border: 2px solid #1b3b5d">
+        </h2>
+        <hr>
+        <h2 style="font-weight: bold">3. Search with Unpaired Base, Genus, Pseudoknot order:
+            <h3>
+                these values are numeric.
+            </h3>
+            <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_unpaired_bases.png') }}" width="435px"
+                 height="40px" style=" border: 2px solid #1b3b5d">
+            <br>
+            <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_genus.png') }}" width="435px"
+                 height="40px" style=" border: 2px solid #1b3b5d"></h2>
+        <br>
+        <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_pseudo_order.png') }}" width="435px"
+             height="40px" style=" border: 2px solid #1b3b5d"></h2>
+        </h2>
+        <hr>
+        <h2 style="font-weight: bold">4. Search with Number of weak bonds or Length:
+            <h3>
+                for both the number of weak bonds and the length you have to enter a range from a min value to a max
+                value.
+                <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_len_weak.png') }}" width="555px"
+                     height="100px" style=" border: 2px solid #1b3b5d">
+            </h3>
+            <br>
+            <h3>
+                You also can enter a single value (for example only the min value or the max value).
+                <img src="{{ url_for('static', filename='img/s_tutorial_imgs/search_from_to_with_one_value.png') }}"
+                     width="555px" height="100px" style=" border: 2px solid #1b3b5d">
+            </h3>
+            <br>
+            <h3>
+                You can enter the same value for the min and max to search with a specific weak bond/length.
+                <img src="{{ url_for('static', filename='img/s_tutorial_imgs/search_from_to_with_specific_value.png') }}"
+                     width="555px" height="100px" style=" border: 2px solid #1b3b5d">
+            </h3>
+
+        </h2>
+        <hr>
+        <h2 style="font-weight: bold">5. Search with Shape, Core or Core plus:
+            <h3>
+                enter a sequence of round and square brackets.
+            </h3>
+            <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_shape.png') }}" width="435px"
+                 height="40px" style=" border: 2px solid #1b3b5d">
+            <br>
+            <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_core.png') }}" width="435px"
+                 height="40px" style=" border: 2px solid #1b3b5d">
+            <br>
+            <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_core_plus.png') }}" width="435px"
+                 height="40px" style=" border: 2px solid #1b3b5d">
+        </h2>
+        <hr>
+        <h2 style="font-weight: bold">6. Search with is Pseudoknotted or is Validated:
+            <h3>
+                select Yes or No from the drop-down menu (default value is null: - - ).
+            </h3>
+            <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_pseudoknotted_options.png') }}"
+                 width="253px" height="151px" style=" border: 2px solid #1b3b5d"></h2>
+        <hr>
+        <h2 style="font-weight: bold">7. Search with RNA Type:
+            <h3>
+                select a rna type from the drop-down value. The default value, Any, searches all kinds of RNA types in
+                the database.
+                The value Others searches all the RNA types that are not listed in the drop-down menu.
+            </h3>
+            <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_rna_type_options.png') }}"
+                 width="361px" height="181px" style=" border: 2px solid #1b3b5d"></h2>
+        <hr>
+        <h2 style="font-weight: bold">8. Search with Database:
+            <h3>
+                enter the reference database where executes the search.
+            </h3>
+            <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_db.png') }}" width="435px"
+                 height="40px" style=" border: 2px solid #1b3b5d"></h2>
+        <hr>
+        <h2 style="font-weight: bold">9. Search with Reference ID:
+            <h3>
+                enter the reference id.
+            </h3>
+            <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_ref_id.png') }}" width="435px"
+                 height="40px" style=" border: 2px solid #1b3b5d"></h2>
+        <hr>
+        <h2 style="font-weight: bold">9. Search with Taxonomy:
+            <h3>
+                select the taxonomy from the drop-down menu.
+                Selecting a taxonomy, the search result will show only the organisms that are classified with the
+                selected taxonomy. In the results you can see all the taxonomies of the organism, as well as the
+                selected one.
+            </h3>
+            <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_taxonomy_options.png') }}"
+                 width="335px" height="180px" style=" border: 2px solid #1b3b5d"></h2>
+        <hr>
+        <h2 style="font-weight: bold">10. Search with Taxonomy rank AND Taxon:
+            <h3>
+                if you want to search with a specific taxon, you have to first enter the taxonomy rank of the taxon
+                because the taxon is disabled until the rank is entered.
+            </h3>
+            <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_taxonomy_rank_options.png') }}"
+                 width="392px" height="201px" style=" border: 2px solid #1b3b5d">
+            <h3></h3>
+            <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_taxon.png') }}" width="435px"
+                 height="40px" style=" border: 2px solid #1b3b5d">
+        </h2>
+    </div>
+{% endblock %}

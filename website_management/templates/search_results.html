@@ -1,0 +1,220 @@
+{% extends 'base.html' %}
+
+{% block title %}Search results{% endblock %}
+
+{% block content %}
+
+<form action="/search/">
+    <button type="submit" id="prev_button"> Previous page </button>
+</form>
+
+<div id="msg" style="font-size:20px; margin-top: 5px;">
+Loading, please wait...
+</div>
+
+<h1>Results</h1>
+<div class="result_container" id="result_container_div" style="display:none">
+    <div id="table_result_div">
+        <table class="result_table" id="result_table">
+            <thead>
+                 <tr>
+                     <th><input id="check_all" class="td_check_btn" type="checkbox"></th>
+                     <th>Organism name</th>
+                     <th>Reference ID</th>
+                     <th>Accession Number</th>
+                     <th>RNA Type</th>
+                     <th>More Information</th>
+                 </tr>
+            </thead>
+            <tbody class="result_tbody">
+                {% for element in result_list %}
+                    <tr id="table_row" >
+                        <td class="td_check_btn">
+                            <input onclick="show_taxonomy('{{ element['Benchmark ID'] }}')" class="check_button" type="checkbox" name="id_checkbox" id="{{ element['Benchmark ID'] }}">
+                        </td>
+                        <td >
+                            {{ element['Organism name'] }}
+                        </td>
+                        <td id="ref_id" class="ref_class">
+                            {{ element['Benchmark ID'] }}
+                        </td>
+                        <td>
+                            {{ element['Accession number'] }}
+                        </td>
+                        <td>
+                            {{ element['Rna Type'] }}
+                        </td>
+                        <td class="more_info" data-toggle="modal" data-target="#exampleModal{{ element['Benchmark ID'] }}" onclick="show_taxonomy('{{ element['Benchmark ID'] }}')">
+                           ...
+                        </td>
+                    </tr>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal{{ element['Benchmark ID'] }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">{{ element['Organism name'] }}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p name="hidden_element">Organism name: {{ element['Organism name'] }}</p>
+                                    <p name="hidden_element">Accession number: {{ element['Accession number'] }}</p>
+                                    <p name="hidden_element">Length: {{ element['Length'] }}</p>
+                                    <p name="hidden_element">Number of decoupled nucleotides: {{ element['Number of decoupled nucleotides'] }}</p>
+                                    <p name="hidden_element">Number of weak bonds: {{ element['Number of weak bonds'] }}</p>
+                                    <p name="hidden_element">Is pseudoknotted: {{ element['Is Pseudoknotted'] }}</p>
+                                    <p name="hidden_element">Pseudoknot order: {{ element['Pseudoknot order'] }}</p>
+                                    <p name="hidden_element">Rna type: {{ element['Rna Type'] }}</p>
+                                    <p name="hidden_element">Genus: {{ element['Genus'] }}</p>
+                                    <p name="hidden_element">Core: {{ element['Core'] }}</p>
+                                    <p name="hidden_element">Core plus: {{ element['Core plus'] }}</p>
+                                    <p name="hidden_element">Shape: {{ element['Shape'] }}</p>
+                                    <p name="hidden_element">Reference ID: {{ element['Benchmark ID'] }}</p>
+                                    <p name="hidden_element">Database name: {{ element['Reference database'] }}</p>
+                                    <p name="hidden_element">Reference: {{ element['Reference'] }}</p>
+                                    <p name="hidden_element">Description: {{ element['Description'] }}</p>
+                                    <hr>
+                                    <p id="taxonomies">TAXONOMIES</p>
+                                    <div id='taxa_container'>
+                                        <div id="silva_div{{ element['Benchmark ID'] }}" class="taxa_div">
+                                            <p id="taxa_name">SILVA</p>
+                                            <p style="display: none;" id="silva_taxonomy{{ element['Benchmark ID'] }}"> {{ element['Taxonomy'][0]['SILVA']}} </p>
+                                        </div>
+                                        <div id="ena_div{{ element['Benchmark ID'] }}" class="taxa_div">
+                                            <p id="taxa_name">ENA</p>
+                                            <p  style="display: none;" id="ena_taxonomy{{ element['Benchmark ID'] }}"> {{ element['Taxonomy'][1]['ENA']}}</p>
+                                        </div>
+                                        <div id="ltp_div{{ element['Benchmark ID'] }}" class="taxa_div">
+                                            <p id="taxa_name">LTP</p>
+                                            <p  style="display: none;" id="ltp_taxonomy{{ element['Benchmark ID'] }}"> {{ element['Taxonomy'][2]['LTP']}}</p>
+                                        </div>
+                                        <div id="ncbi_div{{ element['Benchmark ID'] }}" class="taxa_div">
+                                            <p id="taxa_name">NCBI</p>
+                                            <p  style="display: none;" id="ncbi_taxonomy{{ element['Benchmark ID'] }}"> {{ element['Taxonomy'][3]['NCBI']}}</p>
+                                        </div>
+                                        <div id="gtdb_div{{ element['Benchmark ID'] }}" class="taxa_div">
+                                            <p id="taxa_name">GTDB</p>
+                                            <p  style="display: none;" id="gtdb_taxonomy{{ element['Benchmark ID'] }}"> {{ element['Taxonomy'][4]['GTDB']}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div id="dl_option_div">
+        <h3 id="dl_option">Download options</h3>
+        <div id="selection_download">
+            <div id="choose_format_div">
+                <p>Additional files to download:</p>
+                <input class="check_button_format" type="checkbox" id="bpseq" value=".bpseq">
+                <label for="bpseq"> bpseq format</label><br>
+                <input class="check_button_format" type="checkbox" id="ct" value=".ct">
+                <label for="ct"> ct format</label><br>
+                <input class="check_button_format" type="checkbox" id="db" value=".dbn">
+                <label for="db"> dbn format</label><br>
+                <input class="check_button_format" type="checkbox" id="fasta" value=".fasta">
+                <label for="fasta"> fasta format</label><br>
+                <p>File with header:</p>
+                <input type="radio" class="check_header_button" name="header_button" id="header" value="" checked>
+                <label for="header"> yes</label><br>
+                <input type="radio" class="check_header_button" name="header_button" id="n_header" value="_nH">
+                <label for="n_header"> no</label><br>
+            </div>
+            <div id="choose_taxonomy_div">
+                <p>Taxonomy to download with the csv:</p>
+                <input type="radio" class="check_button_taxonomy" name="taxonomy_button" id="SILVA" value="SILVA">
+                <label for="SILVA"> SILVA taxonomy</label><br>
+                <input type="radio" class="check_button_taxonomy" name="taxonomy_button" id="ENA" value="ENA" checked>
+                <label for="ENA"> ENA taxonomy</label><br>
+                <input type="radio" class="check_button_taxonomy" name="taxonomy_button" id="LTP" value="LTP">
+                <label for="LTP"> LTP taxonomy</label><br>
+                <input type="radio" class="check_button_taxonomy" name="taxonomy_button" id="NCBI" value="NCBI">
+                <label for="NCBI"> NCBI Taxonomy</label><br>
+                <input type="radio" class="check_button_taxonomy" name ="taxonomy_button" id="GTDB" value="GTDB">
+                <label for="GTDB"> GTDB Taxonomy</label><br>
+            </div>
+        </div>
+        <button type="button"  id="dl_button" onclick="final_download()">Download</button>
+        <div id="progress_dl_div">
+            <progress id="download-progress" max="100" value="0"></progress>
+        </div>
+    </div>
+    <p id="hidden_ref_array" hidden></p>
+</div>
+<script type="text/javascript">
+    var rows_selected = [];
+    $(document).ready(function() {
+        var table =  $('#result_table').DataTable();
+        //Select all function for checkboxes
+        $('#check_all').on('click', function(){
+            var rows = table.rows({ 'search': 'applied' }).nodes();
+            $('input[type="checkbox"]', rows).prop('checked', this.checked);
+        });
+        $('#result_table tbody').on('change', 'input[type="checkbox"]', function(){
+            if(!this.checked){
+                var el = $('#check_all').get(0);
+                if(el && el.checked && ('indeterminate' in el)){
+                    el.indeterminate = true;
+                }
+            }
+        });
+    })
+</script>
+<script>
+    var table =  $('#result_table').DataTable();
+    var rows_selected = [];
+    cont = 0
+    $(document).ready(function() {
+        $('#check_all').on('click', function(e){
+            var data = table.rows().data();
+            if(this.checked){
+                for(var i=0; i<data.length; i++) {
+                    rows_selected[i] = data[i][2];
+                }
+            } else {
+                rows_selected.length = 0;
+                console.log("Array deselezionato", rows_selected);
+            }
+            e.stopPropagation();
+            var node= document.createTextNode(rows_selected);
+            var element = document.getElementById("hidden_ref_array");
+            element.appendChild(node);
+        });
+        $('#result_table tbody').on('click', 'input[type="checkbox"]', function(e){
+            var $row = $(this).closest('tr');
+            var data = table.row($row).data();
+            var ref_id= data[2];
+            if(this.checked){
+                $row.addClass('selected');
+                rows_selected[cont]= ref_id;
+                console.log("cont: "+cont)
+                cont++;
+
+            } else {
+                $row.removeClass('selected');
+                rows_selected[rows_selected.indexOf(ref_id)] = '';
+            }
+            e.stopPropagation();
+            var node= document.createTextNode(rows_selected);
+            var element = document.getElementById("hidden_ref_array");
+            element.appendChild(node);
+        });
+    })
+</script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#result_container_div').show();
+    $('#msg').hide();
+});
+</script>
+{% endblock %}
