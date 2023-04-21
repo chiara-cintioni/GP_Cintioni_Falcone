@@ -1,14 +1,15 @@
+import datetime
 import json
 import os
+import gridfs
 import pymongo
 
-
-myclient = pymongo.MongoClient('mongodb+srv://DeniseFalcone:Giappone4ever@cluster0.yelotpf.mongodb.net/test', 27017)
+myclient = pymongo.MongoClient('localhost')
 db = myclient['RIBOdb']
 collection = db['rna_sequences']
 
 
-def insert_many_to_mongo(dir_path):
+def insert_to_mongo(dir_path):
     for file_to_read in os.listdir(dir_path):
         file_path = os.path.join(dir_path, file_to_read)
         if os.path.isfile(file_path):
@@ -63,3 +64,28 @@ def delete_all():
         print("All documents have been deleted. \n")
     else:
         print("Operation Aborted. \n")
+
+
+def insert_files():
+    dir_path = input("Insert the path of the directory containing the files you want to insert: ")
+    for file_to_read in os.listdir(dir_path):
+        file_location = dir_path + "/" + file_to_read
+        if os.path.isfile(file_location):
+            file_data = open(file_location, "rb")
+            data = file_data.read()
+            fs = gridfs.GridFS(db)
+            fs.put(data, filename=file_to_read, _id=file_to_read)
+    print("All the files have been uploaded.")
+
+
+def delete_unused_collection():
+    time_format = '%Y-%m-%d'
+    current_time = str(datetime.datetime.utcnow().date())
+    current_time = datetime.datetime.strptime(current_time, time_format)
+    lists_to_check = db.list_collection_names()
+    for l in lists_to_check:
+        if l != 'fs.chunks' and l != 'fs.files' and l != 'rna_sequences':
+            l_time = db.get_collection(l).find_one().get('_id').generation_time.date()
+            l_time = datetime.datetime.strptime(str(l_time), time_format)
+            if (current_time - datetime.timedelta(days=10)).date() >= l_time.date():
+                db.get_collection(l).drop()

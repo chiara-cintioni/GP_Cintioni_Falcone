@@ -1,15 +1,9 @@
-from pymongo import MongoClient
 import config
-#client = MongoClient('mongodb+srv://DeniseFalcone:Giappone4ever@cluster0.yelotpf.mongodb.net/test', 27017)
-client = MongoClient('localhost')
-db = client.RIBOdb
 
 
 def search_org_name(org_name, collection, user_collection):
     if org_name == '':
-        temp = collection.find({})
-        config.DB.get_collection(user_collection).insert_many(temp)
-        return db.user_collection
+        return collection
     collection.aggregate([
         {
             '$match': {
@@ -20,7 +14,7 @@ def search_org_name(org_name, collection, user_collection):
             '$out': user_collection
         }
     ])
-    return db.user_collection
+    return config.DB.get_collection(user_collection)
 
 
 def search_acc_num(acc_num, collection, user_collection):
@@ -36,7 +30,7 @@ def search_acc_num(acc_num, collection, user_collection):
             '$out': user_collection
         }
     ])
-    return db.user_collection
+    return config.DB.get_collection(user_collection)
 
 
 def search_length_from(length_from, collection, user_collection):
@@ -58,7 +52,7 @@ def search_length_from(length_from, collection, user_collection):
             '$out': user_collection
         }
     ])
-    return db.user_collection
+    return config.DB.get_collection(user_collection)
 
 
 def search_length_to(length_to, collection, user_collection):
@@ -80,7 +74,7 @@ def search_length_to(length_to, collection, user_collection):
             '$out': user_collection
         }
     ])
-    return db.user_collection
+    return config.DB.get_collection(user_collection)
 
 
 def search_length_from_to(length_from, length_to, collection, user_collection):
@@ -114,7 +108,7 @@ def search_length_from_to(length_from, length_to, collection, user_collection):
             '$out': user_collection
         }
     ])
-    return db.user_collection
+    return config.DB.get_collection(user_collection)
 
 
 def search_length(length_from, length_to, collection, user_collection):
@@ -141,7 +135,7 @@ def search_benchmark(benchmark, collection, user_collection):
             '$out': user_collection
         }
     ])
-    return db.user_collection
+    return config.DB.get_collection(user_collection)
 
 
 def search_num_decoup(num_decoup, collection, user_collection):
@@ -157,7 +151,7 @@ def search_num_decoup(num_decoup, collection, user_collection):
             '$out': user_collection
         }
     ])
-    return db.user_collection
+    return config.DB.get_collection(user_collection)
 
 
 def search_weak_from(weak_from, collection, user_collection):
@@ -179,7 +173,7 @@ def search_weak_from(weak_from, collection, user_collection):
             '$out': user_collection
         }
     ])
-    return db.user_collection
+    return config.DB.get_collection(user_collection)
 
 
 def search_weak_to(weak_to, collection, user_collection):
@@ -201,7 +195,7 @@ def search_weak_to(weak_to, collection, user_collection):
             '$out': user_collection
         }
     ])
-    return db.user_collection
+    return config.DB.get_collection(user_collection)
 
 
 def search_weak_from_to(weak_from, weak_to, collection, user_collection):
@@ -235,7 +229,7 @@ def search_weak_from_to(weak_from, weak_to, collection, user_collection):
             '$out': user_collection
         }
     ])
-    return db.user_collection
+    return config.DB.get_collection(user_collection)
 
 
 def search_weak_bonds(weak_from, weak_to, collection, user_collection):
@@ -262,7 +256,7 @@ def search_is_pseudo(is_pseudo, collection, user_collection):
             '$out': user_collection
         }
     ])
-    return db.user_collection
+    return config.DB.get_collection(user_collection)
 
 
 def search_pseudo_order(pseudo_order, collection, user_collection):
@@ -278,7 +272,7 @@ def search_pseudo_order(pseudo_order, collection, user_collection):
             '$out': user_collection
         }
     ])
-    return db.user_collection
+    return config.DB.get_collection(user_collection)
 
 
 def search_rna_type(rna_type, collection, user_collection):
@@ -294,7 +288,7 @@ def search_rna_type(rna_type, collection, user_collection):
             '$out': user_collection
         }
     ])
-    return db.user_collection
+    return config.DB.get_collection(user_collection)
 
 
 def search_genus(genus, collection, user_collection):
@@ -310,7 +304,7 @@ def search_genus(genus, collection, user_collection):
             '$out': user_collection
         }
     ])
-    return db.user_collection
+    return config.DB.get_collection(user_collection)
 
 
 def search_core(core, collection, user_collection):
@@ -326,7 +320,7 @@ def search_core(core, collection, user_collection):
             '$out': user_collection
         }
     ])
-    return db.user_collection
+    return config.DB.get_collection(user_collection)
 
 def search_core_plus(core_plus, collection, user_collection):
     if core_plus == '':
@@ -341,7 +335,7 @@ def search_core_plus(core_plus, collection, user_collection):
             '$out': user_collection
         }
     ])
-    return db.user_collection
+    return config.DB.get_collection(user_collection)
 
 
 def search_shape(shape, collection, user_collection):
@@ -357,7 +351,7 @@ def search_shape(shape, collection, user_collection):
             '$out': user_collection
         }
     ])
-    return db.user_collection
+    return config.DB.get_collection(user_collection)
 
 
 def search_ena(collection, user_collection):
@@ -371,7 +365,7 @@ def search_ena(collection, user_collection):
             '$out': user_collection
         }
     ])
-    return db.user_collection
+    return config.DB.get_collection(user_collection)
 
 
 def search_silva(collection, user_collection):
@@ -385,7 +379,7 @@ def search_silva(collection, user_collection):
             '$out': user_collection
         }
     ])
-    return db.user_collection
+    return config.DB.get_collection(user_collection)
 
 
 def search_ltp(collection, user_collection):
@@ -399,7 +393,7 @@ def search_ltp(collection, user_collection):
             '$out': user_collection
         }
     ])
-    return db.user_collection
+    return config.DB.get_collection(user_collection)
 
 
 def search_gtdb(collection, user_collection):
@@ -413,7 +407,7 @@ def search_gtdb(collection, user_collection):
             '$out': user_collection
         }
     ])
-    return db.user_collection
+    return config.DB.get_collection(user_collection)
 
 
 def search_ncbi(collection, user_collection):
@@ -427,7 +421,7 @@ def search_ncbi(collection, user_collection):
             '$out': user_collection
         }
     ])
-    return db.user_collection
+    return config.DB.get_collection(user_collection)
 
 
 def search_taxonomy(taxonomy, collection, user_collection):
@@ -497,7 +491,7 @@ def create_string_taxonomy(taxonomy, rank, value):
 
 
 def search_rank_all(string_array, value, collection, user_collection):
-    db.get_collection(user_collection).delete_many({})
+    config.DB.get_collection(user_collection).delete_many({})
     collection.aggregate([
         {
             '$match': {
@@ -569,7 +563,7 @@ def search_rank_all(string_array, value, collection, user_collection):
             }
         }
     ])
-    return db.user_collection
+    return config.DB.get_collection(user_collection)
 
 
 def search_rank(taxonomy, rank, value, collection, user_collection):
@@ -589,11 +583,11 @@ def search_rank(taxonomy, rank, value, collection, user_collection):
                 '$out': user_collection
             }
         ])
-        return db.user_collection
+        return config.DB.get_collection(user_collection)
 
 
 def get_file_with_one_taxonomy(filename, taxonomy, user_collection):
-    collection = db.get_collection("rna_sequences")
+    collection = config.DB.get_collection("rna_sequences")
     string_taxonomy = 'Taxonomy.' + taxonomy + '.Classified'
     collection.aggregate([
         {
@@ -625,7 +619,7 @@ def get_file_with_one_taxonomy(filename, taxonomy, user_collection):
             }
         }
     ])
-    return db.user_collection
+    return config.DB.get_collection(user_collection)
 
 
 def search_db_name(db_name, collection, user_collection):
@@ -641,7 +635,7 @@ def search_db_name(db_name, collection, user_collection):
             '$out': user_collection
         }
     ])
-    return db.user_collection
+    return config.DB.get_collection(user_collection)
 
 
 def search_is_validated(is_validated, collection, user_collection):
@@ -657,4 +651,4 @@ def search_is_validated(is_validated, collection, user_collection):
             '$out': user_collection
         }
     ])
-    return db.user_collection
+    return config.DB.get_collection(user_collection)

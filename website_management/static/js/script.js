@@ -11,7 +11,8 @@ function check_format_dl(){
     var check_button_format = document.getElementsByClassName("check_button_format")
     var formats_string = '';
     var header;
-    if( document.getElementById("header").checked === true) {
+    var isSelected = false;
+    if(document.getElementById("header").checked === true) {
         header = document.getElementById("header").value;
     } else {
          header = document.getElementById("n_header").value;
@@ -19,9 +20,14 @@ function check_format_dl(){
     for(var i = 0; i < check_button_format.length; i++) {
         if(check_button_format[i].checked === true){
             formats_string = header + check_button_format[i].value + "," + formats_string;
+            isSelected = true;
         }
     }
-    return  formats_string;
+    if(isSelected){
+        return formats_string;
+    }else {
+        return null;
+    }
 }
 
 function check_taxonomy_dl(){
@@ -70,6 +76,9 @@ function download_csv_from_db() {
 function download_file_from_db() {
     var all_ref_ids = rows_selected;
     var formats = check_format_dl();
+    if(formats === null){
+        return;
+    }
     var jsonData = JSON.stringify({filenames: all_ref_ids, formats: formats});
     $.ajax({
         url: '/download_files',
@@ -88,28 +97,8 @@ function download_file_from_db() {
 }
 
 
-function download_file_from_db2() {
-    var all_ref_id = rows_selected;
-    var formats = check_format_dl();
-    console.log("Formato: ", formats);
-    $.ajax({
-        url: '/download_files/' + all_ref_id +'/'+ formats,
-        type: 'GET',
-        context: document.body,
-        xhrFields:{
-            responseType: 'blob',
-        },
-        success: function(data) {
-            let date = new Date().toJSON();
-            let filename = date.concat(".zip")
-            saveAs(data, filename);
-        }
-    });
-}
-
 function final_download(){
-    if (confirm ('Are you sure you want to download these files? \n' +
-        'N.B. Please consider that if you are downloading a lot of files it might take some time.')) {
+    if (confirm ('Are you sure you want to download these files? \n')) {
         download_csv_from_db();
         download_file_from_db();
     }

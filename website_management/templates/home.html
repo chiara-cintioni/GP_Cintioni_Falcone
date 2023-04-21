@@ -4,7 +4,7 @@
 
 {% block content %}
     <h2 id="home_h2">PhyloRNA: a database of RNA secondary structures with associated phylogeny</h2>
-    <h3 id="home_h3">
+    <h4 id="home_h4">
         PhyloRNA contains known RNA secondary structures associated with their phylogenetic information according to
         several curated taxonomies (<a href="https://www.arb-silva.de/">SILVA</a>, <a
             href="https://www.ebi.ac.uk/">ENA</a>, <a href="https://imedea.uib-csic.es/mmg/ltp/#LTP">LTP</a> , <a
@@ -12,11 +12,8 @@
             href="https://gtdb.ecogenomic.org/">GTDB</a>) to allow the scientific community to study the relationship
         between RNA structures and phylogenetic ranks. In addition, structural features and abstractions of the
         structures are available.
-    </h3>
-    <div id="home_imgs" style="text-align: center;">
-                <img src="{{ url_for('static', filename='img/albero.png') }}" style="max-width:100%; max-height:100%; border: 1px solid black" >
-            </div>
-    <div id="home_tables">
+    </h4>
+    <div id="home_table_imgs">
         <style>
             .tg {
                 border-collapse: collapse;
@@ -28,7 +25,7 @@
                 border-style: solid;
                 border-width: 1px;
                 font-family: Arial, sans-serif;
-                font-size: 20px;
+                font-size: 14px;
                 overflow: hidden;
                 padding: 10px 5px;
                 word-break: normal;
@@ -39,7 +36,7 @@
                 border-style: solid;
                 border-width: 1px;
                 font-family: Arial, sans-serif;
-                font-size: 20px;
+                font-size: 14px;
                 font-weight: normal;
                 overflow: hidden;
                 padding: 10px 5px;
@@ -57,8 +54,6 @@
                 vertical-align: top
             }
         </style>
-
-        <div id="tb_provenience" >
             <table class="tg">
                 <thead>
                 <tr>
@@ -71,91 +66,88 @@
                     <td class="tg-0lax" style="font-weight: bold">Source and Link</td>
                 </tr>
                 <tr>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"><a href="https://www.rcsb.org/pdb/">RCSB Protein Data Bank</a></td>
+                    <td class="tg-0lax">{{ num_RCSB }}</td>
+                    <td class="tg-0lax"><a href=" http://www.rcsb.org/pdb/">RCSB Protein Data Bank</a></td>
                 </tr>
                 <tr>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"><a href="https://crw-site.chemistry.gatech.edu/">Gutell Lab CRW Site</a></td>
+                    <td class="tg-0lax">{{ num_CRW }}</td>
+                    <td class="tg-0lax"><a href="http://www.rna.ccbb.utexas.edu/">Gutell Lab CRW Site</a></td>
                 </tr>
                 <tr>
-                    <td class="tg-0lax"></td>
+                    <td class="tg-0lax"> {{ num_tmRNA }}</td>
                     <td class="tg-0lax"><a href="http://rnp.uthct.edu/rnp/tmRDB/tmRDB.html">tmRNA Database</a></td>
                 </tr>
                 <tr>
-                    <td class="tg-0lax"></td>
+                    <td class="tg-0lax">{{ num_sprinzl }}</td>
                     <td class="tg-0lax"><a href="http://www.uni-bayreuth.de/departments/biochemie/sprinzl/trna/">
-                        Sprinzl
-                        tRNA Database</a></td>
+                        Sprinzl tRNA Database</a></td>
                 </tr>
                 <tr>
-                    <td class="tg-0lax">100000</td>
+                    <td class="tg-0lax">{{ num_RNASE }}</td>
                     <td class="tg-0lax"><a href="http://jwbrown.mbio.ncsu.edu/RNaseP/home.html">RNase P Database</a>
                     </td>
                 </tr>
                 <tr>
-                    <td class="tg-0lax"></td>
+                    <td class="tg-0lax">{{ num_SRP }}</td>
                     <td class="tg-0lax"><a href="http://rnp.uthct.edu/rnp/SRPDB/SRPDB.html"> SRP Database</a></td>
                 </tr>
                 <tr>
-                    <td class="tg-0lax"></td>
+                    <td class="tg-0lax">{{ num_RFAM }}</td>
                     <td class="tg-0lax"><a href="http://www.sanger.ac.uk/Software/Rfam/index.shtml"> Rfam Database</a>
                     </td>
                 </tr>
                 <tr>
-                    <td class="tg-0lax"></td>
+                    <td class="tg-0lax">{{ num_NAD }}</td>
                     <td class="tg-0lax"><a href="http://ndbserver.rutgers.edu/">Nucleic Acid Database</a></td>
                 </tr>
                 </tbody>
             </table>
-        </div>
-        <div id="tb_classes">
-        <table class="tg">
-            <thead>
-            <tr>
-                <th class="tg-0pky" colspan="2" style="font-weight: bold">Classes of PhyloRNA structures</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td class="tg-0lax" style="font-weight: bold">#</td>
-                <td class="tg-0lax" style="font-weight: bold">Class</td>
-            </tr>
-            <tr>
-                <td class="tg-0lax"></td>
-                <td class="tg-0lax">5S rRNA</td>
-            </tr>
-            <tr>
-                <td class="tg-0lax">100000</td>
-                <td class="tg-0lax">16S rRNA</td>
-            </tr>
-            <tr>
-                <td class="tg-0lax"></td>
-                <td class="tg-0lax">23S rRNA</td>
-            </tr>
-            <tr>
-                <td class="tg-0lax"></td>
-                <td class="tg-0lax">Group I Intro</td>
-            </tr>
-            <tr>
-                <td class="tg-0lax"></td>
-                <td class="tg-0lax">Group II Introns</a>
-                </td>
-            </tr>
-            <tr>
-                <td class="tg-0lax"></td>
-                <td class="tg-0lax">tRNA</td>
-            </tr>
-            <tr>
-                <td class="tg-0lax"></td>
-                <td class="tg-0lax">--</td>
-            </tr>
-            <tr>
-                <td class="tg-0lax"></td>
-                <td class="tg-0lax">--</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+            <img src="{{ url_for('static', filename='img/albero.png') }}" style="max-width:60%; max-height:60%; border: 1px solid black">
+            <table class="tg">
+                <thead>
+                <tr>
+                    <th class="tg-0pky" colspan="2" style="font-weight: bold">Classes of PhyloRNA structures</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="tg-0lax" style="font-weight: bold">#</td>
+                    <td class="tg-0lax" style="font-weight: bold">Class</td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax">{{ num_5S }}</td>
+                    <td class="tg-0lax">5S rRNA</td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax">{{ num_16S }}</td>
+                    <td class="tg-0lax">16S rRNA</td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax">{{ num_23S }}</td>
+                    <td class="tg-0lax">23S rRNA</td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax">{{ num_GI1 }}</td>
+                    <td class="tg-0lax">Group I Intro</td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax">{{ num_GI2 }}</td>
+                    <td class="tg-0lax">Group II Introns</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax">{{ num_tRNA}}</td>
+                    <td class="tg-0lax">tRNA</td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax"></td>
+                    <td class="tg-0lax">--</td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax"></td>
+                    <td class="tg-0lax">--</td>
+                </tr>
+                </tbody>
+            </table>
     </div>
 {% endblock %}

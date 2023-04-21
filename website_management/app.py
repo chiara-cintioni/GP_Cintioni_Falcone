@@ -39,6 +39,8 @@ def search_result():
     before_request('/search/res/')
     if request.method == 'POST':
         collection_id = get_session_id()
+        temp = config.DB.get_collection("rna_sequences").find({})
+        config.DB.get_collection(collection_id).insert_many(temp)
         org_name = request.form['Organism name']
         from_length = request.form['Length_from']
         # if the user doesn't insert any input, the variable takes the default value
@@ -75,7 +77,7 @@ def search_result():
         db_name = request.form['Database']
         is_validated = request.form['Is Validated']
         # the order of the result search in the database needs to be in this order, or it doesn't work.
-        result_taxonomy_rank = search_script.search_rank(taxonomy, rank, taxon, config.COLLECTION, collection_id)
+        result_taxonomy_rank = search_script.search_rank(taxonomy, rank, taxon, config.DB.get_collection(collection_id), collection_id)
         result_org_name = search_script.search_org_name(org_name, result_taxonomy_rank, collection_id)
         result_acc_num = search_script.search_acc_num(acc_num, result_org_name, collection_id)
         result_length = search_script.search_length(int(from_length), int(to_length), result_acc_num, collection_id)
@@ -145,7 +147,23 @@ def download_zip_files():
 @app.route('/')
 def home():
     before_request('/')
-    return render_template('home.html')
+    #Provenience of PhyloRNA Structures table
+    num_RCSB = config.COLLECTION.count_documents({'Reference database':'NULL'})
+    num_CRW = config.COLLECTION.count_documents({'Reference database':'CRW'})
+    num_tmRNA =  config.COLLECTION.count_documents({'Reference database':'NULL'})
+    num_sprinzl = config.COLLECTION.count_documents({'Reference database':'NULL'})
+    num_RNASE = config.COLLECTION.count_documents({'Reference database':'NULL'})
+    num_SRP = config.COLLECTION.count_documents({'Reference database':'NULL'})
+    num_RFAM = config.COLLECTION.count_documents({'Reference database':'RFAM'})
+    num_NAD = config.COLLECTION.count_documents({'Reference database':'NULL'})
+    #Classes of PhyloRNA structures table
+    num_5S = config.COLLECTION.count_documents({'Rna Type':'5S'})
+    num_16S = config.COLLECTION.count_documents({'Rna Type':'16S'})
+    num_23S= config.COLLECTION.count_documents({'Rna Type':'23S'})
+    num_GI1= config.COLLECTION.count_documents({'Rna Type':'Group I Introns'})
+    num_GI2= config.COLLECTION.count_documents({'Rna Type':'Group II Introns'})
+    num_tRNA= config.COLLECTION.count_documents({'Rna Type':'tRNA'})
+    return render_template('home.html', num_RCSB = num_RCSB, num_CRW = num_CRW, num_tmRNA = num_tmRNA, num_sprinzl = num_sprinzl, num_RNASE = num_RNASE, num_SRP = num_SRP, num_RFAM = num_RFAM, num_NAD = num_NAD, num_5S=num_5S, num_16S=num_16S, num_23S=num_23S, num_GI1=num_GI1, num_GI2=num_GI2, num_tRNA=num_tRNA)
 
 
 def get_session_id():
@@ -159,17 +177,17 @@ def get_session_id():
 
 def before_request(url):
     with lock:
-        print(url)
-        print(session.get('previous_url'))
+        print("Url attuale: ", url)
+        print("Url precedente: ", session.get('previous_url'))
         if session.get('previous_url') == '/search/res/':
             if url != '/search/res/':
                 session['previous_url'] = url
-                print("ci sono")
                 config.DB.get_collection(get_session_id()).delete_many({})
                 config.DB.get_collection(get_session_id()).drop()
                 session.pop('session_id')
         else:
             session['previous_url'] = url
+
 
 @app.route('/contact/')
 def contact():
@@ -180,7 +198,8 @@ def contact():
 @app.route('/sources/')
 def sources():
     before_request('/sources/')
-    return render_template('sources.html')
+    num_docs = config.COLLECTION.count_documents({})
+    return render_template('sources.html', num_docs=num_docs)
 
 
 @app.route('/tutorial/search')

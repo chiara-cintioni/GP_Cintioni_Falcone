@@ -11,25 +11,30 @@
             <h3>
                 The table shows the results of the search performed.
                 To see all the information of a single result table click on the three dots in the more information column.
-                <img src="{{ url_for('static', filename='img/d_tutorial_imgs/more_info_1.png') }}" width="168px" height="69px">
+                <img src="{{ url_for('static', filename='img/d_tutorial_imgs/more_info_1.png') }}" style="max-width:16%; max-height:16%; border: 1px solid #1b3b5d" >
                 <br>A pop-up will appear with all the information including the taxonomies that classify this organism.
                 <br>By hovering over the taxons in the taxonomies you can see the rank of that taxon.
-                <br><img src="{{ url_for('static', filename='img/d_tutorial_imgs/more_info_2.png') }}" width="156px" height="178px" style="border: 1px solid #1b3b5d">
-                <img src="{{ url_for('static', filename='img/d_tutorial_imgs/more_info_3.png') }}" width="175px" height="178px" style="border: 1px solid #1b3b5d">
+                <br><img src="{{ url_for('static', filename='img/d_tutorial_imgs/more_info_2.png') }}" style="max-width:16%; max-height:16%;border: 1px solid #1b3b5d">
+                <img src="{{ url_for('static', filename='img/d_tutorial_imgs/more_info_3.png') }}" style="max-width:16%; max-height:16%; border: 1px solid #1b3b5d">
             </h3>
         </h2>
 
         <hr>
         <h2 style="font-weight: bold">Download
             <h3>
-                To make a download of one more organism, select it by clicking on the small square.
-                In case you want to do the download of all organisms, select the square in the upper left corner of the table (next to Organism name).
-                Once the organisms are selected, a csv will be downloaded that will contain all the information plus a taxonomy to be selected (by default the csv will be downloaded with the ENA taxonomy).
-                <br><img src="{{ url_for('static', filename='img/d_tutorial_imgs/taxonomy_file.png') }}" width="130px" height="195px">
-                <br>Additional files can also be downloaded for each organism selected, and more than one file extension (db, ct, bpseq_nH ect) of these can be selected at the same time.
-                A zipper folder containing the additional files will be downloaded (the csv file is downloaded separately).
-                <br><img src="{{ url_for('static', filename='img/d_tutorial_imgs/add_files.png') }}" width="130px" height="195px">
-                <img src="{{ url_for('static', filename='img/d_tutorial_imgs/add_file_2.png') }}" width="130px" height="195px" >
+                 To make a download of one more organism, select it by clicking on the small square. In case you want to download of all organisms, select the square in the upper left corner of the table (next to Organism name). Once the organisms are selected, a csv will be downloaded that will contain all the information plus a taxonomy to be selected (by default the csv will be downloaded with the ENA taxonomy).
+                <br>
+                <img src="{{ url_for('static', filename='img/d_tutorial_imgs/taxonomy_file.png') }}" style="max-width:16%; max-height:16%">
+                <br>Additional files can also be downloaded for each organism selected. A zipper folder containing the additional files will be downloaded (the csv file is downloaded separately).
+                The available formats of the additional files are:
+                <ul>
+                    <li>CT: The first line provides the sequence length L. Subsequent lines, one for each nucleotide, start with the nucleotide's index i, followed by its letter code, the 5'-connecting base index (i-1), the 3'-connecting base index (i+1), the paired base index (or 0 for unpaired), and the index of the base in the original sequence.</li>
+                    <li>BPSEQ: File names must end with the ".bpseq" suffix, e.g., "mystr.bpseq". The bpseq format is a simple text format where each line represents a base in the molecule. The line includes the base position (starting from 1), the base name (A, C, G, U, or other alphabetical characters), and the position number of the paired base (or 0 if unpaired).</li>
+                    <li>DBN: Dot-Bracket Notation (DBN) is a format for representing RNA secondary structures. In this format, each base is represented by a character, with round brackets indicating a base pair (e.g., "(.)"), square brackets indicating an unpaired segment (e.g., "[.]"), and dots indicating unpaired positions (e.g., "."). DBN provides a graphical representation of RNA structure and is used in various RNA structure prediction and analysis software.</li>
+                    <li>FASTA: The FASTA format is a commonly used file format for representing nucleotide or protein sequences. Each FASTA entry starts with a header line, which begins with the ">" symbol followed by a brief description of the sequence. The following lines contain the sequence itself, which can span multiple lines. The sequence can include ambiguous characters, gaps, and comments, which are indicated by special symbols. FASTA format is widely used in various bioinformatics applications for storing, retrieving, and comparing sequences.</li>
+                </ul>
+                <img src="{{ url_for('static', filename='img/d_tutorial_imgs/add_file_no_sel.png') }}" style="max-width:16%; max-height:16%">
+                <img src="{{ url_for('static', filename='img/d_tutorial_imgs/add_file_mul_sel.png') }}" style="max-width:16%; max-height:16%">
             </h3>
         </h2>
     </div>
