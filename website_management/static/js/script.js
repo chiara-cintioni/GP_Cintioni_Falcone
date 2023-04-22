@@ -1,4 +1,5 @@
 
+
 /**
  * If the user selects a taxon rank, enable the taxon dropdown menu
  * @param rank - the select box where the user can select a taxon rank
@@ -7,8 +8,13 @@ function check_taxon_rank(rank){
     document.getElementById("Taxon_id").disabled = rank.value === '';
 }
 
+
+/**
+ * Returns a string with all the formats chosen by the client, if none then returns null.
+ * @returns {string|null}
+ */
 function check_format_dl(){
-    var check_button_format = document.getElementsByClassName("check_button_format")
+    var check_button_format = document.getElementsByClassName("check_button_format");
     var formats_string = '';
     var header;
     var isSelected = false;
@@ -30,6 +36,11 @@ function check_format_dl(){
     }
 }
 
+
+/**
+ * Returns the taxonomy chosen by the client
+ * @returns {string}
+ */
 function check_taxonomy_dl(){
     var check_buttons_taxonomy = document.getElementsByClassName("check_button_taxonomy")
     var taxonomy_string = '';
@@ -41,6 +52,10 @@ function check_taxonomy_dl(){
     return  taxonomy_string;
 }
 
+
+/**
+ * Makes an ajax call to download the csv with all the rna sequences chosen by the client.
+ */
 function download_csv_from_db() {
     var all_ref_ids = rows_selected;
     var taxonomy = check_taxonomy_dl();
@@ -72,7 +87,11 @@ function download_csv_from_db() {
 }
 
 
-
+/**
+ * Retrieves the selected rows from the table, checks for the desired file format(s) to download, and sends a request
+ *to the server to download the selected files in a ZIP archive. If the download is successful, it prompts the user to save the ZIP
+ *archive with a filename consisting of the current date and time.
+ */
 function download_file_from_db() {
     var all_ref_ids = rows_selected;
     var formats = check_format_dl();
@@ -97,12 +116,16 @@ function download_file_from_db() {
 }
 
 
+/**
+ * It calls two functions that download CSV and addictional files
+ */
 function final_download(){
     if (confirm ('Are you sure you want to download these files? \n')) {
         download_csv_from_db();
         download_file_from_db();
     }
 }
+
 
 /**
  * It checks if the taxonomy is classified, and if it is, it calls the function to show the taxonomy
@@ -156,6 +179,11 @@ function show_taxonomy(bench_id){
     }
 }
 
+
+/**
+ * Show silva taxonomy on search result table
+ * @param bench_id
+ */
 function show_taxonomy_silva(bench_id) {
     var silva = document.getElementById('silva_taxonomy'+bench_id).innerHTML.toString();
     var temp = silva.split("'");
@@ -182,6 +210,11 @@ function show_taxonomy_silva(bench_id) {
     }
 }
 
+
+/**
+ * Show ena taxonomy on search result table
+ * @param bench_id
+ */
 function show_taxonomy_ena(bench_id) {
     var ena = document.getElementById('ena_taxonomy'+bench_id).innerHTML.toString();
     var temp = ena.split("'");
@@ -207,6 +240,11 @@ function show_taxonomy_ena(bench_id) {
     }
 }
 
+
+/**
+ * Show gtdb taxonomy on search reasult table
+ * @param bench_id
+ */
 function show_taxonomy_gtdb(bench_id) {
     var gtdb = document.getElementById('gtdb_taxonomy'+bench_id).innerHTML.toString();
     var temp = gtdb.split("'");
@@ -232,6 +270,11 @@ function show_taxonomy_gtdb(bench_id) {
     }
 }
 
+
+/**
+ * Show ltp taxonomy on search result table
+ * @param bench_id
+ */
 function show_taxonomy_ltp(bench_id) {
     var ltp = document.getElementById('ltp_taxonomy'+bench_id).innerHTML.toString();
     var temp = ltp.split("'");
@@ -257,6 +300,11 @@ function show_taxonomy_ltp(bench_id) {
     }
 }
 
+
+/**
+ * Show the ncbi taxonomy on search result table.
+ * @param bench_id
+ */
 function show_taxonomy_ncbi(bench_id) {
     var ncbi = document.getElementById('ncbi_taxonomy'+bench_id).innerHTML.toString();
     var temp = ncbi.split("'");

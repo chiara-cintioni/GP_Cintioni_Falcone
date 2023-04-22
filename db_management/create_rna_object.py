@@ -1,14 +1,14 @@
 import os
 import re
 import pandas as pd
-# class that creates a RnaObject that contains all the info
-# make it possible to add more taxonomies
+
+# Class that creates a RnaObject that contains all the info of the rna sequence
 class RnaObject:
 
     def __init__(self, info):
         self.strain = ''
         self.accession_number = ''
-        elements = re.split(r'\t+',info)
+        elements = re.split(r'\t+', info)
         cont = 0
         self.silva = False
         self.silva_taxonomy = ''

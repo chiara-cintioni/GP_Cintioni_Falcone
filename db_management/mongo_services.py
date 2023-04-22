@@ -4,11 +4,14 @@ import os
 import gridfs
 import pymongo
 
-myclient = pymongo.MongoClient('localhost')
-db = myclient['RIBOdb']
+client = pymongo.MongoClient('localhost')
+db = client['PhyloRNAdb']
 collection = db['rna_sequences']
 
 
+'''
+It inserts files into the collection in the database
+'''
 def insert_to_mongo(dir_path):
     for file_to_read in os.listdir(dir_path):
         file_path = os.path.join(dir_path, file_to_read)
@@ -22,6 +25,18 @@ def insert_to_mongo(dir_path):
     print("The json files have been inserted to mongo db. \n")
 
 
+'''
+Given a name of a field to add, adds the field to every document of the collection.
+'''
+def add_one_field_all_docs():
+    field = input("Insert the field you want to add to the rna_sequences collection: ")
+    collection.update_many({}, {'$set': {field: "--"}})
+    print("The field has been successfully added to the collection.")
+
+
+'''
+Given an accession number of a document, it modifies a field of that document
+'''
 def update_one_field():
     acc_number = input("Insert the accession number of the rna sequence you want to modify: ")
     old_document = collection.find_one({"Accession number": acc_number})
@@ -38,7 +53,9 @@ def update_one_field():
         print("The value was changed successfully.")
         print(collection.find_one({"Accession number": acc_number}))
 
-
+'''
+Delete one document from a collection. To remove the document, you need to enter the accession number of the document 
+'''
 def delete_one():
     acc_number = input("Insert the accession number of the rna sequence you want to delete: ")
     old_document = collection.find_one({"Accession number": acc_number})
@@ -54,7 +71,9 @@ def delete_one():
     else:
         print("Operation Aborted. \n")
 
-
+'''
+Delete all documents from a given collection
+'''
 def delete_all():
     col_name = input("Insert the name of the collection of the documents you want to delete: ")
     print("Are you sure you want to delete all documents of this collection? y/n (default: n) ")
@@ -65,7 +84,9 @@ def delete_all():
     else:
         print("Operation Aborted. \n")
 
-
+'''
+It inserts additional files into the database (the files can have the extensions .ct, .bpseq, .fasta, .dbn).
+'''
 def insert_files():
     dir_path = input("Insert the path of the directory containing the files you want to insert: ")
     for file_to_read in os.listdir(dir_path):
@@ -77,7 +98,9 @@ def insert_files():
             fs.put(data, filename=file_to_read, _id=file_to_read)
     print("All the files have been uploaded.")
 
-
+'''
+Delete collections that have not been used within 10 days from their creation.
+'''
 def delete_unused_collection():
     time_format = '%Y-%m-%d'
     current_time = str(datetime.datetime.utcnow().date())

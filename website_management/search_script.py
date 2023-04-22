@@ -322,6 +322,7 @@ def search_core(core, collection, user_collection):
     ])
     return config.DB.get_collection(user_collection)
 
+
 def search_core_plus(core_plus, collection, user_collection):
     if core_plus == '':
         return collection

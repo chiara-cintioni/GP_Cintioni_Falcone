@@ -1,9 +1,26 @@
 from create_rna_object import RnaObject
+import os
 import pandas as pd
 
 rank_file = open("files/taxonomy/TaxaName_TaxaRank.txt", "r")
 dataframe = pd.read_table(rank_file)
 rank_file.close()
+
+
+def read_files():
+    dir_path = input("Insert the path of the directory that contains ONLY the txt files: ")
+    for file_to_read in os.listdir(dir_path):
+        file_path = os.path.join(dir_path, file_to_read)
+        if os.path.isfile(file_path):
+            with open(file_path, 'r') as f:
+                if f.name.endswith(".txt"):
+                    output_path = "files/json_files"
+                    output = file_to_read.replace(".txt", ".json")
+                    print("Creating json of: ", output)
+                    output = open(os.path.join(output_path, output), "w")
+                    create_file_json(f, output)
+    print("The creation of the json files to insert into mongodb has finished.\n")
+    return "files/json_files"
 
 # It takes a taxa string and returns the rank and taxa name
 #
@@ -26,24 +43,6 @@ def search_gtdb_rank(taxa):
     elif rank_taxa[0] == 's':
         rank = "species"
     return [rank, rank_taxa[-1]]
-
-
-# It opens the TaxaName_TaxaRank file, reads all the lines, and for each line it checks if the first word is the word we're looking for (the taxa name).
-# If it is, it returns the last word of the line (the rank)
-#
-# :param word_to_search: the word you want to search for
-# :return: The rank of the word searched.
-def search_rank_vecchio(word_to_search):
-    rank_file = open("files/taxonomy/TaxaName_TaxaRank.txt", "r")
-    rank_file_lines = rank_file.readlines()
-    for line in rank_file_lines:
-        first_word = get_first_word(line).strip()
-        if word_to_search == first_word:
-            rank = get_final_word(line).strip()
-            rank_file.close()
-            return rank
-    rank_file.close()
-    return " "
 
 
 # It takes a word as an input, searches the dataframe for that word, and returns the rank of the word if it is found

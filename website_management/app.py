@@ -15,12 +15,11 @@ import search_script
 import uuid
 
 app = Flask(__name__)
-app.secret_key = 'ajdhaskdjhdkjasdhfk'
+app.secret_key = 'ajdhaskdjhdkjadhfsdsd'
 lock = threading.Lock()
 
 # Loading the configuration from the config.py file.
 app.config.from_pyfile('config.py')
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(seconds=30)
 
 if __name__ == '__main__':
     app.run(debug=True)
@@ -32,8 +31,12 @@ def search():
     return render_template('search.html')
 
 
-# It takes the input from the user and uses it to search the database
-# :return: The result of the search.
+'''
+It takes the input from the user and uses it to search the database
+:return: The result of the search.
+'''
+
+
 @app.route('/search/res/', methods=['POST'])
 def search_result():
     before_request('/search/res/')
@@ -76,13 +79,14 @@ def search_result():
         taxon = request.form['rank_value']
         db_name = request.form['Database']
         is_validated = request.form['Is Validated']
-        # the order of the result search in the database needs to be in this order, or it doesn't work.
-        result_taxonomy_rank = search_script.search_rank(taxonomy, rank, taxon, config.DB.get_collection(collection_id), collection_id)
+        result_taxonomy_rank = search_script.search_rank(taxonomy, rank, taxon, config.DB.get_collection(collection_id),
+                                                         collection_id)
         result_org_name = search_script.search_org_name(org_name, result_taxonomy_rank, collection_id)
         result_acc_num = search_script.search_acc_num(acc_num, result_org_name, collection_id)
         result_length = search_script.search_length(int(from_length), int(to_length), result_acc_num, collection_id)
         result_decoupled = search_script.search_num_decoup(int(num_dec), result_length, collection_id)
-        result_weak_bonds = search_script.search_weak_bonds(int(weak_from), int(weak_to), result_decoupled, collection_id)
+        result_weak_bonds = search_script.search_weak_bonds(int(weak_from), int(weak_to), result_decoupled,
+                                                            collection_id)
         result_is_pseudo = search_script.search_is_pseudo(is_pseudoknotted, result_weak_bonds, collection_id)
         result_pseudo_ord = search_script.search_pseudo_order(int(pseudoknot_ord), result_is_pseudo, collection_id)
         result_rna_type = search_script.search_rna_type(rna_type, result_pseudo_ord, collection_id)
@@ -97,6 +101,11 @@ def search_result():
         # result gets the final output of the user research
         result = config.DB.get_collection(collection_id).find()
         return render_template("search_results.html", result_list=result)
+
+
+'''
+Download of rna, selected from the table, in csv format
+'''
 
 
 @app.route('/download_files_csv', methods=['POST'])
@@ -120,6 +129,11 @@ def download():
         temp_file = os.path.join(tempfile.gettempdir(), os.urandom(24).hex())
         final_mongo_docs.to_csv(temp_file, sep=',', index=False)
         return send_file(temp_file, as_attachment=True)
+
+
+'''
+Download addictional files
+'''
 
 
 @app.route('/download_files', methods=['POST'])
@@ -147,23 +161,26 @@ def download_zip_files():
 @app.route('/')
 def home():
     before_request('/')
-    #Provenience of PhyloRNA Structures table
-    num_RCSB = config.COLLECTION.count_documents({'Reference database':'NULL'})
-    num_CRW = config.COLLECTION.count_documents({'Reference database':'CRW'})
-    num_tmRNA =  config.COLLECTION.count_documents({'Reference database':'NULL'})
-    num_sprinzl = config.COLLECTION.count_documents({'Reference database':'NULL'})
-    num_RNASE = config.COLLECTION.count_documents({'Reference database':'NULL'})
-    num_SRP = config.COLLECTION.count_documents({'Reference database':'NULL'})
-    num_RFAM = config.COLLECTION.count_documents({'Reference database':'RFAM'})
-    num_NAD = config.COLLECTION.count_documents({'Reference database':'NULL'})
-    #Classes of PhyloRNA structures table
-    num_5S = config.COLLECTION.count_documents({'Rna Type':'5S'})
-    num_16S = config.COLLECTION.count_documents({'Rna Type':'16S'})
-    num_23S= config.COLLECTION.count_documents({'Rna Type':'23S'})
-    num_GI1= config.COLLECTION.count_documents({'Rna Type':'Group I Introns'})
-    num_GI2= config.COLLECTION.count_documents({'Rna Type':'Group II Introns'})
-    num_tRNA= config.COLLECTION.count_documents({'Rna Type':'tRNA'})
-    return render_template('home.html', num_RCSB = num_RCSB, num_CRW = num_CRW, num_tmRNA = num_tmRNA, num_sprinzl = num_sprinzl, num_RNASE = num_RNASE, num_SRP = num_SRP, num_RFAM = num_RFAM, num_NAD = num_NAD, num_5S=num_5S, num_16S=num_16S, num_23S=num_23S, num_GI1=num_GI1, num_GI2=num_GI2, num_tRNA=num_tRNA)
+    # Provenience of PhyloRNA Structures table
+    num_RCSB = config.COLLECTION.count_documents({'Reference database': 'NULL'})
+    num_CRW = config.COLLECTION.count_documents({'Reference database': 'CRW'})
+    num_tmRNA = config.COLLECTION.count_documents({'Reference database': 'NULL'})
+    num_sprinzl = config.COLLECTION.count_documents({'Reference database': 'NULL'})
+    num_RNASE = config.COLLECTION.count_documents({'Reference database': 'NULL'})
+    num_SRP = config.COLLECTION.count_documents({'Reference database': 'NULL'})
+    num_RFAM = config.COLLECTION.count_documents({'Reference database': 'RFAM'})
+    num_NAD = config.COLLECTION.count_documents({'Reference database': 'NULL'})
+    # Classes of PhyloRNA structures table
+    num_5S = config.COLLECTION.count_documents({'Rna Type': '5S'})
+    num_16S = config.COLLECTION.count_documents({'Rna Type': '16S'})
+    num_23S = config.COLLECTION.count_documents({'Rna Type': '23S'})
+    num_GI1 = config.COLLECTION.count_documents({'Rna Type': 'Group I Introns'})
+    num_GI2 = config.COLLECTION.count_documents({'Rna Type': 'Group II Introns'})
+    num_tRNA = config.COLLECTION.count_documents({'Rna Type': 'tRNA'})
+    return render_template('home.html', num_RCSB=num_RCSB, num_CRW=num_CRW, num_tmRNA=num_tmRNA,
+                           num_sprinzl=num_sprinzl, num_RNASE=num_RNASE, num_SRP=num_SRP, num_RFAM=num_RFAM,
+                           num_NAD=num_NAD, num_5S=num_5S, num_16S=num_16S, num_23S=num_23S, num_GI1=num_GI1,
+                           num_GI2=num_GI2, num_tRNA=num_tRNA)
 
 
 def get_session_id():
