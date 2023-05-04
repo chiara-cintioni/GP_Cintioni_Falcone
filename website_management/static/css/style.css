@@ -103,11 +103,15 @@ body {
     background:whitesmoke center;
 }
 #PhyloRNA_title{
-    line-height: 80px;
+    line-height: 73px;
+    font-size: 40px;
+    position: absolute;
+    color: white;
+    font-family: "math";
+    text-decoration: none;
+    margin-left: -250px;
     z-index: 2;
-    top: -4px;
     cursor: pointer;
-    margin-left: 250px;
 }
 label.logo{
     line-height: 80px;
@@ -489,7 +493,7 @@ input#leng_f, input#leng_t, input#weak_f, input#weak_t {
         z-index: 2;
         top: -4px;
         cursor: pointer;
-        margin-left: 180px;
+        margin-left: 700px;
     }
 }
 
@@ -559,6 +563,10 @@ input#leng_f, input#leng_t, input#weak_f, input#weak_t {
     }
     #mn_bars_checkbox:checked ~ .nav_bar{
         display: initial;
+    }
+    /* homepage */
+    #albero_png{
+        display: none;
     }
     /* search */
     #search_table, #search_table tr, #search_table td{

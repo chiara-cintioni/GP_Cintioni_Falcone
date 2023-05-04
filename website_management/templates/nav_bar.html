@@ -25,12 +25,8 @@
                     <img id="unicam_text" src="{{ url_for('static', filename='img/UNICAM_scritta.webp') }}" width="126" height="40">
                 </a>
             </label>
-            <label class="text-logo" >
-                <a href="{{ url_for('home') }}">
-                    <img id="PhyloRNA_title" src="{{ url_for('static', filename='img/PhyloRNA_title.png') }}" width="158" height="75">
-                </a>
-            </label>
             <nav class="nav_bar">
+                <a href="{{ url_for('home') }}" id="PhyloRNA_title">PhyloRNA</a>
                 <ul>
                     <li><a href="{{ url_for('home') }}">Home</a></li>
                     <li><a href="{{ url_for('search') }}">Search</a></li>

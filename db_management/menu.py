@@ -12,6 +12,8 @@ def menu():
     print("4. Add one field to all documents in rna sequences collection.")
     print("5. Delete a single rna sequence.")
     print("6. Delete all.")
+    print("7. Remove expired session's collections.")
+    print("8. Create taxonomy file.")
     print("0. Exit.")
     result = input("Insert the number of the action you want to do: ")
     if not result.isnumeric():
@@ -45,6 +47,13 @@ def menu():
         print("You chose to delete all documents in a collection.")
         mongo_services.delete_all()
         menu()
-
+    elif result == 7:
+        print("You chose to delete all the expired session's collections.")
+        mongo_services.delete_unused_collection()
+        menu()
+    elif result == 8:
+        print("You chose to create the taxonomy file.")
+        mongo_services.modify_file()
+        menu()
 
 menu()

@@ -121,20 +121,13 @@ def download():
         sanitized_mongo_docs = json.loads(json_util.dumps(mongo_docs))
         normalized_mongo_docs = json_normalize(sanitized_mongo_docs)
         final_mongo_docs = pandas.DataFrame(normalized_mongo_docs)
-        # We use os.path.join(tempfile.gettempdir(), os.urandom(24).hex()) because it's reliable, cross-platform and
-        # the only caveat is that it doesn't work on FAT partitions. NamedTemporaryFile has a number of issues,
-        # not the least of which is that it can fail to create files because of a permission error, fail to detect
-        # the permission error, and then loop millions of times, hanging your program and your filesystem.
         temp_file = os.path.join(tempfile.gettempdir(), os.urandom(24).hex())
         final_mongo_docs.to_csv(temp_file, sep=',', index=False)
         return send_file(temp_file, as_attachment=True)
 
-
 '''
-Download addictional files
+ciao cioison
 '''
-
-
 @app.route('/download_files', methods=['POST'])
 def download_zip_files():
     if request.method == 'POST':
@@ -193,8 +186,6 @@ def get_session_id():
 
 def before_request(url):
     with lock:
-        print("Url attuale: ", url)
-        print("Url precedente: ", session.get('previous_url'))
         if session.get('previous_url') == '/search/res/':
             if url != '/search/res/':
                 session['previous_url'] = url
