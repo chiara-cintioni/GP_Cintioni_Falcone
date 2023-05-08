@@ -14,7 +14,10 @@ This function prompts the user to input the names of two files:
 def reduce_file(input_file, taxa_name):
     output_file = "files/taxonomy/" + taxa_name + "_taxonomy.csv"
     data = pd.read_table(input_file, low_memory=False)
-    data.drop_duplicates(['submitted_name'], keep='last').to_csv(output_file, sep='	')
+    if taxa_name == 'ena':
+        data.drop_duplicates(['submitted_name'], keep='last').to_csv(output_file, sep='	')
+    else:
+        data.drop_duplicates(['organism_name'], keep='last').to_csv(output_file, sep='	')
     return output_file
 
 
@@ -39,6 +42,8 @@ def reduce_file2():
 This function takes a file as input and removes duplicate rows based on the fifth column.
 It then saves the resulting data as a tab-separated file in the specified output file.    
 '''
+
+
 def remove_duplicates(file):
     output_dup = input("Insert file name with file extension (csv) where to save file rows without duplicates: ")
     k = []
@@ -70,30 +75,31 @@ def merge_files(path_1, path_2, taxa_name):
         output_file.write(line)
     for line in file_2:
         output_file.write(line)
-    return  output_path
+    return output_path
 
 
 def modify_file():
-    taxa_file = input("Insert the name of the taxonomy you want to modify or \"rank\" if you want to modify the taxa rank file: ")
+    taxa_file = input(
+        "Insert the name of the taxonomy you want to modify or \"rank\" if you want to modify the taxa rank file: ")
     if taxa_file.lower() == "silva":
-        path = "db_management/files/silva"
+        path = "files/silva"
     elif taxa_file.lower() == "ena":
-        path = "db_management/files/ena"
+        path = "files/ena"
     elif taxa_file.lower() == "ncbi":
-        path = "db_management/files/ncbi"
+        path = "files/ncbi"
     elif taxa_file.lower() == "ltp":
-        path = "db_management/files/ltp"
+        path = "files/ltp"
     elif taxa_file.lower() == "gtdb":
-        path = "db_management/files/gtdb"
+        path = "files/gtdb"
     elif taxa_file.lower() == "rank":
-        path = "db_management/files/taxonomy/TaxaName_TaxaRank.txt"
+        path = "files/taxonomy/TaxaName_TaxaRank.txt"
         remove_diamonds(path)
         print("The file has been modified.")
         return
 
     cont = 0
     for file in os.listdir(path):
-        cont = cont +1
+        cont = cont + 1
 
     if cont > 1:
         path = merge_files(os.path.join(path, os.listdir(path)[0]), os.path.join(path, os.listdir(path)[1]), taxa_file)

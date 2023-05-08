@@ -1,5 +1,6 @@
 import create_json
 import mongo_services
+import modify_taxonomy_docs
 
 
 # It's a menu that allows the user to choose what to do.
@@ -14,6 +15,7 @@ def menu():
     print("6. Delete all.")
     print("7. Remove expired session's collections.")
     print("8. Create taxonomy file.")
+    print("9. Insert a json file into mongodb.")
     print("0. Exit.")
     result = input("Insert the number of the action you want to do: ")
     if not result.isnumeric():
@@ -53,7 +55,11 @@ def menu():
         menu()
     elif result == 8:
         print("You chose to create the taxonomy file.")
-        mongo_services.modify_file()
+        modify_taxonomy_docs.modify_file()
+        menu()
+    elif result == 9:
+        print("You chose to add a json file into mongodb.")
+        mongo_services.insert_to_mongo("files/json_files")
         menu()
 
 menu()

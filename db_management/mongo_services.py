@@ -11,8 +11,6 @@ collection = db['rna_sequences']
 '''
 It inserts files into the collection in the database
 '''
-
-
 def insert_to_mongo(dir_path):
     for file_to_read in os.listdir(dir_path):
         file_path = os.path.join(dir_path, file_to_read)
@@ -130,6 +128,6 @@ def delete_unused_collection():
             else:
                 l_time = db.get_collection(l).find_one().get('_id').generation_time.date()
                 l_time = datetime.datetime.strptime(str(l_time), time_format)
-                if (current_time - datetime.timedelta(days=1)).date() >= l_time.date():
+                if (current_time - datetime.timedelta(days=10)).date() >= l_time.date():
                     db.get_collection(l).drop()
-    print("Collection remove successfully")
+    print("Collection removed successfully")
