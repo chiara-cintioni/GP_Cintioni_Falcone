@@ -125,9 +125,7 @@ def download():
         final_mongo_docs.to_csv(temp_file, sep=',', index=False)
         return send_file(temp_file, as_attachment=True)
 
-'''
-ciao cioison
-'''
+
 @app.route('/download_files', methods=['POST'])
 def download_zip_files():
     if request.method == 'POST':
